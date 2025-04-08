@@ -1,50 +1,49 @@
-
+/* styles/Layout.module.css */
 .header {
+  background-color: #121212;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: #1a1a1a;
-  padding: 16px;
-  color: white;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: bold;
   color: white;
   text-decoration: none;
-  margin-bottom: 8px;
 }
 
 .search {
-  width: 90%;
-  max-width: 500px;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 0.6rem;
+  border-radius: 8px;
   border: none;
-  margin: 12px 0;
+  width: 100%;
+  max-width: 400px;
 }
 
-.nav {
+.categories {
   display: flex;
+  gap: 0.5rem;
   flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
 }
 
-.nav a {
-  color: white;
-  text-decoration: none;
-  background: #333;
-  padding: 8px 14px;
+.categoryBtn {
+  background: #1f1f1f;
+  border: none;
   border-radius: 6px;
-  transition: background 0.3s;
+  padding: 0.4rem 1rem;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.nav a:hover {
-  background: #555;
+.categoryBtn:hover,
+.active {
+  background: #2e2e2e;
 }
 
 .main {
-  padding: 24px;
+  padding: 1rem;
 }
