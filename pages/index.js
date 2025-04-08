@@ -9,15 +9,6 @@ export default function Home() {
       <Head>
         <title>Epix - Unblocked Games</title>
       </Head>
-      <div className={styles.header}>
-        <h1>Epix</h1>
-        <input
-          type="text"
-          placeholder="Search games..."
-          className={styles.search}
-        />
-      </div>
-
       <div className={styles.grid}>
         {games.map((game) => (
           <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
