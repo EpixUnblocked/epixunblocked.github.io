@@ -6,13 +6,13 @@ const games = [
     slug: 'flappy',
     description: 'A fun and addictive clone of the classic Flappy Bird game.',
     thumbnail: '/games/flappy/IMG_7614.png',
-    "tags": ["arcade", "action"]
+    "tags": ["arcade"]
   },
   {
     title: 'Tiny Fishing',
     slug: 'tinyfishing',
     description: 'A fishing game.',
-    thumbnail: '/games/flappy/IMG_7614.png',
+    thumbnail: '/games/tinyfishing/IMG_0199.png',
     "tags": ["simulator"]
   },
   
