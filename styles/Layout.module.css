@@ -4,17 +4,19 @@
   width: 100%;
   background: #111;
   padding: 12px 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   position: sticky;
   top: 0;
   z-index: 999;
+  box-sizing: border-box;
 }
 
 .topBarContent {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -25,14 +27,14 @@
 }
 
 .search {
-  flex: 1;
-  min-width: 200px;
+  width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
   border: none;
   background: #1e1e1e;
   color: white;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .search:focus {
@@ -44,6 +46,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .categoryBtn {
@@ -69,4 +73,7 @@
 
 .main {
   padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
