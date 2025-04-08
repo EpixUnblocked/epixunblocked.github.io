@@ -1,17 +1,20 @@
 /* styles/Layout.module.css */
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1.5rem;
-  background-color: #121212;
-  color: white;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  width: 100%;
+  background: #111;
+  padding: 12px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 999;
+}
+
+.topBarContent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
 }
 
 .logo {
@@ -23,43 +26,46 @@
 
 .search {
   flex: 1;
-  max-width: 300px;
-  padding: 0.5rem 1rem;
+  min-width: 200px;
+  padding: 10px 14px;
   border-radius: 8px;
   border: none;
-  background-color: #1e1e1e;
+  background: #1e1e1e;
   color: white;
   font-size: 1rem;
-  transition: box-shadow 0.2s ease;
-}
-
-.search::placeholder {
-  color: #888;
 }
 
 .search:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #333;
+  background: #2a2a2a;
 }
 
 .categories {
   display: flex;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .categoryBtn {
-  padding: 0.4rem 0.8rem;
+  background: #1e1e1e;
+  border: none;
+  color: #ccc;
+  padding: 8px 14px;
   border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #1a1a1a;
-  color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
 }
 
-.categoryBtn:hover,
-.categoryBtn.active {
-  background-color: #333;
+.categoryBtn:hover {
+  background: #333;
+}
+
+.active {
+  background: #4e4e4e;
+  color: white;
+}
+
+.main {
+  padding: 20px;
 }
