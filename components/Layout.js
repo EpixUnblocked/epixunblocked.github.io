@@ -7,7 +7,7 @@ import games from '../data/games';
 
 export default function Layout({ children }) {
   const { searchTerm, setSearchTerm, selectedCategory, setSelectedCategory } = useGameContext();
-  const categories = ['All', ...new Set(games.flatMap(game => game.tags))];
+  const categories = ['All', ...new Set(games.flatMap((game) => game.tags))];
   const router = useRouter();
 
   const handleSearchChange = (e) => {
@@ -23,33 +23,37 @@ export default function Layout({ children }) {
   return (
     <>
       <header className={styles.header}>
-        <Link href="/" className={styles.logo}>Epix</Link>
+        <div className={styles.topBarContent}>
+          <Link href="/" className={styles.logo}>
+            Epix
+          </Link>
 
-        {!isGamePage && (
-          <>
-            <input
-              className={styles.search}
-              type="text"
-              placeholder="Search games..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <div className={styles.categories}>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
-                  onClick={() => handleCategoryClick(cat)}
-                >
-                  {cat.replace(/\b\w/g, l => l.toUpperCase())}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+          {!isGamePage && (
+            <>
+              <input
+                className={styles.search}
+                type="text"
+                placeholder="Search games..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <div className={styles.categories}>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
+                    onClick={() => handleCategoryClick(cat)}
+                  >
+                    {cat.replace(/\b\w/g, (l) => l.toUpperCase())}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </header>
 
-      <main style={{ padding: '1rem' }}>{children}</main>
+      <main className={styles.main}>{children}</main>
     </>
   );
 }
