@@ -4,7 +4,7 @@
   width: 100%;
   background: #111;
   padding: 12px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -19,11 +19,33 @@
   box-sizing: border-box;
 }
 
+@media (min-width: 768px) {
+  .topBarContent {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .search {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .categories {
+    flex-wrap: nowrap;
+    flex: 2;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+}
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .search {
@@ -46,8 +68,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .categoryBtn {
@@ -68,12 +88,12 @@
 .active {
   background: #4e4e4e;
   color: white;
-  border: 1px solid white;
+  border: 1px solid #888;
 }
 
 .main {
   padding: 20px;
-  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
