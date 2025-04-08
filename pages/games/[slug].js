@@ -1,34 +1,54 @@
-
-import { useRouter } from 'next/router'
-import Head from 'next/head'
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Link from 'next/link';
 
-export default function Game() {
-  const router = useRouter()
-  const { slug } = router.query
+const gameData = {
+  flappy: {
+    title: 'Flappy Bird',
+    slug: 'flappy',
+    description: 'A fun clone of Flappy Bird.',
+    embedPath: '/games/flappy/index.html',
+  },
+  // Add more games here using the same format
+};
 
-  return (
-  <>
-    <Link href="/" style={{ color: '#fff', marginBottom: '12px', display: 'inline-block' }}>← Back to Game List</Link>
+export default function GamePage() {
+  const router = useRouter();
+  const { slug } = router.query;
 
-    <h1>{game.title}</h1>
-    <iframe
-      src={`/games/${game.slug}/index.html`}
-      style={{ width: '100%', height: '80vh', border: 'none', borderRadius: '10px' }}
-    />
-  </>
-);
+  const game = gameData[slug];
+
+  if (!slug || !game) {
+    return (
+      <div style={{ color: '#fff', padding: '20px' }}>
+        <p>Loading game...</p>
+      </div>
+    );
+  }
 
   return (
     <>
       <Head>
-        <title>{slug} | Epix</title>
+        <title>{game.title} | Epix</title>
       </Head>
-      <iframe
-        src={`/games/${slug}.html`}
-        style={{ width: '100%', height: '100vh', border: 'none' }}
-        title={slug}
-      ></iframe>
+      <div style={{ padding: '20px' }}>
+        <Link href="/" style={{ color: '#fff', marginBottom: '12px', display: 'inline-block' }}>
+          ← Back to Game List
+        </Link>
+        <h1 style={{ color: '#fff' }}>{game.title}</h1>
+        <p style={{ color: '#ccc' }}>{game.description}</p>
+        <iframe
+          src={game.embedPath}
+          style={{
+            width: '100%',
+            height: '80vh',
+            border: 'none',
+            borderRadius: '10px',
+            marginTop: '20px',
+          }}
+          title={game.title}
+        />
+      </div>
     </>
   );
 }
