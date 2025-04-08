@@ -54,7 +54,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.95rem;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, border 0.2s ease;
 }
 
 .categoryBtn:hover {
@@ -64,6 +64,7 @@
 .active {
   background: #4e4e4e;
   color: white;
+  border: 1px solid white;
 }
 
 .main {
