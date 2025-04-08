@@ -1,20 +1,22 @@
-import Link from 'next/link';
-import styles from '../styles/Layout.module.css';
+import styles from './Layout.module.css';
 
 export default function Layout({ children }) {
   return (
     <>
-      <header className={styles.header}>
-        <Link href="/" className={styles.logo}>Epix</Link>
-        <input className={styles.search} type="text" placeholder="Search games..." />
+      <header className={styles.topbar}>
+        <div className={styles.logo}>Epix</div>
         <nav className={styles.nav}>
-          <Link href="/">All</Link>
-          <Link href="/category/action">Action</Link>
-          <Link href="/category/puzzle">Puzzle</Link>
-          <Link href="/login">Login</Link>
+          <input type="text" placeholder="Search games..." className={styles.search} />
+          <div className={styles.categories}>
+            <button data-tag="all">All</button>
+            <button data-tag="arcade">Arcade</button>
+            <button data-tag="puzzle">Puzzle</button>
+            <button data-tag="action">Action</button>
+            <button data-tag="strategy">Strategy</button>
+          </div>
         </nav>
       </header>
-      <main className={styles.main}>{children}</main>
+      <main>{children}</main>
     </>
   );
 }
