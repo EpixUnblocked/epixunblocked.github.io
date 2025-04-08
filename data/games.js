@@ -5,7 +5,7 @@ const games = [
     title: 'Flappy Bird',
     slug: 'flappy',
     description: 'A fun and addictive clone of the classic Flappy Bird game.',
-    thumbnail: '/games/flappy/thumbnail.png',
+    thumbnail: '/games/flappy/IMG_7614.png',
   },
   
   // Add more games here...
