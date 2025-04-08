@@ -1,11 +1,21 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/Layout.module.css';
-import { FaBars } from 'react-icons/fa';
+import games from '../data/games';
 
 export default function Layout({ children, onSearch, onCategorySelect }) {
   const [search, setSearch] = useState('');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const uniqueCategories = new Set();
+    games.forEach(game => {
+      if (game.tags) {
+        game.tags.forEach(tag => uniqueCategories.add(tag));
+      }
+    });
+    setCategories(['all', ...Array.from(uniqueCategories)]);
+  }, []);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -20,38 +30,29 @@ export default function Layout({ children, onSearch, onCategorySelect }) {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.left}>
+        <div className={styles.topbar}>
           <Link href="/" className={styles.logo}>Epix</Link>
-        </div>
-
-        <div className={styles.center}>
           <input
             className={styles.search}
             type="text"
-            placeholder="Search games..."
             value={search}
             onChange={handleSearchChange}
+            placeholder="Search games..."
           />
         </div>
-
-        <div className={styles.right}>
-          <button
-            className={styles.menuToggle}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle Menu"
-          >
-            <FaBars />
-          </button>
-          <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
-            <button onClick={() => handleCategoryClick('all')}>All</button>
-            <button onClick={() => handleCategoryClick('action')}>Action</button>
-            <button onClick={() => handleCategoryClick('puzzle')}>Puzzle</button>
-            <Link href="/login">Login</Link>
-          </nav>
+        <div className={styles.categories}>
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              className={styles.categoryButton}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+          ))}
         </div>
       </header>
-
-      <main className={styles.mainContent}>
+      <main className={styles.main}>
         {children}
       </main>
     </>
