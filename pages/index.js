@@ -15,11 +15,17 @@ export default function Home() {
 
   return (
     <div className={styles.grid}>
-      {filteredGames.map(game => (
+      {filteredGames.map((game) => (
         <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
-          <img src={game.thumbnail} alt={game.title} />
-          <h3>{game.title}</h3>
-          <p>{game.description}</p>
+          <div
+            className={styles.cardImage}
+            style={{ backgroundImage: `url(${game.thumbnail})` }}
+          >
+            <div className={styles.cardOverlay}>
+              <h3>{game.title}</h3>
+              <p>{game.description}</p>
+            </div>
+          </div>
         </Link>
       ))}
     </div>
