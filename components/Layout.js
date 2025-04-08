@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './Layout.module.css';
+import styles from './styles/Layout.module.css';
 
 export default function Layout({ children }) {
   return (
