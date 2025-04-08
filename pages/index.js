@@ -1,46 +1,36 @@
-
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import { useState } from 'react'
-import { FaSearch, FaGamepad } from 'react-icons/fa'
-
-const games = [
-  { title: "Flappy Bird", slug: "flappy", category: "arcade" },
-];
+import Head from 'next/head';
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
+import games from '../data/games';
 
 export default function Home() {
-  const [search, setSearch] = useState('');
-  const filtered = games.filter(game =>
-    game.title.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Epix Unblocked Games</title>
+        <title>Epix - Unblocked Games</title>
       </Head>
-      <header className={styles.header}>
-        <h1><FaGamepad /> Epix</h1>
-        <div>
-          <input
-            type="text"
-            placeholder="Search games..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      </header>
-      <main className={styles.grid}>
-        {filtered.map((game, index) => (
-          <Link href={"/games/" + game.slug} key={index} className={styles.card}>
-            <div className={styles.card}>
-              <h2>{game.title}</h2>
-              <p>{game.category.charAt(0).toUpperCase() + game.category.slice(1)} Game</p>
-            </div>
+      <div className={styles.header}>
+        <h1>Epix</h1>
+        <input
+          type="text"
+          placeholder="Search games..."
+          className={styles.search}
+        />
+      </div>
+
+      <div className={styles.grid}>
+        {games.map((game) => (
+          <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
+            <img
+              src={game.thumbnail}
+              alt={`${game.title} Thumbnail`}
+              className={styles.thumbnail}
+            />
+            <h3>{game.title}</h3>
+            <p className={styles.description}>{game.description}</p>
           </Link>
         ))}
-      </main>
-    </div>
+      </div>
+    </>
   );
 }
