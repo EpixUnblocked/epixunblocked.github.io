@@ -1,60 +1,50 @@
+
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import styles from '../styles/Layout.module.css';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import games from '../data/games';
 
-export default function Layout({ children, onSearch, onCategorySelect }) {
+export default function Layout({ children }) {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const uniqueCategories = new Set();
+    const tags = new Set();
     games.forEach(game => {
-      if (game.tags) {
-        game.tags.forEach(tag => uniqueCategories.add(tag));
-      }
+      game.tags.forEach(tag => tags.add(tag));
     });
-    setCategories(['all', ...Array.from(uniqueCategories)]);
+    setCategories([...tags]);
   }, []);
 
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    if (onSearch) onSearch(value);
-  };
-
-  const handleCategoryClick = (category) => {
-    if (onCategorySelect) onCategorySelect(category);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    const query = e.target.value.toLowerCase();
+    router.push(`/?search=${query}`);
   };
 
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.topbar}>
-          <Link href="/" className={styles.logo}>Epix</Link>
-          <input
-            className={styles.search}
-            type="text"
-            value={search}
-            onChange={handleSearchChange}
-            placeholder="Search games..."
-          />
-        </div>
-        <div className={styles.categories}>
-          {categories.map((category, index) => (
-            <button
-              key={index}
-              className={styles.categoryButton}
-              onClick={() => handleCategoryClick(category)}
-            >
+        <Link href="/" className={styles.logo}>Epix</Link>
+        <input
+          className={styles.search}
+          type="text"
+          placeholder="Search games..."
+          value={search}
+          onChange={handleSearch}
+        />
+        <nav className={styles.nav}>
+          <Link href="/">All</Link>
+          {categories.map(category => (
+            <Link key={category} href={`/?category=${category}`}>
               {category.charAt(0).toUpperCase() + category.slice(1)}
-            </button>
+            </Link>
           ))}
-        </div>
+        </nav>
       </header>
-      <main className={styles.main}>
-        {children}
-      </main>
+      <main className={styles.main}>{children}</main>
     </>
   );
 }

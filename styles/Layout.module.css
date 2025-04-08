@@ -1,78 +1,50 @@
-/* styles/Layout.module.css */
 
 .header {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background-color: #1e1e2f;
+  background: #1a1a1a;
+  padding: 16px;
   color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  color: white;
   text-decoration: none;
-  margin-right: 20px;
+  margin-bottom: 8px;
 }
 
 .search {
-  flex: 1 1 300px;
-  max-width: 400px;
-  padding: 10px 14px;
-  margin: 10px;
+  width: 90%;
+  max-width: 500px;
+  padding: 8px 12px;
+  border-radius: 6px;
   border: none;
-  border-radius: 8px;
-  background-color: #2d2d3f;
-  color: white;
-  font-size: 1rem;
-}
-
-.search::placeholder {
-  color: #aaa;
+  margin: 12px 0;
 }
 
 .nav {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
 
 .nav a {
-  color: #ddd;
+  color: white;
   text-decoration: none;
-  background: #2d2d3f;
+  background: #333;
   padding: 8px 14px;
-  border-radius: 8px;
-  transition: background 0.2s ease, transform 0.2s ease;
-  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: background 0.3s;
 }
 
 .nav a:hover {
-  background: #3c3c5a;
-  transform: scale(1.05);
+  background: #555;
 }
 
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav {
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .search {
-    width: 100%;
-    margin: 10px 0;
-  }
+.main {
+  padding: 24px;
 }
