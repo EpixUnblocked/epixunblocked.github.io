@@ -4,8 +4,6 @@ import Head from 'next/head'
 
 import Link from 'next/link';
 
-...
-
 return (
   <>
     <Link href="/" style={{ color: '#fff', marginBottom: '12px', display: 'inline-block' }}>← Back to Game List</Link>
