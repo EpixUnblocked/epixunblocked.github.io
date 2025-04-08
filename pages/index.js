@@ -1,4 +1,3 @@
-// pages/index.js
 import styles from '../styles/Home.module.css';
 import games from '../data/games';
 import Link from 'next/link';
@@ -9,12 +8,13 @@ export default function Home() {
 
   const filteredGames = games.filter((game) => {
     const matchesSearch = game.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || game.tags.includes(selectedCategory.toLowerCase());
+    const matchesCategory =
+      selectedCategory === 'All' || game.tags.includes(selectedCategory.toLowerCase());
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <div className={styles.grid}>
+    <div className={`${styles.grid} ${styles.gridEnter}`} key={searchTerm + selectedCategory}>
       {filteredGames.map((game) => (
         <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
           <div
