@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unblocked Games Hub</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🎮 Unblocked Games</h1>
+      <nav class="topbar">
+        <input type="text" id="search-bar" placeholder="Search games..." oninput="filterGames()">
+        <select id="category-select" onchange="filterGames()">
+          <option value="all">All Categories</option>
+          <option value="puzzle">Puzzle</option>
+          <option value="classic">Classic</option>
+          <option value="arcade">Arcade</option>
+        </select>
+        <div id="auth-buttons">
+          <button onclick="toggleLogin()">Login</button>
+          <button onclick="toggleSignup()">Sign Up</button>
+        </div>
+      </nav>
+      <div id="auth-section" style="display:none;">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <button onclick="signup()">Signup</button>
+        <button onclick="toggleAuth()">Cancel</button>
+      </div>
+    </header>
+    <main>
+      <div id="games-list"></div>
+    </main>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
