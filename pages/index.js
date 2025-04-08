@@ -6,9 +6,7 @@ import { useState } from 'react'
 import { FaSearch, FaGamepad } from 'react-icons/fa'
 
 const games = [
-  { title: "2048", slug: "2048", category: "puzzle" },
-  { title: "Tetris", slug: "tetris", category: "classic" },
-  { title: "Snake", slug: "snake", category: "arcade" }
+  { title: "Flappy", slug: "flappy", category: "arcade" }
 ];
 
 export default function Home() {
