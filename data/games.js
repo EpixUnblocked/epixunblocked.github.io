@@ -8,6 +8,13 @@ const games = [
     thumbnail: '/games/flappy/IMG_7614.png',
     "tags": ["arcade", "action"]
   },
+  {
+    title: 'Tiny Fishing',
+    slug: 'tinyfishing',
+    description: 'A fishing game.',
+    thumbnail: '/games/flappy/IMG_7614.png',
+    "tags": ["simulator"]
+  },
   
   // Add more games here...
 ];
