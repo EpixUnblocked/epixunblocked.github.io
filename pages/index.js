@@ -1,27 +1,27 @@
-import Head from 'next/head';
-import Link from 'next/link';
+// pages/index.js
 import styles from '../styles/Home.module.css';
 import games from '../data/games';
+import Link from 'next/link';
+import { useGameContext } from '../context/GameContext';
 
 export default function Home() {
+  const { searchTerm, selectedCategory } = useGameContext();
+
+  const filteredGames = games.filter((game) => {
+    const matchesSearch = game.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || game.tags.includes(selectedCategory.toLowerCase());
+    return matchesSearch && matchesCategory;
+  });
+
   return (
-    <>
-      <Head>
-        <title>Epix - Unblocked Games</title>
-      </Head>
-      <div className={styles.grid}>
-        {games.map((game) => (
-          <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
-            <img
-              src={game.thumbnail}
-              alt={`${game.title} Thumbnail`}
-              className={styles.thumbnail}
-            />
-            <h3>{game.title}</h3>
-            <p className={styles.description}>{game.description}</p>
-          </Link>
-        ))}
-      </div>
-    </>
+    <div className={styles.grid}>
+      {filteredGames.map(game => (
+        <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
+          <img src={game.thumbnail} alt={game.title} />
+          <h3>{game.title}</h3>
+          <p>{game.description}</p>
+        </Link>
+      ))}
+    </div>
   );
 }
