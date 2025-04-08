@@ -1,26 +1,45 @@
 /* styles/Layout.module.css */
+
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
   background-color: #121212;
   color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
   text-decoration: none;
 }
 
 .search {
-  padding: 0.6rem;
+  flex: 1;
+  max-width: 300px;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
   border: none;
-  width: 100%;
-  max-width: 400px;
+  background-color: #1e1e1e;
+  color: white;
+  font-size: 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.search::placeholder {
+  color: #888;
+}
+
+.search:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #333;
 }
 
 .categories {
@@ -30,18 +49,19 @@
 }
 
 .categoryBtn {
-  background: #1f1f1f;
-  border: none;
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
-  padding: 0.4rem 1rem;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
   color: white;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
 }
 
 .categoryBtn:hover,
-.active {
-  background: #2e2e2e;
+.categoryBtn.active {
+  background-color: #333;
 }
 
 .main {
