@@ -41,7 +41,7 @@ export default function Layout({ children }) {
                   className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
                   onClick={() => handleCategoryClick(cat)}
                 >
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  {cat.replace(/\b\w/g, l => l.toUpperCase())}
                 </button>
               ))}
             </div>
