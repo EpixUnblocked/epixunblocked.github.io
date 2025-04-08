@@ -6,6 +6,7 @@ const games = [
     slug: 'flappy',
     description: 'A fun and addictive clone of the classic Flappy Bird game.',
     thumbnail: '/games/flappy/IMG_7614.png',
+    "tags": ["arcade", "action"]
   },
   
   // Add more games here...
