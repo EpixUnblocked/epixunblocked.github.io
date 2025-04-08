@@ -1,0 +1,111 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header input {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: none;
+  background: #1e1e1e;
+  color: #fff;
+  width: 100%;
+  max-width: 300px;
+  transition: border 0.3s;
+  font-size: 1rem;
+}
+
+.header input:focus {
+  border: 2px solid #007bff;
+  outline: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background: #222;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card h2 {
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.button {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  background-color: #2e8bff;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #1f6ed4;
+  transform: translateY(-2px);
+}
+
+/* Responsive Enhancements */
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .header input {
+    width: 300px;
+  }
+}
