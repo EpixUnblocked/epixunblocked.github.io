@@ -1,22 +1,25 @@
-import styles from './Layout.module.css';
+import styles from '../styles/Layout.module.css';
 
-export default function Layout({ children }) {
+export default function Layout({ children, onSearch, onFilter }) {
   return (
     <>
       <header className={styles.topbar}>
         <div className={styles.logo}>Epix</div>
-        <nav className={styles.nav}>
-          <input type="text" placeholder="Search games..." className={styles.search} />
-          <div className={styles.categories}>
-            <button data-tag="all">All</button>
-            <button data-tag="arcade">Arcade</button>
-            <button data-tag="puzzle">Puzzle</button>
-            <button data-tag="action">Action</button>
-            <button data-tag="strategy">Strategy</button>
-          </div>
-        </nav>
+        <input
+          type="text"
+          placeholder="Search games..."
+          className={styles.search}
+          onChange={(e) => onSearch(e.target.value)}
+        />
+        <div className={styles.categories}>
+          {['all', 'arcade', 'puzzle', 'action', 'strategy'].map(tag => (
+            <button key={tag} data-tag={tag} onClick={() => onFilter(tag)}>
+              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+            </button>
+          ))}
+        </div>
       </header>
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
     </>
   );
 }
