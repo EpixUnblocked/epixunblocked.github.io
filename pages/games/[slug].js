@@ -1,10 +1,13 @@
 
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-
 import Link from 'next/link';
 
-return (
+export default function Game() {
+  const router = useRouter()
+  const { slug } = router.query
+
+  return (
   <>
     <Link href="/" style={{ color: '#fff', marginBottom: '12px', display: 'inline-block' }}>← Back to Game List</Link>
 
@@ -15,10 +18,6 @@ return (
     />
   </>
 );
-
-export default function Game() {
-  const router = useRouter()
-  const { slug } = router.query
 
   return (
     <>
