@@ -26,7 +26,7 @@ const games = [
     title: 'Basketball Random',
     slug: 'basketballrandom',
     description: 'A cool game about basketball.',
-    thumbnail: '/games/tinyfishing/IMG_0199.png',
+    thumbnail: '/games/basketballrandom/2Q==.jpeg',
     "tags": ["sport","random"]
   },
   
