@@ -43,6 +43,13 @@ const games = [
     thumbnail: '/games/wonderrocket/image098.png',
     "tags": ["popular","simulator"]
   },
+  {
+    title: 'Drift Boss 3D',
+    slug: 'driftboss',
+    description: 'A game about perfect drifts.',
+    thumbnail: '/games/driftboss/driftboss.png',
+    "tags": ["driving","simulator"]
+  },
   // Add more games here...
 ];
 
