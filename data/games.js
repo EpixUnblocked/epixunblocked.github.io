@@ -16,20 +16,6 @@ const games = [
     "tags": ["popular","driving"]
   },
   {
-    title: 'Moto X3M',
-    slug: 'motox3m',
-    description: 'A game about motobikes, jumps, and flips.',
-    thumbnail: '/games/motox3m/thumb.png',
-    "tags": ["popular","driving"]
-  },
-  {
-    title: 'Moto X3M',
-    slug: 'motox3m',
-    description: 'A game about motobikes, jumps, and flips.',
-    thumbnail: '/games/motox3m/thumb.png',
-    "tags": ["popular","driving"]
-  },
-  {
     title: 'Tiny Fishing',
     slug: 'tinyfishing',
     description: 'A fishing game.',
