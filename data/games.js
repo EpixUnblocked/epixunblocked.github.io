@@ -29,6 +29,13 @@ const games = [
     thumbnail: '/games/basketballrandom/2Q==.jpeg',
     "tags": ["sport","random"]
   },
+  {
+    title: 'Soccer Random',
+    slug: 'soccerrandom',
+    description: 'A cool game about soccer.',
+    thumbnail: '/games/soccerrandom/soccerrandom.png',
+    "tags": ["sport","random"]
+  },
   
   // Add more games here...
 ];
