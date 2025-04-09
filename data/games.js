@@ -13,7 +13,7 @@ const games = [
     slug: 'tinyfishing',
     description: 'A fishing game.',
     thumbnail: '/games/tinyfishing/IMG_0199.png',
-    "tags": ["simulator"]
+    "tags": ["popular","simulator"]
   },
   
   // Add more games here...
