@@ -22,6 +22,13 @@ const games = [
     thumbnail: '/games/tinyfishing/IMG_0199.png',
     "tags": ["popular","simulator"]
   },
+  {
+    title: 'Basketball Random',
+    slug: 'basketballrandom',
+    description: 'A cool game about basketball.',
+    thumbnail: '/games/tinyfishing/IMG_0199.png',
+    "tags": ["sport","random"]
+  },
   
   // Add more games here...
 ];
