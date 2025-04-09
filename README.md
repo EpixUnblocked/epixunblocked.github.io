@@ -1,7 +1,7 @@
 # Epix Unblocked
 Your portal into internet freedom
 
-WIP
+WIP: https://epixunblocked.netlify.app/
 
 Made by people who hate internet restrictions
 
