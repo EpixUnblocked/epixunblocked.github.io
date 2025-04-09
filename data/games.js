@@ -36,7 +36,13 @@ const games = [
     thumbnail: '/games/soccerrandom/soccerrandom.png',
     "tags": ["sport","random"]
   },
-  
+  {
+    title: 'Wonder Rocket',
+    slug: 'wonderrocket',
+    description: 'A game about shooting for the stars.',
+    thumbnail: '/games/wonderrocket/image098.png',
+    "tags": ["popular","simulator"]
+  },
   // Add more games here...
 ];
 
