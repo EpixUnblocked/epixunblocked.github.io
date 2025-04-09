@@ -9,6 +9,13 @@ const games = [
     "tags": ["popular","driving"]
   },
   {
+    title: 'Police Chase Drifter',
+    slug: 'policechasedrift',
+    description: 'Steal the money!',
+    thumbnail: '/games/policechasedrift/thumb.png',
+    "tags": ["popular","driving"]
+  },
+  {
     title: 'Tiny Fishing',
     slug: 'tinyfishing',
     description: 'A fishing game.',
