@@ -2,11 +2,11 @@
 
 const games = [
   {
-    title: 'Flappy Bird',
-    slug: 'flappy',
-    description: 'A fun and addictive clone of the classic Flappy Bird game.',
-    thumbnail: '/games/flappy/IMG_7614.png',
-    "tags": ["arcade"]
+    title: 'Moto X3M',
+    slug: 'motox3m',
+    description: 'A game about motobikes, jumps, and flips.',
+    thumbnail: '/games/motox3m/thumb.png',
+    "tags": ["popular","driving"]
   },
   {
     title: 'Tiny Fishing',
