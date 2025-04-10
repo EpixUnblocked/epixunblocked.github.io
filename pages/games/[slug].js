@@ -25,8 +25,9 @@ export default function Game() {
       <p style={{ color: '#ccc' }}>{game.description}</p>
 
       <iframe
-        src={`/games/${game.slug}/index.html`}
+        src={`/epix/games/${game.slug}/index.html`}
         style={{ width: '100%', height: '80vh', border: 'none', borderRadius: '10px' }}
+        title={game.title}
       />
     </>
   );
