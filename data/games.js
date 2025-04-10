@@ -27,14 +27,14 @@ const games = [
     slug: 'basketballrandom',
     description: 'A cool game about basketball.',
     thumbnail: `${basePath}/games/basketballrandom/2Q==.jpeg`,
-    tags: ['sport', 'random'],
+    tags: ['sport'],
   },
   {
     title: 'Soccer Random',
     slug: 'soccerrandom',
     description: 'A cool game about soccer.',
     thumbnail: `${basePath}/games/soccerrandom/soccerrandom.png`,
-    tags: ['sport', 'random'],
+    tags: ['sport'],
   },
   {
     title: 'Wonder Rocket',
