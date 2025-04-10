@@ -14,6 +14,7 @@
 .topBarContent {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -22,21 +23,27 @@
 @media (min-width: 768px) {
   .topBarContent {
     flex-direction: row;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 16px;
+  }
+
+  .categories {
+    flex: 2;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .categories::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
   }
 
   .search {
     flex: 1;
     min-width: 200px;
-  }
-
-  .categories {
-    flex-wrap: nowrap;
-    flex: 2;
-    overflow-x: auto;
-    padding-bottom: 4px;
   }
 }
 
@@ -68,6 +75,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .categoryBtn {
@@ -79,6 +88,7 @@
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s ease, border 0.2s ease;
+  white-space: nowrap;
 }
 
 .categoryBtn:hover {
@@ -117,4 +127,15 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.infoClose {
+  float: right;
+  font-size: 1.2rem;
+  color: #aaa;
+  cursor: pointer;
+  margin-left: 12px;
+}
+.infoClose:hover {
+  color: white;
 }
