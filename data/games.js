@@ -2,6 +2,13 @@ const basePath = ''; // Required for GitHub Pages subpath
 
 const games = [
   {
+    title: 'Block Blast',
+    slug: 'blockblast',
+    description: 'Relaxing puzzle game.',
+    thumbnail: `${basePath}/games/blockblast/block.png`,
+    tags: ['featured'],
+  },
+  {
     title: 'Moto X3M',
     slug: 'motox3m',
     description: 'A game about motorbikes, jumps, and flips.',
@@ -85,14 +92,6 @@ const games = [
     thumbnail: `${basePath}/games/stickmanclimb/apple-touch-icon.png`,
     tags: ['popular'],
   },
-  {
-    title: 'Block Blast',
-    slug: 'blockblast',
-    description: 'Relaxing puzzle game.',
-    thumbnail: `${basePath}/games/blockblast/block.png`,
-    tags: ['featured'],
-  },
-  
 ];
 
 export default games;
