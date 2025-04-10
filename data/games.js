@@ -57,6 +57,13 @@ const games = [
     thumbnail: `${basePath}/games/ovo/ovo.png`,
     tags: ['popular'],
   },
+  {
+    title: 'BitLife',
+    slug: 'bitlife',
+    description: 'Its Bitlife!',
+    thumbnail: `${basePath}/games/bitlife/bitlife.png`,
+    tags: ['popular','simulator'],
+  },
 ];
 
 export default games;
