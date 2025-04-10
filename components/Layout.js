@@ -7,25 +7,25 @@ import games from '../data/games';
 import { useState } from 'react';
 
 export default function Layout({ children }) {
-  const { searchTerm, setSearchTerm, selectedCategory, setSelectedCategory } = useGameContext();
-  const [infoOpen, setInfoOpen] = useState(false);
+  const {
+    searchTerm,
+    setSearchTerm,
+    selectedCategory,
+    setSelectedCategory,
+  } = useGameContext();
+
+  const categories = ['Info', 'All', ...new Set(games.flatMap((game) => game.tags))];
   const router = useRouter();
   const isGamePage = router.pathname.startsWith('/games/');
-
-  const categories = ['All', ...new Set(games.flatMap((game) => game.tags))];
+  const [showInfo, setShowInfo] = useState(false);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const handleCategoryClick = (category) => {
-    setInfoOpen(false);
     setSelectedCategory(category);
-  };
-
-  const handleInfoClick = () => {
-    setSelectedCategory(null);
-    setInfoOpen(true);
+    setShowInfo(category === 'Info');
   };
 
   return (
@@ -47,19 +47,10 @@ export default function Layout({ children }) {
               />
 
               <div className={styles.categories}>
-                <button
-                  className={`${styles.categoryBtn} ${infoOpen ? styles.active : ''}`}
-                  onClick={handleInfoClick}
-                >
-                  Info
-                </button>
-
                 {categories.map((cat) => (
                   <button
                     key={cat}
-                    className={`${styles.categoryBtn} ${
-                      selectedCategory === cat && !infoOpen ? styles.active : ''
-                    }`}
+                    className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
                     onClick={() => handleCategoryClick(cat)}
                   >
                     {cat.replace(/\b\w/g, (l) => l.toUpperCase())}
@@ -72,24 +63,27 @@ export default function Layout({ children }) {
       </header>
 
       <main className={styles.main}>
-        {infoOpen ? (
+        {showInfo && (
           <div className={styles.infoBox}>
             <button
               className={styles.closeButton}
-              onClick={() => setInfoOpen(false)}
-              aria-label="Close Info"
+              onClick={() => {
+                setShowInfo(false);
+                setSelectedCategory('All');
+              }}
             >
-              ✕
+              ×
             </button>
             <h2>About Epix</h2>
             <p>
-              Epix is your go-to hub for fun and addictive web-based games. Discover new titles, filter
-              by category, and enjoy fast, lightweight experiences directly in your browser.
+              Epix is a lightweight web platform to browse and play cool web games. Built using
+              Next.js and deployed on GitHub Pages!
             </p>
           </div>
-        ) : (
-          children
         )}
+
+        {!isGamePage && !showInfo && children}
+        {isGamePage && children}
       </main>
     </>
   );
