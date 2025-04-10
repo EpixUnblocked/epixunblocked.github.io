@@ -74,6 +74,7 @@ export default function Layout({ children }) {
             >
               ×
             </button>
+            <h1>Epix - Unblocked Games</h1>
             <p>Web games offer engaging entertainment, but many schools and workplaces restrict access to gaming websites and monitor online activity. Epix effectively bypasses these network limitations, offering a diverse range of games that cater to all age groups, ensuring uninterrupted fun.</p>
 <h3>Having Trouble Loading the Game?</h3>
 <p>If the game isn’t loading and you’re stuck with a blank page, don’t worry! This might be caused by your browser’s extensions. Try opening our website in Incognito Mode (or Private Browsing) to see if that fixes the issue. Incognito disables most extensions, so it’s a quick way to check if something like an adblocker is blocking the game from loading.
