@@ -13,10 +13,12 @@ export default function Layout({ children }) {
     selectedCategory,
     setSelectedCategory,
   } = useGameContext();
+
   const [infoOpen, setInfoOpen] = useState(false);
-  const categories = ['All', ...new Set(games.flatMap((game) => game.tags))];
   const router = useRouter();
   const isGamePage = router.pathname.startsWith('/games/');
+
+  const categories = ['All', ...new Set(games.flatMap((game) => game.tags))];
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -28,8 +30,12 @@ export default function Layout({ children }) {
   };
 
   const handleInfoClick = () => {
-    setSelectedCategory(null); // deselect all tags
+    setSelectedCategory(null);
     setInfoOpen(true);
+  };
+
+  const handleCloseInfo = () => {
+    setInfoOpen(false);
   };
 
   return (
@@ -51,6 +57,13 @@ export default function Layout({ children }) {
               />
 
               <div className={styles.categories}>
+                <button
+                  className={`${styles.categoryBtn} ${infoOpen ? styles.active : ''}`}
+                  onClick={handleInfoClick}
+                >
+                  Info
+                </button>
+
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -62,15 +75,6 @@ export default function Layout({ children }) {
                     {cat.replace(/\b\w/g, (l) => l.toUpperCase())}
                   </button>
                 ))}
-
-                <button
-                  className={`${styles.categoryBtn} ${
-                    infoOpen ? styles.active : ''
-                  }`}
-                  onClick={handleInfoClick}
-                >
-                  Info
-                </button>
               </div>
             </>
           )}
@@ -79,7 +83,9 @@ export default function Layout({ children }) {
 
       {!isGamePage && infoOpen && (
         <div className={styles.infoBox}>
-          <p><strong>Epix</strong> is a browser-based game hub built with ❤️ using Next.js. Enjoy free online games with zero setup.</p>
+          <button className={styles.closeButton} onClick={handleCloseInfo}>×</button>
+          <p><strong>Epix</strong> is your go-to place for lightweight, free-to-play browser games. Built using Next.js and GitHub Pages for fast performance and easy deployment.</p>
+          <p>Games are updated regularly — bookmark and check back often!</p>
         </div>
       )}
 
