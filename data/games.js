@@ -85,6 +85,13 @@ const games = [
     thumbnail: `${basePath}/games/stickmanclimb/apple-touch-icon.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Block Blast',
+    slug: 'blockblast',
+    description: 'Relaxing puzzle game.',
+    thumbnail: `${basePath}/games/blockblast/block.png`,
+    tags: ['featured'],
+  },
   
 ];
 
