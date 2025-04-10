@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div className={styles.grid}>
       {filteredGames.map((game) => (
-        <Link key={game.slug} href={`games/${game.slug}`} className={styles.card}>
+        <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
           <div
             className={styles.cardImage}
             style={{ backgroundImage: `url(${game.thumbnail})` }}
