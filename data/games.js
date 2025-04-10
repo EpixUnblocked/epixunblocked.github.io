@@ -78,6 +78,13 @@ const games = [
     thumbnail: `${basePath}/games/fnafcustom/fnaf.png`,
     tags: ['popular','horror'],
   },
+  {
+    title: 'StickMan Climb 2',
+    slug: 'stickmanclimb',
+    description: 'Get to the top!!',
+    thumbnail: `${basePath}/games/stickmanclimb/apple-touch-icon.png`,
+    tags: ['popular'],
+  },
   
 ];
 
