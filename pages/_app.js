@@ -2,18 +2,21 @@
 import '../styles/globals.css';
 import Layout from '../components/Layout';
 import { GameProvider } from '../context/GameContext';
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
   return (
-    <Head>
+    <>
+      <Head>
         <title>Epix</title>
         <link rel="icon" href="/epix/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </Head>
-    <GameProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </GameProvider>
+      </Head>
+      <GameProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </GameProvider>
+    </>
   );
 }
