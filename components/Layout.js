@@ -14,7 +14,7 @@ export default function Layout({ children }) {
     setSelectedCategory,
   } = useGameContext();
 
-  const categories = ['Info', 'All', ...new Set(games.flatMap((game) => game.tags))];
+  const categories = ['About', 'All', ...new Set(games.flatMap((game) => game.tags))];
   const router = useRouter();
   const isGamePage = router.pathname.startsWith('/games/');
   const [showInfo, setShowInfo] = useState(false);
@@ -25,7 +25,7 @@ export default function Layout({ children }) {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
-    setShowInfo(category === 'Info');
+    setShowInfo(category === 'About');
   };
 
   return (
