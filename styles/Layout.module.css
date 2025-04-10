@@ -1,3 +1,5 @@
+/* styles/Layout.module.css */
+
 .header {
   width: 100%;
   background: #111;
@@ -100,11 +102,29 @@
 .infoBox {
   background: #1a1a1a;
   color: #ddd;
-  padding: 16px 20px;
+  padding: 20px;
   margin: 0 20px 16px;
   border-radius: 8px;
   border: 1px solid #333;
+  position: relative;
   animation: fadeIn 0.3s ease;
+  box-sizing: border-box;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  color: #888;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: #fff;
 }
 
 @keyframes fadeIn {
