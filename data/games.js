@@ -64,6 +64,14 @@ const games = [
     thumbnail: `${basePath}/games/bitlife/bitlife.png`,
     tags: ['popular','simulator'],
   },
+  {
+    title: 'Neon Swing',
+    slug: 'neonswing',
+    description: 'A cool swinging game where you doge obsticals.',
+    thumbnail: `${basePath}/games/neonswing/neonswing.png`,
+    tags: ['popular'],
+  },
+  
 ];
 
 export default games;
