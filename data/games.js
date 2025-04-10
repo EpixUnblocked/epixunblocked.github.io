@@ -50,6 +50,13 @@ const games = [
     thumbnail: `${basePath}/games/driftboss/driftboss.png`,
     tags: ['driving', 'simulator'],
   },
+  {
+    title: 'OvO Dimensions',
+    slug: 'ovo',
+    description: 'The best OvO game out there.',
+    thumbnail: `${basePath}/games/ovo/ovo.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
