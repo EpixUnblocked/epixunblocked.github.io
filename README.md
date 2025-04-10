@@ -1,7 +1,7 @@
 # Epix Unblocked
 Your portal into internet freedom
 
-WIP: https://scriptedcoke.github.io/epix
+WIP: https://scriptedcoke.github.io/
 
 Made by people who hate internet restrictions
 
