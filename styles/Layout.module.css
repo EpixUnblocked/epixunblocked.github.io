@@ -79,7 +79,6 @@
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s ease, border 0.2s ease;
-  white-space: nowrap;
 }
 
 .categoryBtn:hover {
@@ -120,6 +119,7 @@
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+  padding: 4px 8px;
   transition: color 0.2s ease;
 }
 
