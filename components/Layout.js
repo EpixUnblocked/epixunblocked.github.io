@@ -1,16 +1,19 @@
 // components/Layout.js
-import { useState } from 'react';
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
 import { useGameContext } from '../context/GameContext';
 import { useRouter } from 'next/router';
 import games from '../data/games';
+import { useState } from 'react';
 
 export default function Layout({ children }) {
   const { searchTerm, setSearchTerm, selectedCategory, setSelectedCategory } = useGameContext();
   const [infoVisible, setInfoVisible] = useState(false);
-  const categories = ['All', ...new Set(games.flatMap(game => game.tags))];
   const router = useRouter();
+
+  const isGamePage = router.pathname.startsWith('/games/');
+
+  const categories = ['All', ...new Set(games.flatMap((game) => game.tags))];
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -18,10 +21,8 @@ export default function Layout({ children }) {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
-    setInfoVisible(false);
+    setInfoVisible(false); // Hide info when changing tag
   };
-
-  const isGamePage = router.pathname.startsWith('/games/');
 
   return (
     <>
@@ -45,32 +46,33 @@ export default function Layout({ children }) {
               >
                 Info
               </button>
+
+              <div className={styles.categories}>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
+                    onClick={() => handleCategoryClick(cat)}
+                  >
+                    {cat.replace(/\b\w/g, (l) => l.toUpperCase())}
+                  </button>
+                ))}
+              </div>
             </>
           )}
         </div>
-
-        {!isGamePage && (
-          <div className={styles.categories}>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
-                onClick={() => handleCategoryClick(cat)}
-              >
-                {cat.replace(/\b\w/g, l => l.toUpperCase())}
-              </button>
-            ))}
-          </div>
-        )}
       </header>
 
       {infoVisible && (
         <div className={styles.infoBox}>
-          <p><strong>Epix</strong> is a lightweight game hub for browser-based games. Browse by category, search your favorites, and have fun!</p>
+          <span className={styles.infoClose} onClick={() => setInfoVisible(false)}>×</span>
+          <p>
+            <strong>Epix</strong> is a lightweight game hub for browser-based games. Search, filter, and enjoy your favorites!
+          </p>
         </div>
       )}
 
-      <main className={styles.main}>{children}</main>
+      {!infoVisible && <main className={styles.main}>{children}</main>}
     </>
   );
 }
