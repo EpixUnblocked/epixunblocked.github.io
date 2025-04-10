@@ -71,6 +71,13 @@ const games = [
     thumbnail: `${basePath}/games/neonswing/neonswing.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Fnaf Custom',
+    slug: 'fnafcustom',
+    description: 'Survive the night!',
+    thumbnail: `${basePath}/games/fnafcustom/fnaf.png`,
+    tags: ['popular'],
+  },
   
 ];
 
