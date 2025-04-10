@@ -7,14 +7,18 @@ export default function Home() {
   const { searchTerm, selectedCategory } = useGameContext();
 
   const filteredGames = games.filter((game) => {
+    if (selectedCategory === 'Info') return false;
+
     const matchesSearch = game.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
-      selectedCategory === 'All' || game.tags.includes(selectedCategory.toLowerCase());
+      selectedCategory === 'All' ||
+      game.tags.some((tag) => tag.toLowerCase() === selectedCategory.toLowerCase());
+
     return matchesSearch && matchesCategory;
   });
 
   return (
-    <div className={`${styles.grid} ${styles.gridEnter}`} key={searchTerm + selectedCategory}>
+    <div className={styles.grid}>
       {filteredGames.map((game) => (
         <Link key={game.slug} href={`/games/${game.slug}`} className={styles.card}>
           <div
