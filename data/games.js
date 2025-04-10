@@ -76,7 +76,7 @@ const games = [
     slug: 'fnafcustom',
     description: 'Survive the night!',
     thumbnail: `${basePath}/games/fnafcustom/fnaf.png`,
-    tags: ['popular'],
+    tags: ['popular','horror'],
   },
   
 ];
