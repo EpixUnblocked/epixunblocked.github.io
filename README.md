@@ -1,5 +1,5 @@
 # Epix Unblocked
-Your portal into internet freedom
+Your portal into internet freedom, an up and coming games site.
 
 WIP: https://scriptedcoke.github.io/
 
