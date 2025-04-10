@@ -1,4 +1,4 @@
-const basePath = '/epix'; // Required for GitHub Pages subpath
+const basePath = ''; // Required for GitHub Pages subpath
 
 const games = [
   {
