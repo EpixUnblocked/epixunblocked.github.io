@@ -1,4 +1,5 @@
 // components/Layout.js
+import { useState } from 'react';
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
 import { useGameContext } from '../context/GameContext';
@@ -7,7 +8,8 @@ import games from '../data/games';
 
 export default function Layout({ children }) {
   const { searchTerm, setSearchTerm, selectedCategory, setSelectedCategory } = useGameContext();
-  const categories = ['All', ...new Set(games.flatMap((game) => game.tags))];
+  const [infoVisible, setInfoVisible] = useState(false);
+  const categories = ['All', ...new Set(games.flatMap(game => game.tags))];
   const router = useRouter();
 
   const handleSearchChange = (e) => {
@@ -16,6 +18,7 @@ export default function Layout({ children }) {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
+    setInfoVisible(false);
   };
 
   const isGamePage = router.pathname.startsWith('/games/');
@@ -24,9 +27,7 @@ export default function Layout({ children }) {
     <>
       <header className={styles.header}>
         <div className={styles.topBarContent}>
-          <Link href="/" className={styles.logo}>
-            Epix
-          </Link>
+          <Link href="/" className={styles.logo}>Epix</Link>
 
           {!isGamePage && (
             <>
@@ -37,21 +38,37 @@ export default function Layout({ children }) {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <div className={styles.categories}>
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
-                    onClick={() => handleCategoryClick(cat)}
-                  >
-                    {cat.replace(/\b\w/g, (l) => l.toUpperCase())}
-                  </button>
-                ))}
-              </div>
+
+              <button
+                className={`${styles.categoryBtn} ${infoVisible ? styles.active : ''}`}
+                onClick={() => setInfoVisible(!infoVisible)}
+              >
+                Info
+              </button>
             </>
           )}
         </div>
+
+        {!isGamePage && (
+          <div className={styles.categories}>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`${styles.categoryBtn} ${selectedCategory === cat ? styles.active : ''}`}
+                onClick={() => handleCategoryClick(cat)}
+              >
+                {cat.replace(/\b\w/g, l => l.toUpperCase())}
+              </button>
+            ))}
+          </div>
+        )}
       </header>
+
+      {infoVisible && (
+        <div className={styles.infoBox}>
+          <p><strong>Epix</strong> is a lightweight game hub for browser-based games. Browse by category, search your favorites, and have fun!</p>
+        </div>
+      )}
 
       <main className={styles.main}>{children}</main>
     </>
