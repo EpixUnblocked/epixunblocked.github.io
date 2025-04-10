@@ -7,7 +7,7 @@ export default function Home() {
   const { searchTerm, selectedCategory } = useGameContext();
 
   const filteredGames = games.filter((game) => {
-    if (selectedCategory === 'Info') return false;
+    if (selectedCategory === 'About') return false;
 
     const matchesSearch = game.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
