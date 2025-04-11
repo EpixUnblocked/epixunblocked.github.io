@@ -33,7 +33,7 @@ export default function Layout({ children }) {
       <header className={styles.header}>
         <div className={styles.topBarContent}>
           <Link href="/" className={styles.logo}>
-            Epix
+            Epix Unblocked
           </Link>
 
           {!isGamePage && (
