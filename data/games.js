@@ -99,13 +99,7 @@ const games = [
     thumbnail: `${basePath}/games/idlestartup/logo.png`,
     tags: ['popular'],
   },
-  {
-    title: 'test',
-    slug: 'idlehospital',
-    description: 'test',
-    thumbnail: `${basePath}/games/idlehospital/idle.png`,
-    tags: ['popular'],
-  },
+  
 ];
 
 export default games;
