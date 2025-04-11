@@ -92,6 +92,13 @@ const games = [
     thumbnail: `${basePath}/games/stickmanclimb/apple-touch-icon.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Idle Startup Tycoon',
+    slug: 'idlestartup',
+    description: 'Become rich!',
+    thumbnail: `${basePath}/games/idlestartup/logo.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
