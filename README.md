@@ -1,7 +1,7 @@
 # Epix Unblocked
 Your portal into internet freedom, an up and coming games site.
 
-WIP: https://scriptedcoke.github.io/
+WIP: https://epixunblocked.github.io/
 
 Made by people who hate internet restrictions
 
