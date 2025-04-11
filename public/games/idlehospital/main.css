@@ -1,0 +1,156 @@
+body {
+    background-color: #881111;
+    margin: 5px;
+    padding: 0;
+}
+
+div.title {
+    text-align: center;
+    background-color: #ffffff;
+    max-width: 1004px;
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+div.button {
+    width: 140px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: middle;
+    display:inline-block;
+    background-color: #dddddd;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 2px;
+    font-weight: bold;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.button:hover {
+    background-color: #eeeeee;
+}
+
+div.button:active {
+    background-color: #FFFF33;
+}
+
+div.selected, div.selected:hover, div.selected:active {
+    background-color: #FFFF88;
+}
+
+div.info {
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 5px;
+    max-width: 1004px;
+    text-align: center;
+}
+
+div.info p {
+    display: inline-block;
+    width: 49%;
+    text-align: left;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+div.info div.button {
+    display: block;
+    margin: 2px auto 2px auto;
+    width: auto;
+    max-width: 500px;
+}
+
+div.tabs {
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 5px;
+    max-width: 1004px;
+    text-align: center;
+}
+
+div.content {
+
+}
+
+div.item {
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 5px;
+    max-width: 1004px;
+    position: relative;
+}
+
+div.heading {
+    font-weight: bold;
+    margin: 5px;
+}
+
+div.description {
+    color: #555555;
+    margin: 5px;
+}
+
+div.own {
+    border-left: 1px solid #000000;
+    margin: 0 5px 5px 5px;
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+    float: right;
+    font-size: 30px;
+}
+
+div.buysell {
+    margin: 0 10px 10px 10px;
+    float: right;
+    text-align: right;
+}
+
+div.smallButton {
+    width: 50px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: middle;
+    display:inline-block;
+    background-color: #dddddd;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 1px;
+    font-weight: bold;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.clear {
+    clear: both;
+}
+
+div.stats {
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 5px;
+    max-width: 1004px;
+}
+
+div.stats div {
+    margin: 5px;
+}

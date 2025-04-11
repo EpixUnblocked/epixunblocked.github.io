@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="clickHospital">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
+    <title>Click Hospital</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <!--<script language="JavaScript" type="text/javascript" src="jquery.js"></script>-->
+    <script language="JavaScript" type="text/javascript" src="angular.js"></script>
+    <!--<script language="JavaScript" type="text/javascript" src="angular-animate.js"></script>-->
+    <script language="JavaScript" type="text/javascript" src="game.js"></script>
+</head>
+<body ng-controller="gameController">
+<div class="title">Click Hospital</div>
+<div class="info">
+    <p class="money">{{formatCurrency(game.money)}}</p>
+    <p class="lawsuit">{{game.chanceLawsuit}}% Chance of Lawsuit</p>
+    <div class="button" ng-click="seePatient()">See Patient</div>
+</div>
+<div class="tabs">
+    <div class="button {{selectedTab == tab ? 'selected' : ''}}" ng-repeat="tab in tabs" ng-click="switchTab(tab)">{{tab}}</div>
+</div>
+<div ng-hide="selectedTab == 'Statistics'">
+    <div class="item" ng-repeat="obj in display | orderBy:'index':true">
+        <div class="heading">{{obj.name}}</div>
+        <div class="own" ng-show="obj.bc">{{obj.own}}</div>
+        <div class="buysell" ng-show="obj.bc">
+            <div>{{formatCurrency(obj.buyPrice)}}<div class="smallButton" ng-click="buyObject(obj)">Buy</div></div>
+            <div ng-hide="obj.own == 0">{{formatCurrency(obj.sellPrice)}}<div class="smallButton" ng-click="sellObject(obj)">Sell</div></div>
+        </div>
+        <div class="description">{{obj.desc}}</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="stats" ng-show="selectedTab == 'Statistics'">
+    <div>{{game.earned}}</div>
+    <div>{{game.spent}}</div>
+</div>
+</body>
+</html>
