@@ -106,6 +106,13 @@ const games = [
     thumbnail: `${basePath}/games/idlemining/idle.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Candy Clicker',
+    slug: 'candy',
+    description: 'Get diabities!',
+    thumbnail: `${basePath}/games/candy/idle.png`,
+    tags: ['popular'],
+  },
   
 ];
 
