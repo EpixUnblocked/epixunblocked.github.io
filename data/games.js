@@ -99,6 +99,13 @@ const games = [
     thumbnail: `${basePath}/games/idlestartup/logo.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Idle Mining Tycoon',
+    slug: 'idlemining',
+    description: 'Become rich!',
+    thumbnail: `${basePath}/games/idlemining/idle.png`,
+    tags: ['popular'],
+  },
   
 ];
 
