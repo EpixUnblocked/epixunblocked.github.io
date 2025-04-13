@@ -113,6 +113,20 @@ const games = [
     thumbnail: `${basePath}/games/candy/idle.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Stickman Hook',
+    slug: 'stickmanhook',
+    description: 'Swing to the finish line.',
+    thumbnail: `${basePath}/games/stickmanhook/idle.png`,
+    tags: ['featured'],
+  },
+  {
+    title: 'Jetpack Joyride',
+    slug: 'jetpack',
+    description: 'Pls play me.',
+    thumbnail: `${basePath}/games/jetpack/idle.png`,
+    tags: ['featured'],
+  },
   
 ];
 
