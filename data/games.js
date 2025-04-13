@@ -129,9 +129,9 @@ const games = [
   },
   {
     title: 'test',
-    slug: 'crazymotox',
+    slug: 'Crazymotox',
     description: 'test',
-    thumbnail: `${basePath}/games/crazymotox/idle.png`,
+    thumbnail: `${basePath}/games/Crazymotox/idle.png`,
     tags: ['featured'],
   },
   
