@@ -1,0 +1,24 @@
+.button{
+	opacity:0;
+}
+
+.input-text{
+	background: none;
+	border:none;
+	outline:none;
+	color:white;
+	font-family:"Nunito-Bold";
+	font-size:3vh;
+	text-align:center;
+}
+
+
+.input-text-room{
+	background: none;
+	border:none;
+	outline:none;
+	color:#01333E;
+	font-family:"Nunito-Bold";
+	font-size:3vh;
+	text-align:center;
+}
