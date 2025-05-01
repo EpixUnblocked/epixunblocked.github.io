@@ -127,13 +127,6 @@ const games = [
     thumbnail: `${basePath}/games/jetpack/idle.png`,
     tags: ['featured'],
   },
-  {
-    title: 'test',
-    slug: 'Crazymotox',
-    description: 'test',
-    thumbnail: `${basePath}/games/Crazymotox/idle.png`,
-    tags: ['featured'],
-  },
   
 ];
 
