@@ -1,4 +1,3 @@
-// components/Layout.js
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
 import { useGameContext } from '../context/GameContext';
@@ -23,10 +22,6 @@ export default function Layout({ children }) {
     setSearchTerm(e.target.value);
   };
 
-  const handleClearSearch = () => {
-    setSearchTerm('');
-  };
-
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setShowInfo(category === 'About');
@@ -36,29 +31,19 @@ export default function Layout({ children }) {
     <>
       <header className={styles.header}>
         <div className={styles.topBarContent}>
-          <div className={styles.logoAbout}>
-            <Link href="/" className={styles.logo}>
-              Epix Unblocked
-            </Link>
-            <button onClick={() => handleCategoryClick('About')} className={styles.aboutTag}>
-              About
-            </button>
-          </div>
+          <Link href="/" className={styles.logo}>
+            Epix Unblocked
+          </Link>
 
           {!isGamePage && (
             <>
-              <div className={styles.searchContainer}>
-                <input
-                  className={styles.search}
-                  type="text"
-                  placeholder="Search games..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                />
-                {searchTerm && (
-                  <button onClick={handleClearSearch} className={styles.clearButton}>×</button>
-                )}
-              </div>
+              <input
+                className={styles.search}
+                type="text"
+                placeholder="Search games..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
 
               <div className={styles.categories}>
                 {categories.map((cat) => (
@@ -101,8 +86,7 @@ export default function Layout({ children }) {
               <li>Disable Ad Blockers: Some ad blockers can prevent games from loading correctly. Temporarily disable them to see if that solves the issue.</li>
             </ul>
             <h3>Links To Other Web Sites</h3>
-            <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Unblocked games.
-            Unblocked games however have no control or responsibility for the policies, contents or practices of any third party sites or their services. You agree that Unblocked games shall not be held responsible or liable in anyway directly or indirectly, for whatever damage or loss resulting from or alleged to be caused by any such third party contents. Carefully read the terms and conditions for any third party services before using them.</p>
+            <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Unblocked games. Unblocked games however have no control or responsibility for the policies, contents or practices of any third party sites or their services. You agree that Unblocked games shall not be held responsible or liable in anyway directly or indirectly, for whatever damage or loss resulting from or alleged to be caused by any such third party contents. Carefully read the terms and conditions for any third party services before using them.</p>
           </div>
         )}
 
