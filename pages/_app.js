@@ -1,6 +1,7 @@
 // pages/_app.js
 import '../styles/globals.css';
 import Layout from '../components/Layout';
+import Footer from '../components/Footer';
 import { GameProvider } from '../context/GameContext';
 import Head from 'next/head';
 
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
       </GameProvider>
+      <Footer />
     </>
   );
 }
