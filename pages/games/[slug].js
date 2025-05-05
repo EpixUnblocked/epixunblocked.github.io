@@ -20,13 +20,13 @@ export default function Game() {
     setGame(foundGame || null);
   }, [slug]);
 
+  // Only run if game is valid
   useEffect(() => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('lastGameRoute', `/games/${game.slug}`);
-  }
-  }, [game.slug]);
+    if (typeof window !== 'undefined' && game?.slug) {
+      localStorage.setItem('lastGameRoute', `/games/${game.slug}`);
+    }
+  }, [game]);
 
-  // Listen for fullscreen changes
   useEffect(() => {
     const handleChange = () => {
       const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
