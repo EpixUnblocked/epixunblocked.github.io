@@ -1,12 +1,32 @@
 # Epix Unblocked
-Your portal into internet freedom, an up and coming games site.
 
-WIP: https://epixunblocked.github.io/
+**Your Gateway to Unrestricted Internet Gaming**
 
-Made by people who hate internet restrictions
+A growing platform for accessing your favorite games, free from online restrictions.
 
-## Adding games
-Follow the steps to add a game:
-1. Create the game folder under public/games
-2. Add the index.html and thumbnail image, png prefered
-3. Change the data/games.js folder so the game shows on the website
+[**Visit Epix Unblocked**](https://epixunblocked.github.io/)
+
+Made by a passionate team dedicated to bypassing internet limitations and providing a seamless gaming experience.
+
+---
+
+## **How to Add a Game:**
+
+Follow these simple steps to add your game to the platform:
+
+1. **Create a Game Folder**
+
+   * Navigate to `public/games/` and create a new folder for your game.
+
+2. **Add Game Files**
+
+   * Place the `index.html` file for the game in the newly created folder.
+   * Add a thumbnail image for the game (preferably a PNG) in `public/thumbnails`.
+
+3. **Update the Games Data**
+
+   * Edit the `data/games.js` file to include the new game and thumbnail location, ensuring it appears on the site.
+
+---
+
+By following these steps, you can easily contribute and share games with the Epix Unblocked community. Let's make internet freedom more fun together!
