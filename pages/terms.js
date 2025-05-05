@@ -1,5 +1,6 @@
 // pages/terms.js
 import Head from 'next/head';
+import styles from '../styles/Game.module.css'
 
 export default function TermsOfService() {
   return (
@@ -8,6 +9,9 @@ export default function TermsOfService() {
         <title>Terms of Service | Epix</title>
       </Head>
       <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', color: '#ddd' }}>
+      <button onClick={() => router.back()} className={styles.backBtn}>
+          ← Back
+        </button>
         <h1>Terms of Service</h1>
         <p>Last updated: May 5, 2025</p>
 
