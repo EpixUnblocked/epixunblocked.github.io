@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
+import TabCloak from '../components/TabCloak';
 import { useGameContext } from '../context/GameContext';
 import { useRouter } from 'next/router';
 import games from '../data/games';
@@ -41,6 +42,7 @@ export default function Layout({ children }) {
 
   return (
     <>
+      <TabCloak />
       <header className={styles.header}>
         <div className={styles.topBarContent}>
           <div className={styles.logoRow}>
