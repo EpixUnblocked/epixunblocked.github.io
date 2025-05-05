@@ -6,13 +6,6 @@ import games from '../data/games';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-useEffect(() => {
-  if (router.pathname === '/') {
-    setSelectedCategory('All');
-    setShowInfo(false);
-  }
-}, [router.pathname]);
-
 export default function Layout({ children }) {
   const {
     searchTerm,
@@ -38,6 +31,13 @@ export default function Layout({ children }) {
     setSelectedCategory('About');
     setShowInfo(true);
   };
+
+  useEffect(() => {
+  if (router.pathname === '/') {
+    setSelectedCategory('All');
+    setShowInfo(false);
+  }
+  }, [router.pathname]);
 
   return (
     <>
