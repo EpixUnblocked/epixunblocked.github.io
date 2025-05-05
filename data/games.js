@@ -120,6 +120,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/Jetpack.png`,
     tags: ['featured'],
   },
+  {
+    title: 'Level Devil',
+    slug: 'leveldevil',
+    description: 'Try not to rage.',
+    thumbnail: `${basePath}/thumbnails/Jetpack.png`,
+    tags: ['featured','new'],
+  },
   
 ];
 
