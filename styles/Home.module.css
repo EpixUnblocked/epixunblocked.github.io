@@ -61,6 +61,10 @@
   animation-delay: var(--animation-delay, 0ms);
 }
 
+.card.animate {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
