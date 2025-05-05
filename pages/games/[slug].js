@@ -79,7 +79,7 @@ export default function Game() {
             allowFullScreen
           />
           <button className={styles.fullscreenBtn} onClick={toggleFullscreen}>
-            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            {isFullscreen ? '⛶ Exit Fullscreen' : '⛶ Fullscreen'}
           </button>
         </div>
       </div>
