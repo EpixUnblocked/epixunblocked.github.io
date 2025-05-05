@@ -11,7 +11,7 @@ export default function TermsOfService() {
         <title>Terms of Service | Epix</title>
       </Head>
       <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', color: '#ddd' }}>
-      <button onClick={() => router.push('/')} className={styles.backBtn}>
+      <button onClick={() => router.back()} className={styles.backBtn}>
           ← Back
         </button>
         <h1>Terms of Service</h1>
