@@ -124,7 +124,7 @@ const games = [
     title: 'Level Devil',
     slug: 'leveldevil',
     description: 'Try not to rage.',
-    thumbnail: `${basePath}/thumbnails/Jetpack.png`,
+    thumbnail: `${basePath}/thumbnails/devil.png`,
     tags: ['featured','new'],
   },
   
