@@ -5,7 +5,7 @@ export default function TabCloak() {
     const originalTitle = document.title;
     const originalFavicon = document.querySelector("link[rel='icon']")?.href;
 
-    const cloakTitle = 'Google Docs';
+    const cloakTitle = 'Google Drive';
     const cloakFavicon = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
 
     const changeFavicon = (src) => {
