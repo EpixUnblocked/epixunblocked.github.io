@@ -1,6 +1,7 @@
 // pages/terms.js
 import Head from 'next/head';
-import styles from '../styles/Game.module.css'
+import { useRouter } from 'next/router';
+import styles from '../styles/Game.module.css';
 
 export default function TermsOfService() {
   return (
