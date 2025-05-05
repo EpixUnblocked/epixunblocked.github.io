@@ -117,7 +117,7 @@ const games = [
     title: 'Stickman Hook',
     slug: 'stickmanhook',
     description: 'Swing to the finish line.',
-    thumbnail: `${basePath}/games/stickmanhook/idle.png`,
+    thumbnail: `${basePath}/thumbnails/stickhook.png`,
     tags: ['featured'],
   },
   {
