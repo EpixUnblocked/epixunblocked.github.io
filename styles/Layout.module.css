@@ -127,6 +127,12 @@
   color: #fff;
 }
 
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
