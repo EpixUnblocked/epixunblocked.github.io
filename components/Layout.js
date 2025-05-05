@@ -96,12 +96,23 @@ export default function Layout({ children }) {
               </button>
             </div>
             <p>
-              Web games offer engaging entertainment, but many schools and workplaces restrict access to gaming websites. Epix bypasses these blocks, offering a diverse library for uninterrupted fun.
+              Web games offer engaging entertainment, but many schools and workplaces restrict access to gaming websites. Epix bypasses these network limitations, offering a wide range of games for all age groups.
             </p>
             <h3>Having Trouble Loading the Game?</h3>
-            <p>Try incognito mode, refreshing, clearing cache, or switching browsers. Disable ad blockers if needed.</p>
-            <h3>Links to Other Websites</h3>
-            <p>We link to third-party services but don’t control their content. Use them at your own discretion.</p>
+            <p>
+              Try Incognito Mode to disable extensions, or follow these tips:
+            </p>
+            <ul>
+              <li>Refresh the page</li>
+              <li>Clear your browser cache</li>
+              <li>Use a different browser</li>
+              <li>Check your internet connection</li>
+              <li>Disable ad blockers</li>
+            </ul>
+            <h3>External Links Disclaimer</h3>
+            <p>
+              Epix may link to external sites we don’t control. We’re not responsible for their content or policies. Use third-party services at your own risk.
+            </p>
           </div>
         )}
 
