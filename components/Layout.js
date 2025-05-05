@@ -58,7 +58,7 @@ export default function Layout({ children }) {
                   onChange={handleSearchChange}
                 />
                 {searchTerm && (
-                  <button className={styles.clearButton} onClick={handleClearSearch}>
+                  <button className={styles.clearSearch} onClick={handleClearSearch}>
                     ×
                   </button>
                 )}
