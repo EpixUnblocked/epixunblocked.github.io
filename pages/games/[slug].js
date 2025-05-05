@@ -73,7 +73,7 @@ export default function Game() {
 
         <div className={styles.iframeWrapper} ref={iframeRef}>
           <iframe
-            src={`/games/${game.slug}/index.html`}
+            src={`/html/${game.slug}/index.html`}
             title={game.title}
             className={styles.iframe}
             allowFullScreen
