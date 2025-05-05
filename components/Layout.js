@@ -4,6 +4,23 @@ import { useGameContext } from '../context/GameContext';
 import { useRouter } from 'next/router';
 import games from '../data/games';
 import { useState } from 'react';
+import { useEffect } from 'react';
+
+// Inside the Layout component (after useState):
+useEffect(() => {
+  const handleRouteChange = (url) => {
+    if (url === '/') {
+      setSelectedCategory('All');
+      setShowInfo(false);
+    }
+  };
+
+  router.events.on('routeChangeComplete', handleRouteChange);
+
+  return () => {
+    router.events.off('routeChangeComplete', handleRouteChange);
+  };
+}, [router]);
 
 export default function Layout({ children }) {
   const {
