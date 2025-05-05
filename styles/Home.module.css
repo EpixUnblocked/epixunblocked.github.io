@@ -39,20 +39,40 @@
   outline: none;
 }
 
-/* styles/Home.module.css */
-
+/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
   padding: 1rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: fadeInGrid 0.4s ease;
 }
 
+/* Game Card Animation */
 .card {
   text-decoration: none;
   color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Image & Overlay */
 .cardImage {
   position: relative;
   height: 300px;
@@ -62,11 +82,12 @@
   overflow: hidden;
   display: flex;
   align-items: flex-end;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
 .cardImage:hover {
   transform: scale(1.02);
+  opacity: 0.95;
 }
 
 .cardOverlay {
@@ -87,6 +108,7 @@
   color: #ccc;
 }
 
+/* Buttons */
 .button {
   padding: 0.75rem 1.25rem;
   font-size: 1rem;
@@ -103,15 +125,7 @@
   transform: translateY(-2px);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
+/* Grid Enter Animation */
 .gridEnter {
   animation: fadeInGrid 0.4s ease;
 }
