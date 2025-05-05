@@ -1,5 +1,7 @@
 // pages/privacy.js
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import styles from '../styles/Game.module.css';
 
 export default function PrivacyPolicy() {
   return (
