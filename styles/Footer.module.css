@@ -7,11 +7,18 @@
   text-align: center;
   border-top: 1px solid #222;
   margin-top: 60px;
+  min-height: 100px;
+  animation: fadeInFooter 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .inner {
   max-width: 960px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .links {
@@ -22,7 +29,8 @@
   margin-bottom: 16px;
 }
 
-.links a, .links span {
+.links a,
+.links span {
   color: #aaa;
   text-decoration: none;
   font-size: 0.95rem;
@@ -57,5 +65,16 @@
   .links {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
