@@ -107,13 +107,6 @@ const games = [
     tags: ['popular'],
   },
   {
-    title: 'Candy Clicker',
-    slug: 'candy',
-    description: 'Get diabities!',
-    thumbnail: `${basePath}/games/candy/idle.png`,
-    tags: ['popular'],
-  },
-  {
     title: 'Stickman Hook',
     slug: 'stickmanhook',
     description: 'Swing to the finish line.',
