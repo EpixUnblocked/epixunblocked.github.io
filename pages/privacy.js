@@ -10,7 +10,10 @@ export default function PrivacyPolicy() {
         <title>Privacy Policy | Epix</title>
       </Head>
       <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', color: '#ddd' }}>
-        <h1>Privacy Policy</h1>
+        <button onClick={() => router.back()} className={styles.backBtn}>
+          ← Back
+        </button>
+  <h1>Privacy Policy</h1>
         <p>Last updated: May 5, 2025</p>
 
         <h2>1. Information We Collect</h2>
