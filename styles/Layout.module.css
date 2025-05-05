@@ -17,8 +17,6 @@
   gap: 10px;
   width: 100%;
   box-sizing: border-box;
-  min-height: 140px; /* Ensures consistent height */
-  justify-content: space-between;
 }
 
 @media (min-width: 768px) {
@@ -62,12 +60,11 @@
   width: 100%;
   display: flex;
   align-items: center;
-  min-height: 40px; /* Prevents shifting */
 }
 
 .search {
   width: 100%;
-  padding: 10px 40px 10px 14px;
+  padding: 10px 40px 10px 14px; /* padding-right for clear button */
   border-radius: 8px;
   border: none;
   background: #1e1e1e;
@@ -106,7 +103,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  min-height: 48px; /* Prevent layout shift */
 }
 
 .categoryBtn {
@@ -118,11 +114,6 @@
   cursor: pointer;
   font-size: 0.95rem;
   transition: background 0.2s ease, border 0.2s ease;
-  min-width: 100px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .categoryBtn:hover {
