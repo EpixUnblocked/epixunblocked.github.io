@@ -48,7 +48,7 @@
     height: 100%;
     border: none;
     border-radius: 12px;
-    /* overflow: hidden; */
+    overflow: hidden;
   }
   
   .fullscreenBtn {
