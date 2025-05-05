@@ -3,7 +3,7 @@
 
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import games from '../../data/games';
 import styles from '../../styles/Game.module.css';
 
@@ -11,12 +11,23 @@ export default function Game() {
   const router = useRouter();
   const { slug } = router.query;
   const [game, setGame] = useState(null);
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     if (!slug) return;
     const foundGame = games.find((g) => g.slug === slug);
     setGame(foundGame || null);
   }, [slug]);
+
+  const handleFullscreen = () => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      if (iframe.requestFullscreen) iframe.requestFullscreen();
+      else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+      else if (iframe.mozRequestFullScreen) iframe.mozRequestFullScreen();
+      else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+    }
+  };
 
   if (!game) return <p className={styles.notFound}>Game not found.</p>;
 
@@ -36,11 +47,13 @@ export default function Game() {
 
         <div className={styles.iframeWrapper}>
           <iframe
+            ref={iframeRef}
             src={`/games/${game.slug}/index.html`}
             title={game.title}
             className={styles.iframe}
             allowFullScreen
           />
+          <button onClick={handleFullscreen} className={styles.fullscreenBtn}>⛶ Fullscreen</button>
         </div>
       </div>
     </>
