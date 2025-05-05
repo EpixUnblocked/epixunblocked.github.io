@@ -124,7 +124,7 @@ const games = [
     title: 'Jetpack Joyride',
     slug: 'jetpack',
     description: 'Pls play me.',
-    thumbnail: `${basePath}/games/jetpack/idle.png`,
+    thumbnail: `${basePath}/public/thumbnails/Jetpack.png`,
     tags: ['featured'],
   },
   
