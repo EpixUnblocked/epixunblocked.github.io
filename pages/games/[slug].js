@@ -1,15 +1,24 @@
+// game slug
+// @scriptedCoke
+
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import games from '../../data/games';
+import styles from '../../styles/Game.module.css';
 
 export default function Game() {
   const router = useRouter();
   const { slug } = router.query;
+  const [game, setGame] = useState(null);
 
-  const game = games.find((g) => g.slug === slug);
+  useEffect(() => {
+    if (!slug) return;
+    const foundGame = games.find((g) => g.slug === slug);
+    setGame(foundGame || null);
+  }, [slug]);
 
-  if (!game) return <p>Game not found</p>;
+  if (!game) return <p className={styles.notFound}>Game not found.</p>;
 
   return (
     <>
@@ -17,18 +26,23 @@ export default function Game() {
         <title>{game.title} | Epix</title>
       </Head>
 
-      <Link href="/" style={{ color: '#fff', marginBottom: '12px', display: 'inline-block' }}>
-        ← Back to Game List
-      </Link>
+      <div className={styles.container}>
+        <button onClick={() => router.push('/')} className={styles.backBtn}>
+          ← Back
+        </button>
 
-      <h1>{game.title}</h1>
-      <p style={{ color: '#ccc' }}>{game.description}</p>
+        <h1 className={styles.title}>{game.title}</h1>
+        <p className={styles.description}>{game.description}</p>
 
-      <iframe
-        src={`/games/${game.slug}/index.html`}
-        style={{ width: '100%', height: '80vh', border: 'none', borderRadius: '10px' }}
-        title={game.title}
-      />
+        <div className={styles.iframeWrapper}>
+          <iframe
+            src={`/games/${game.slug}/index.html`}
+            title={game.title}
+            className={styles.iframe}
+            allowFullScreen
+          />
+        </div>
+      </div>
     </>
   );
 }
