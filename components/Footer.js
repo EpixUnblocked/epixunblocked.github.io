@@ -10,7 +10,7 @@ export default function Footer() {
         <div className={styles.links}>
           <Link href="/terms"><span>Terms of Service</span></Link>
           <Link href="/privacy"><span>Privacy Policy</span></Link>
-          <a href="https://github.com/EpixUnblocked" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/EpixUnblocked/epixunblocked.github.io" target="_blank" rel="noopener noreferrer">
             <span>GitHub</span>
           </a>
         </div>
