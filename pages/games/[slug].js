@@ -12,6 +12,7 @@ export default function Game() {
   const { slug } = router.query;
   const [game, setGame] = useState(null);
   const iframeRef = useRef(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
@@ -19,13 +20,38 @@ export default function Game() {
     setGame(foundGame || null);
   }, [slug]);
 
-  const handleFullscreen = () => {
-    const iframe = iframeRef.current;
-    if (iframe) {
-      if (iframe.requestFullscreen) iframe.requestFullscreen();
-      else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-      else if (iframe.mozRequestFullScreen) iframe.mozRequestFullScreen();
-      else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+  // Listen for fullscreen changes
+  useEffect(() => {
+    const handleChange = () => {
+      const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+      setIsFullscreen(!!fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleChange);
+    document.addEventListener('webkitfullscreenchange', handleChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleChange);
+      document.removeEventListener('webkitfullscreenchange', handleChange);
+    };
+  }, []);
+
+  const toggleFullscreen = () => {
+    const iframeWrapper = iframeRef.current;
+
+    if (!iframeWrapper) return;
+
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      if (iframeWrapper.requestFullscreen) {
+        iframeWrapper.requestFullscreen();
+      } else if (iframeWrapper.webkitRequestFullscreen) {
+        iframeWrapper.webkitRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
     }
   };
 
@@ -45,15 +71,16 @@ export default function Game() {
         <h1 className={styles.title}>{game.title}</h1>
         <p className={styles.description}>{game.description}</p>
 
-        <div className={styles.iframeWrapper}>
+        <div className={styles.iframeWrapper} ref={iframeRef}>
           <iframe
-            ref={iframeRef}
             src={`/games/${game.slug}/index.html`}
             title={game.title}
             className={styles.iframe}
             allowFullScreen
           />
-          <button onClick={handleFullscreen} className={styles.fullscreenBtn}>⛶ Fullscreen</button>
+          <button className={styles.fullscreenBtn} onClick={toggleFullscreen}>
+            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          </button>
         </div>
       </div>
     </>
