@@ -127,6 +127,24 @@
   color: #fff;
 }
 
+.clearButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 6px;
+  line-height: 1;
+}
+
+.clearButton:hover {
+  color: white;
+}
+
 .logoRow {
   display: flex;
   align-items: center;
