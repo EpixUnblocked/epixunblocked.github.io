@@ -103,7 +103,7 @@ const games = [
     title: 'Idle Mining Tycoon',
     slug: 'idlemining',
     description: 'Become rich!',
-    thumbnail: `${basePath}/games/idlemining/idle.png`,
+    thumbnail: `${basePath}/thumbnails/idleminer.png`,
     tags: ['popular'],
   },
   {
