@@ -127,6 +127,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/devil.png`,
     tags: ['featured','new'],
   },
+  {
+    title: 'testjs',
+    slug: 'worldshardestgame-master',
+    description: 'testjsdes.',
+    thumbnail: `${basePath}/thumbnails/devil.png`,
+    tags: ['featured','new'],
+  },
   
 ];
 
