@@ -127,6 +127,13 @@ const games = [
     thumbnail: `${basePath}/games/jetpack/idle.png`,
     tags: ['featured'],
   },
+  {
+    title: 'WaterDig',
+    slug: 'waterdig',
+    description: 'Dig out the water or somth',
+    thumbnail: `${basePath}/games/jetpack/idle.png`,
+    tags: ['featured'],
+  },
   
 ];
 
