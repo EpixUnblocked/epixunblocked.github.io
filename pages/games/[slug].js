@@ -20,6 +20,12 @@ export default function Game() {
     setGame(foundGame || null);
   }, [slug]);
 
+  useEffect(() => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('lastGameRoute', `/games/${game.slug}`);
+  }
+  }, [game.slug]);
+
   // Listen for fullscreen changes
   useEffect(() => {
     const handleChange = () => {
