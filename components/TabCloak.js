@@ -1,4 +1,4 @@
-// tabcloak.js
+// TabCloak.js
 // @scriptedCoke
 
 import { useEffect } from 'react';

@@ -1,3 +1,6 @@
+// Layout.js
+// @scriptedCoke
+
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
 import TabCloak from '../components/TabCloak';
