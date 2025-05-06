@@ -95,26 +95,33 @@
   transform: scale(1.02);
   opacity: 0.95;
 }
-
+/*
 .cardOverlay {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   flex-grow: 1;
+}*/
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  color: white;
 }
 
 .cardOverlay h3 {
   margin: 0;
   font-size: 1.2rem;
-  background-color: #000;
 }
 
 .cardOverlay p {
   margin-top: 0.25rem;
   font-size: 0.9rem;
   color: #ccc;
-  background-color: #000;
 }
 
 /* Buttons */
