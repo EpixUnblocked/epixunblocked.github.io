@@ -108,17 +108,19 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 1.25rem; /* extra bottom space if needed */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
   color: white;
+  box-sizing: border-box; /* Ensures padding works as expected */
 }
 
 .cardOverlay h3 {
   margin: 0;
   font-size: 1.2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .cardOverlay p {
