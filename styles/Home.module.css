@@ -53,35 +53,46 @@
   animation: fadeInGrid 0.4s ease;
 }
 
-/* Game Card Animation */
-.card.animate {
-  animation: fadeInUp 0.4s ease forwards;
+/* Game Card Design */
+.card {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Card Image & Overlay */
-.cardImage:hover {
+.card:hover {
   transform: scale(1.02);
-  opacity: 0.95;
 }
 
-.cardOverlay h3 {
+/* Card Image */
+.cardImage {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Card Content */
+.cardContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContent h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.cardOverlay p {
-  margin-top: 0.25rem;
+.cardContent p {
+  margin-top: 0.5rem;
   font-size: 0.9rem;
   color: #ccc;
 }
@@ -129,61 +140,4 @@
   .header input {
     width: 300px;
   }
-}
-
-/* --- Updated Card Styles --- */
-.card {
-  text-decoration: none;
-  color: white;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.4s ease forwards;
-  animation-delay: var(--animation-delay, 0ms);
-  display: flex;
-  flex-direction: column;
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  overflow: hidden;
-  min-height: 360px;
-  box-sizing: border-box;
-  transition: height 0.3s ease;
-}
-
-.cardImage {
-  position: relative;
-  height: 180px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px 12px 0 0;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  transition: transform 0.2s ease, opacity 0.3s ease;
-}
-
-.cardImage:hover {
-  transform: scale(1.02);
-  opacity: 0.95;
-}
-
-.cardOverlay {
-  width: 100%;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  backdrop-filter: blur(2px);
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.cardOverlay h3 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.cardOverlay p {
-  margin-top: 0.25rem;
-  font-size: 0.9rem;
-  color: #ccc;
 }
