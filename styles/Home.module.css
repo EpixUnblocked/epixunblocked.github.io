@@ -108,7 +108,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 1rem 1rem 1.25rem; /* extra bottom space if needed */
+  padding: 1rem 1rem 1rem; /* extra bottom space if needed */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
