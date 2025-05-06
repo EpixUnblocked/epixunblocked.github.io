@@ -127,6 +127,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/devil.png`,
     tags: ['featured','new'],
   },
+  {
+    title: 'Subway Surfers: Tokyo',
+    slug: 'subwaysurf',
+    description: 'Race through tokyo.',
+    thumbnail: `${basePath}/thumbnails/tokyo.png`,
+    tags: ['featured','new','simulator'],
+  },
   
 ];
 
