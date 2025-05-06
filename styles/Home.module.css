@@ -54,15 +54,6 @@
 }
 
 /* Game Card Animation */
-.card {
-  text-decoration: none;
-  color: white;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.4s ease forwards;
-  animation-delay: var(--animation-delay, 0ms);
-}
-
 .card.animate {
   animation: fadeInUp 0.4s ease forwards;
 }
@@ -79,28 +70,9 @@
 }
 
 /* Card Image & Overlay */
-.cardImage {
-  position: relative;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  transition: transform 0.2s ease, opacity 0.3s ease;
-}
-
 .cardImage:hover {
   transform: scale(1.02);
   opacity: 0.95;
-}
-
-.cardOverlay {
-  width: 100%;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  backdrop-filter: blur(2px);
 }
 
 .cardOverlay h3 {
@@ -157,4 +129,61 @@
   .header input {
     width: 300px;
   }
+}
+
+/* --- Updated Card Styles --- */
+.card {
+  text-decoration: none;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 360px;
+  box-sizing: border-box;
+  transition: height 0.3s ease;
+}
+
+.cardImage {
+  position: relative;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.cardImage:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
+.cardOverlay {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(2px);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cardOverlay h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.cardOverlay p {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #ccc;
 }
