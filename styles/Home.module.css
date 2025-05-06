@@ -55,6 +55,7 @@
 
 /* Game Card Animation */
 .card {
+  aspect-ratio: 16 / 9;
   text-decoration: none;
   color: white;
   opacity: 0;
