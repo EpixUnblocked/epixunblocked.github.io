@@ -32,7 +32,6 @@
   color: #fff;
   width: 100%;
   max-width: 300px;
-  transition: border 0.3s;
   font-size: 1rem;
 }
 
@@ -41,96 +40,59 @@
   outline: none;
 }
 
-/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
   padding: 1rem;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  animation: fadeInGrid 0.4s ease;
 }
 
-/* Game Card Design */
 .card {
-  background: #1e1e1e;
+  background-color: #1a1a1a;
   border-radius: 12px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
   text-decoration: none;
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
   transition: transform 0.2s ease;
+  height: auto;
+  min-height: 260px;
 }
 
 .card:hover {
   transform: scale(1.02);
 }
 
-/* Card Image */
 .cardImage {
-  height: 180px;
+  width: 100%;
+  height: 160px;
   background-size: cover;
   background-position: center;
-  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
 }
 
-/* Card Content */
 .cardContent {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
 }
 
 .cardContent h3 {
-  margin: 0;
   font-size: 1.1rem;
+  margin: 0;
   font-weight: 600;
 }
 
 .cardContent p {
-  margin-top: 0.5rem;
   font-size: 0.9rem;
   color: #ccc;
+  margin: 0;
+  line-height: 1.4;
 }
 
-/* Buttons */
-.button {
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  background-color: #2e8bff;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.button:hover {
-  background-color: #1f6ed4;
-  transform: translateY(-2px);
-}
-
-/* Grid Enter Animation */
-.gridEnter {
-  animation: fadeInGrid 0.4s ease;
-}
-
-@keyframes fadeInGrid {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive Enhancements */
 @media (min-width: 768px) {
   .header {
     flex-direction: row;
