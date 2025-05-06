@@ -148,6 +148,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/wbwwb.png`,
     tags: ['new','platformer'],
   },
+  {
+    title: 'Doge love.',
+    slug: 'dogelove',
+    description: 'Help the dogs fall in love.',
+    thumbnail: `${basePath}/thumbnails/doge.png`,
+    tags: ['new','platformer'],
+  },
 ];
 
 export default games;
