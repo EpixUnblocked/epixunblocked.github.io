@@ -1,15 +1,17 @@
+/* Home.module.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .container {
-  padding: 1.5rem;
-  background-color: #121212;
+  padding: 1rem;
 }
 
-/* Header Styling */
 .header {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 2rem;
 }
 
@@ -17,22 +19,25 @@
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
-  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header input {
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  border-radius: 8px;
-  border: 1px solid #2e2e2e;
-  background: #1e1e1e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b0b0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cpath d='M21 21l-4.35-4.35'%3E%3C/path%3E%3C/svg%3E") no-repeat 12px center;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: none;
+  background: #1e1e1e;
   color: #fff;
   width: 100%;
-  max-width: 400px;
-  font-size: 0.95rem;
+  max-width: 300px;
+  transition: border 0.3s;
+  font-size: 1rem;
 }
 
 .header input:focus {
-  border: 1px solid #3a3a3a;
+  border: 2px solid #007bff;
   outline: none;
 }
 
@@ -40,56 +45,98 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
+  padding: 1rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: fadeInGrid 0.4s ease;
 }
 
-/* Game Card */
+/* Game Card Animation */
 .card {
-  background: #1a1a1a;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #2e2e2e;
+  text-decoration: none;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+.card.animate {
+  animation: fadeInUp 0.4s ease forwards;
 }
 
-/* Card Image */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Image & Overlay */
 .cardImage {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  position: relative;
+  height: 300px;
   background-size: cover;
   background-position: center;
-  background-color: #2e2e2e;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-/* Card Content */
+.cardImage:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
 .cardOverlay {
-  padding: 1.25rem;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(2px);
 }
 
 .cardOverlay h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 .cardOverlay p {
-  font-size: 0.85rem;
-  color: #b0b0b0;
-  line-height: 1.4;
-  margin: 0;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #ccc;
 }
 
-/* Button Style */
+/* Buttons */
 .button {
-  display: none; /* Not visible in the image */
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  background-color: #2e8bff;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Animations */
-@keyframes fadeInUp {
+.button:hover {
+  background-color: #1f6ed4;
+  transform: translateY(-2px);
+}
+
+/* Grid Enter Animation */
+.gridEnter {
+  animation: fadeInGrid 0.4s ease;
+}
+
+@keyframes fadeInGrid {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -105,6 +152,9 @@
   .header {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+  }
+
+  .header input {
+    width: 300px;
   }
 }
