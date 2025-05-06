@@ -4,7 +4,7 @@ const games = [
   {
     title: 'Block Blast',
     slug: 'blockblast',
-    description: 'Relaxing puzzle game.',
+    description: 'Block Blast involves in matching blocks together to make specific patterns that explode with points,the more points you earn, the higher your score.',
     thumbnail: `${basePath}/html/blockblast/block.png`,
     tags: ['featured'],
   },
