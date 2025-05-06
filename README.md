@@ -16,7 +16,7 @@ Follow these simple steps to add your game to the platform:
 
 1. **Create a Game Folder**
 
-   * Navigate to `public/games/` and create a new folder for your game.
+   * Navigate to `public/html/` and create a new folder for your game.
 
 2. **Add Game Files**
 
