@@ -32,6 +32,7 @@
   color: #fff;
   width: 100%;
   max-width: 300px;
+  transition: border 0.3s;
   font-size: 1rem;
 }
 
@@ -40,59 +41,113 @@
   outline: none;
 }
 
+/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
   padding: 1rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: fadeInGrid 0.4s ease;
 }
 
+/* Game Card Animation */
 .card {
-  background-color: #1a1a1a;
-  border-radius: 12px;
-  overflow: hidden;
   text-decoration: none;
   color: white;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease;
-  height: auto;
-  min-height: 260px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
 }
 
-.card:hover {
-  transform: scale(1.02);
+.card.animate {
+  animation: fadeInUp 0.4s ease forwards;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Image & Overlay */
 .cardImage {
-  width: 100%;
-  height: 160px;
+  position: relative;
+  height: 300px;
   background-size: cover;
   background-position: center;
-  flex-shrink: 0;
-}
-
-.cardContent {
-  padding: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex-grow: 1;
+  align-items: flex-end;
+  transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-.cardContent h3 {
-  font-size: 1.1rem;
+.cardImage:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
+.cardOverlay {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(2px);
+}
+
+.cardOverlay h3 {
   margin: 0;
-  font-weight: 600;
+  font-size: 1.2rem;
 }
 
-.cardContent p {
+.cardOverlay p {
+  margin-top: 0.25rem;
   font-size: 0.9rem;
   color: #ccc;
-  margin: 0;
-  line-height: 1.4;
 }
 
+/* Buttons */
+.button {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  background-color: #2e8bff;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #1f6ed4;
+  transform: translateY(-2px);
+}
+
+/* Grid Enter Animation */
+.gridEnter {
+  animation: fadeInGrid 0.4s ease;
+}
+
+@keyframes fadeInGrid {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Enhancements */
 @media (min-width: 768px) {
   .header {
     flex-direction: row;
