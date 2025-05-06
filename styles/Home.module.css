@@ -4,6 +4,7 @@
   padding: 1rem;
 }
 
+/* Header Styling */
 .header {
   display: flex;
   flex-direction: column;
@@ -42,24 +43,21 @@
 /* Grid Layout */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   padding: 1rem;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.4s ease, transform 0.4s ease;
   animation: fadeInGrid 0.4s ease;
 }
 
 /* Modern Game Card Design */
 .card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: white;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #1a1a1a;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   opacity: 0;
@@ -77,18 +75,17 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
+/* Aspect-ratio Image */
 .cardImage {
-  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background-size: cover;
   background-position: center;
 }
 
+/* Text content under the image */
 .cardOverlay {
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -108,7 +105,7 @@
   margin: 0;
 }
 
-/* Buttons */
+/* Button Style */
 .button {
   padding: 0.75rem 1.25rem;
   font-size: 1rem;
@@ -125,11 +122,7 @@
   transform: translateY(-2px);
 }
 
-/* Grid Enter Animation */
-.gridEnter {
-  animation: fadeInGrid 0.4s ease;
-}
-
+/* Grid Animation */
 @keyframes fadeInGrid {
   from {
     opacity: 0;
