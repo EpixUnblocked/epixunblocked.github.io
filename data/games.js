@@ -62,7 +62,7 @@ const games = [
     slug: 'ovo',
     description: 'The best OvO game out there.',
     thumbnail: `${basePath}/html/ovo/ovo.png`,
-    tags: ['popular'],
+    tags: ['popular','platformer'],
   },
   {
     title: 'BitLife',
@@ -134,7 +134,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/tokyo.png`,
     tags: ['featured','new','simulator'],
   },
-  
+  {
+    title: 'Icey Purple Head 3',
+    slug: 'iceypurplehead3',
+    description: 'Cool game!',
+    thumbnail: `${basePath}/thumbnails/icy.png`,
+    tags: ['new','platformer'],
+  },
 ];
 
 export default games;
