@@ -134,13 +134,6 @@ const games = [
     thumbnail: `${basePath}/thumbnails/tokyo.png`,
     tags: ['featured','new','simulator'],
   },
-  {
-    title: 'Icy Purple head 3',
-    slug: 'icypurple3',
-    description: 'Beta test.',
-    thumbnail: `${basePath}/thumbnails/icy.png`,
-    tags: ['featured','new','simulator'],
-  },
   
 ];
 
