@@ -102,20 +102,19 @@
   flex-direction: column;
   gap: 0.5rem;
   flex-grow: 1;
-  background-color: #000;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
 }
 
 .cardOverlay h3 {
   margin: 0;
   font-size: 1.2rem;
+  background-color: #000;
 }
 
 .cardOverlay p {
   margin-top: 0.25rem;
   font-size: 0.9rem;
   color: #ccc;
+  background-color: #000;
 }
 
 /* Buttons */
