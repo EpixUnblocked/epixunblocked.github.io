@@ -11,7 +11,7 @@ const games = [
   {
     title: 'Moto X3M',
     slug: 'motox3m',
-    description: 'A game about motorbikes, jumps, and flips.',
+    description: 'Moto X3M consists of multiple levels and stages where you have you get by on a motorbike, there is also a point system where you can do cool flips and tricks.',
     thumbnail: `${basePath}/html/motox3m/thumb.png`,
     tags: ['popular', 'driving'],
   },
