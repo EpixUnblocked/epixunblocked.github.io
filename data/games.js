@@ -155,6 +155,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/doge.png`,
     tags: ['new','platformer'],
   },
+  {
+    title: 'Fruit Merge!',
+    slug: 'fruitmerge',
+    description: 'Juicy merge game!',
+    thumbnail: `${basePath}/thumbnails/fruit.png`,
+    tags: ['new','simulator','popular'],
+  },
 ];
 
 export default games;
