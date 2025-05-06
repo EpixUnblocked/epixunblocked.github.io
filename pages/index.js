@@ -37,7 +37,7 @@ export default function Home() {
             className={styles.cardImage}
             style={{ backgroundImage: `url(${game.thumbnail})` }}
           >
-            <div className={styles.cardContent}>
+            <div className={styles.cardOverlay}>
               <h3>{game.title}</h3>
               <p>{game.description}</p>
             </div>
