@@ -162,13 +162,6 @@ const games = [
     thumbnail: `${basePath}/thumbnails/fruit.png`,
     tags: ['new','simulator','popular'],
   },
-  {
-    title: 'test',
-    slug: 'brainit',
-    description: 'test',
-    thumbnail: `${basePath}/thumbnails/fruit.png`,
-    tags: ['new'],
-  },
 ];
 
 export default games;
