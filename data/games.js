@@ -141,6 +141,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/icy.png`,
     tags: ['new','platformer'],
   },
+  {
+    title: 'We Become What We Behold',
+    slug: 'wbwwb',
+    description: 'A minigame about the news.',
+    thumbnail: `${basePath}/thumbnails/wbwwb.png`,
+    tags: ['new','platformer'],
+  },
 ];
 
 export default games;
