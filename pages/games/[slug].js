@@ -51,12 +51,16 @@ export default function Game() {
         iframeWrapper.requestFullscreen();
       } else if (iframeWrapper.webkitRequestFullscreen) {
         iframeWrapper.webkitRequestFullscreen();
+      } else if (iframeWrapper.msRequestFullscreen) {
+        iframeWrapper.msRequestFullscreen();
       }
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
       } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
       }
     }
   };
