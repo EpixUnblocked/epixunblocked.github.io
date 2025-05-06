@@ -1,3 +1,5 @@
+/* Home.module.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .container {
@@ -51,7 +53,7 @@
   animation: fadeInGrid 0.4s ease;
 }
 
-/* Game Card */
+/* Game Card Animation */
 .card {
   text-decoration: none;
   color: white;
@@ -59,18 +61,6 @@
   transform: translateY(20px);
   animation: fadeInUp 0.4s ease forwards;
   animation-delay: var(--animation-delay, 0ms);
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  background: #1a1a1a;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px) scale(1.015);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
 .card.animate {
@@ -88,38 +78,38 @@
   }
 }
 
-/* Card Image with Fade Overlay and Text */
+/* Card Image & Overlay */
 .cardImage {
   position: relative;
-  aspect-ratio: 16 / 9;
+  height: 300px;
   background-size: cover;
   background-position: center;
-  border-radius: 16px 16px 0 0;
+  border-radius: 12px;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.cardImage:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
 }
 
 .cardOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
   padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 80%, transparent 100%);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  backdrop-filter: blur(10px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  backdrop-filter: blur(2px);
 }
 
 .cardOverlay h3 {
   margin: 0;
   font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
 }
 
 .cardOverlay p {
-  margin: 0;
+  margin-top: 0.25rem;
   font-size: 0.9rem;
   color: #ccc;
 }
@@ -141,7 +131,11 @@
   transform: translateY(-2px);
 }
 
-/* Grid Animation */
+/* Grid Enter Animation */
+.gridEnter {
+  animation: fadeInGrid 0.4s ease;
+}
+
 @keyframes fadeInGrid {
   from {
     opacity: 0;
@@ -151,10 +145,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.gridEnter {
-  animation: fadeInGrid 0.4s ease;
 }
 
 /* Responsive Enhancements */
