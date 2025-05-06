@@ -121,6 +121,7 @@ export default function Layout({ children }) {
             </ul>
             <h3>Links To Other Web Sites</h3>
             <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Unblocked games. Unblocked games however have no control or responsibility for the policies, contents or practices of any third party sites or their services. You agree that Unblocked games shall not be held responsible or liable in anyway directly or indirectly, for whatever damage or loss resulting from or alleged to be caused by any such third party contents. Carefully read the terms and conditions for any third party services before using them.</p>
+            <p>© {new Date().getFullYear()} Epix. All rights reserved.</p>
           </div>
         )}
 
