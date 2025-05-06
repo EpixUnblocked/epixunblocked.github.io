@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
 .container {
   padding: 1rem;
 }
 
+/* header, input, grid, cards, buttons, etc. */
 .header {
   display: flex;
   flex-direction: column;
@@ -39,7 +38,7 @@
   outline: none;
 }
 
-/* Grid Layout */
+/* Grid and Card Styling */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -51,7 +50,6 @@
   animation: fadeInGrid 0.4s ease;
 }
 
-/* Game Card Animation */
 .card {
   text-decoration: none;
   color: white;
@@ -76,7 +74,6 @@
   }
 }
 
-/* Card Image & Overlay */
 .cardImage {
   position: relative;
   height: 300px;
@@ -112,7 +109,6 @@
   color: #ccc;
 }
 
-/* Buttons */
 .button {
   padding: 0.75rem 1.25rem;
   font-size: 1rem;
@@ -129,7 +125,6 @@
   transform: translateY(-2px);
 }
 
-/* Grid Enter Animation */
 .gridEnter {
   animation: fadeInGrid 0.4s ease;
 }
@@ -145,7 +140,6 @@
   }
 }
 
-/* Responsive Enhancements */
 @media (min-width: 768px) {
   .header {
     flex-direction: row;
