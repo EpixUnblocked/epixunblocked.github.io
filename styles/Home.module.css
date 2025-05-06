@@ -97,10 +97,14 @@
 }
 
 .cardOverlay {
-  width: 100%;
   padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+  background-color: #000;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .cardOverlay h3 {
