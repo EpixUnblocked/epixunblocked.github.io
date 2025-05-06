@@ -49,7 +49,7 @@
   animation: fadeInGrid 0.4s ease;
 }
 
-/* Modern Game Card Design */
+/* Game Card */
 .card {
   background: #1a1a1a;
   border-radius: 16px;
@@ -75,7 +75,7 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* Aspect-ratio Image */
+/* Card Image */
 .cardImage {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -83,7 +83,7 @@
   background-position: center;
 }
 
-/* Text content under the image */
+/* Card Content */
 .cardOverlay {
   padding: 1rem;
   display: flex;
@@ -122,7 +122,7 @@
   transform: translateY(-2px);
 }
 
-/* Grid Animation */
+/* Animations */
 @keyframes fadeInGrid {
   from {
     opacity: 0;
