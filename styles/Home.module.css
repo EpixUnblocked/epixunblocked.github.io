@@ -54,18 +54,6 @@
 }
 
 /* Game Card Animation */
-.card {
-  text-decoration: none;
-  color: white;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.4s ease forwards;
-  animation-delay: var(--animation-delay, 0ms);
-}
-
-.card.animate {
-  animation: fadeInUp 0.4s ease forwards;
-}
 
 @keyframes fadeInUp {
   from {
@@ -78,38 +66,60 @@
   }
 }
 
-/* Card Image & Overlay */
-.cardImage {
-  position: relative;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  transition: transform 0.2s ease, opacity 0.3s ease;
+.card.animate {
+  animation: fadeInUp 0.4s ease forwards;
 }
 
-.cardImage:hover {
-  transform: scale(1.02);
-  opacity: 0.95;
+/* Card Image & Overlay */
+.card {
+  text-decoration: none;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease forwards;
+  animation-delay: var(--animation-delay, 0ms);
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.cardImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
 }
 
 .cardOverlay {
-  width: 100%;
+  position: relative;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  backdrop-filter: blur(4px);
   padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  backdrop-filter: blur(2px);
+  margin-top: -3rem; /* overlaps bottom of image slightly for the fade */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .cardOverlay h3 {
   margin: 0;
   font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 .cardOverlay p {
-  margin-top: 0.25rem;
+  margin: 0;
   font-size: 0.9rem;
   color: #ccc;
 }
