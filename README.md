@@ -2,7 +2,7 @@
 
 **Your Gateway to Unrestricted Internet Gaming**
 
-A growing platform for accessing your favorite games, free from online restrictions.
+A growing platform for accessing your favourite games, free from online restrictions.
 
 [**Visit Epix Unblocked**](https://epixunblocked.github.io/)
 
