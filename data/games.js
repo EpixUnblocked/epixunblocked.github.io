@@ -162,6 +162,13 @@ const games = [
     thumbnail: `${basePath}/thumbnails/fruit.png`,
     tags: ['new','simulator','popular'],
   },
+  {
+    title: 'Chat App',
+    slug: 'chat',
+    description: 'Chat with strangers with this unblocked chatting app!',
+    thumbnail: `${basePath}/thumbnails/chatter.png`,
+    tags: ['featured','chat','new'],
+  },
 ];
 
 export default games;
