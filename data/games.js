@@ -2,6 +2,13 @@ const basePath = ''; // Required for GitHub Pages subpath
 
 const games = [
   {
+    title: 'Chat App',
+    slug: 'chat',
+    description: 'Chat with strangers with this unblocked chatting app!',
+    thumbnail: `${basePath}/thumbnails/chatter.png`,
+    tags: ['featured','chat','new'],
+  },
+  {
     title: 'Block Blast',
     slug: 'blockblast',
     description: 'Block Blast involves in matching blocks together to make specific patterns that explode with points, the more points you earn, the higher your score.',
@@ -161,13 +168,6 @@ const games = [
     description: 'Juicy merge game!',
     thumbnail: `${basePath}/thumbnails/fruit.png`,
     tags: ['new','simulator','popular'],
-  },
-  {
-    title: 'Chat App',
-    slug: 'chat',
-    description: 'Chat with strangers with this unblocked chatting app!',
-    thumbnail: `${basePath}/thumbnails/chatter.png`,
-    tags: ['featured','chat','new'],
   },
 ];
 
