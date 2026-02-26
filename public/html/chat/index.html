@@ -1,1 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Message Now Network</title>
+<style>
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #2c2f33;
+    color: #ddd;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
+  h2 {
+    text-align: center;
+    color: #fff;
+  }
+
+  iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  #feed {
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: #23272a;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .message {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 10px;
+    word-break: break-word;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .message:nth-child(odd) {
+    background-color: #2c2f33;
+  }
+  .message:nth-child(even) {
+    background-color: #3a3f45;
+  }
+
+  .pfp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 2px solid #555;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .username {
+    font-weight: bold;
+    color: #7289da;
+  }
+
+  .timestamp {
+    font-size: 0.75em;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .text {
+    font-size: 1em;
+    color: #eee;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #loadMore {
+    margin-top: 10px;
+    background-color: #7289da;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #typing {
+    font-style: italic;
+    color: #aaa;
+    margin-top: 5px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Message Now Network</h2>
+
+<!-- Google Form Embed -->
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true"></iframe>
+
+<h3>Live Feed</h3>
+<div id="feed">Loading messages…</div>
+<div id="typing"></div>
+<button id="loadMore">Load More Messages</button>
+
+<script>
+const feedDiv = document.getElementById('feed');
+const typingDiv = document.getElementById('typing');
+const loadMoreBtn = document.getElementById('loadMore');
+const csvUrl = "https://script.google.com/macros/s/AKfycbxQiP4z80woDPKMfhP_gW-jNygnbB-shDk1WJlgHYabMCFtCO_lLKhOP-H6ZsEjlSA1/exec";
+
+let allMessages = [];
+let messagesToShow = 10; // initial number of messages
+
+function renderMessages() {
+  feedDiv.innerHTML = '';
+  // Show last N messages, newest first
+  const messages = allMessages.slice(-messagesToShow).reverse();
+
+  messages.forEach(msgObj => {
+    // Skip messages where username is "del"
+    if ((msgObj.username || "").toLowerCase() === "del") return;
+
+    const messageEl = document.createElement('div');
+    messageEl.className = 'message';
+
+    const pfpImg = document.createElement('img');
+    pfpImg.className = 'pfp';
+    pfpImg.src = msgObj.pfp || 'https://i.imgur.com/5QfJ5mL.png';
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'content';
+
+    const usernameSpan = document.createElement('span');
+    usernameSpan.className = 'username';
+    usernameSpan.textContent = msgObj.username || "Anonymous";
+
+    const timestampSpan = document.createElement('span');
+    timestampSpan.className = 'timestamp';
+    const dt = new Date(msgObj.timestamp);
+    timestampSpan.textContent = dt.toLocaleString();
+
+    const textSpan = document.createElement('span');
+    textSpan.className = 'text';
+    let text = msgObj.message || "";
+    // Emoji replacement
+    text = text.replace(/:smile:/g, "😄").replace(/:laugh:/g, "😆");
+    // GIF / Image embedding
+    const gifRegex = /(https?:\/\/\S+\.(?:gif|webp|png|jpg))/gi;
+    text = text.replace(gifRegex, url => `<img src="${url}" style="max-width:200px; max-height:200px; display:block; margin-top:5px;">`);
+    textSpan.innerHTML = text;
+
+    contentDiv.appendChild(usernameSpan);
+    contentDiv.appendChild(timestampSpan);
+    contentDiv.appendChild(textSpan);
+
+    messageEl.appendChild(pfpImg);
+    messageEl.appendChild(contentDiv);
+    feedDiv.appendChild(messageEl);
+  });
+
+  // Scroll to top for newest messages
+  feedDiv.scrollTop = 0;
+}
+
+async function fetchMessages() {
+  try {
+    typingDiv.textContent = "Fetching messages…";
+    const res = await fetch(csvUrl);
+    const data = await res.json();
+    allMessages = data;
+    renderMessages();
+    typingDiv.textContent = "";
+  } catch (err) {
+    console.error(err);
+    typingDiv.textContent = "Error loading messages.";
+  }
+}
+
+// Initial fetch
+fetchMessages();
+
+// Refresh every 4 seconds
+setInterval(fetchMessages, 4000);
+
+// Load more messages
+loadMoreBtn.addEventListener('click', () => {
+  messagesToShow += 10;
+  renderMessages();
+});
+</script>
+
+</body>
+</html>
