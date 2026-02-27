@@ -16,6 +16,13 @@ const games = [
     tags: ['featured'],
   },
   {
+    title: 'Poly Track',
+    slug: 'polytrack',
+    description: 'Polytrack is a driving game where you drive around.',
+    thumbnail: `${basePath}/thumbnails/polytrack.png`,
+    tags: ['featured'],
+  },
+  {
     title: 'Moto X3M',
     slug: 'motox3m',
     description: 'Moto X3M consists of multiple levels and stages where you have you get by on a motorbike, there is also a point system where you can do cool flips and tricks.',
