@@ -20,7 +20,7 @@ const games = [
     slug: 'polytrack',
     description: 'Polytrack is a driving game where you drive around.',
     thumbnail: `${basePath}/thumbnails/polytrack.png`,
-    tags: ['featured'],
+    tags: ['featured', 'driving'],
   },
   {
     title: 'Ultrakill',
@@ -177,11 +177,11 @@ const games = [
     tags: ['horror'],
   },
   {
-    title: 'Test',
-    slug: 'test',
-    description: 'You need to hide from a monster, and you\'re trapped in the backrooms.',
-    thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
-    tags: ['horror'],
+    title: 'Mario Kart',
+    slug: 'mariokart',
+    description: 'Join multiple races!',
+    thumbnail: `${basePath}/html/mariokart/thumb.png`,
+    tags: ['featured', 'driving'],
   },
 ];
 
