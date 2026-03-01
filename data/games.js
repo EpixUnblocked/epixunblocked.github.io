@@ -163,18 +163,11 @@ const games = [
     tags: ['new','platformer'],
   },
   {
-    title: 'Doge love.',
-    slug: 'dogelove',
-    description: 'Help the dogs fall in love.',
-    thumbnail: `${basePath}/thumbnails/doge.png`,
-    tags: ['new','platformer'],
-  },
-  {
-    title: 'Fruit Merge!',
-    slug: 'fruitmerge',
-    description: 'Juicy merge game!',
-    thumbnail: `${basePath}/thumbnails/fruit.png`,
-    tags: ['new','simulator','popular'],
+    title: 'Backrooms',
+    slug: 'backrooms',
+    description: 'You need to hide from a monster, and you\'re trapped in the backrooms.',
+    thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
+    tags: ['horror'],
   },
 ];
 
