@@ -23,6 +23,13 @@ const games = [
     tags: ['featured'],
   },
   {
+    title: 'Ultrakill',
+    slug: 'ultrakill',
+    description: 'Shoot things.',
+    thumbnail: `${basePath}/html/ultrakill/thumb.png`,
+    tags: ['featured', 'shooter'],
+  },
+  {
     title: 'Moto X3M',
     slug: 'motox3m',
     description: 'Moto X3M consists of multiple levels and stages where you have you get by on a motorbike, there is also a point system where you can do cool flips and tricks.',
@@ -168,13 +175,6 @@ const games = [
     description: 'You need to hide from a monster, and you\'re trapped in the backrooms.',
     thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
     tags: ['horror'],
-  },
-  {
-    title: 'Ultrakill',
-    slug: 'ultrakill',
-    description: 'Shoot things.',
-    thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
-    tags: ['shooter'],
   },
 ];
 
