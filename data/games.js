@@ -176,6 +176,13 @@ const games = [
     thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
     tags: ['horror'],
   },
+  {
+    title: 'Test',
+    slug: 'test',
+    description: 'You need to hide from a monster, and you\'re trapped in the backrooms.',
+    thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
+    tags: ['horror'],
+  },
 ];
 
 export default games;
