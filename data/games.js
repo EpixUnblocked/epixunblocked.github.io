@@ -169,6 +169,13 @@ const games = [
     thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
     tags: ['horror'],
   },
+  {
+    title: 'Ultrakill',
+    slug: 'ultrakill',
+    description: 'Shoot things.',
+    thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
+    tags: ['shooter'],
+  },
 ];
 
 export default games;
