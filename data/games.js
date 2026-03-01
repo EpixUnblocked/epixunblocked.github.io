@@ -177,7 +177,7 @@ const games = [
     tags: ['horror'],
   },
   {
-    title: 'Mario Kart',
+    title: 'Super Mario Kart',
     slug: 'mariokart',
     description: 'Join multiple races!',
     thumbnail: `${basePath}/html/mariokart/thumb.png`,
