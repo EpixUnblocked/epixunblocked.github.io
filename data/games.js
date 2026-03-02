@@ -204,6 +204,13 @@ const games = [
     thumbnail: `${basePath}/html/rooftopsnipers/thumb.png`,
     tags: ['new', 'shooter'],
   },
+  {
+    title: 'Friday Night Funkin',
+    slug: 'fnf',
+    description: 'A rhythm game.',
+    thumbnail: `${basePath}/html/fnf/thumb.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
