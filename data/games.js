@@ -211,6 +211,13 @@ const games = [
     thumbnail: `${basePath}/html/fnf/thumb.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Baldi\'s Basics',
+    slug: 'baldibasic',
+    description: 'Escape baldi.',
+    thumbnail: `${basePath}/html/baldibasic/thumb.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
