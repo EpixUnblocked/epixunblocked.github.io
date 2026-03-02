@@ -267,6 +267,13 @@ const games = [
     thumbnail: `${basePath}/html/pokemonemerald/thumb.png`,
     tags: ['popular'],
   },
+  {
+    title: 'GachaVerse',
+    slug: 'gachaverse',
+    description: 'GachaVerse is a gacha game where you can collect characters and items, there are also multiple game modes to play in.',
+    thumbnail: `${basePath}/html/gachaverse/thumb.png`,
+    tags: ['simulator'],
+  },
 ];
 
 export default games;
