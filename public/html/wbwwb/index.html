@@ -1,4 +1,9 @@
-﻿<html>
+﻿<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+<!--social commentary. Uses jsdelivr--!>
+
+<html>
+<base href="https://cdn.jsdelivr.net/gh/Stinkalistic/UGS@main/MISC/webecomewhatwebehold/">
 	<head>
 		<link rel="stylesheet" href="css/game.css">
 	</head>
@@ -6,19 +11,16 @@
 		<div id="stage"></div>
 		<div id="modal_shade"></div>
 		<div class="overlay" id="warning">
-			<div dir="rtl">ای بابا!</div>
-			<div dir="rtl">
+			<div>oh noes</div>
+			<div>
 			your browser doesn't support webgl.<br>
-			try a different browser or computer?<br>
-				<br>
-				مرورگر شما مرخص است! از یه مرورگر و یا کامپیوتر دیگه استفاده کنید!
+			try a different browser or computer?
 			</div>
 		</div>
 		<div class="overlay" id="paused">
 			<div>paused</div>
-			<div dir="rtl">
-			click anywhere to resume<br>
-				برای بازگشت رو یه جا رو کلیک کن!
+			<div>
+			click anywhere to resume
 			</div>
 		</div>
 	</body>
@@ -32,9 +34,6 @@
 <script src="js/lib/tweenjs-0.6.2.min.js"></script>
 <script>Ticker.framerate=60; Ticker.paused=true;</script>
 <script src="js/lib/helpers.js"></script>
-
-<!-- Text Strings -->
-<script src="js/textStrings.js"></script>
 
 <!-- Core Engine Code -->
 <script src="js/core/Game.js"></script>
@@ -99,6 +98,6 @@ window.onload = function(){
 		document.getElementById("warning").style.display = "block";
 	}
 };
-window.SHARE_TEXT = 'همین الان یه بازی خیلی خفن رو بازی کردم'
-window.SHARE_URL = "";
+window.SHARE_TEXT = "I just played this really weird game about the news. WE BECOME WHAT WE BEHOLD:"
+window.SHARE_URL = "https://ncase.itch.io/wbwwb";
 </script>
