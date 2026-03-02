@@ -260,6 +260,13 @@ const games = [
     thumbnail: `${basePath}/html/eggycar/thumb.png`,
     tags: ['featured', 'popular'],
   },
+  {
+    title: 'Pokemon Emerald',
+    slug: 'pokemonemerald',
+    description: 'Pokemon',
+    thumbnail: `${basePath}/html/pokemonemerald/thumb.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
