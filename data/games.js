@@ -235,8 +235,15 @@ const games = [
   {
     title: 'Geometry Dash SubZero',
     slug: 'gdsubzero',
-    description: 'Gather your bricks and be the first to build your bridge.',
+    description: 'Reach the end!',
     thumbnail: `${basePath}/html/gdsubzero/thumb.png`,
+    tags: ['platformer'],
+  },
+  {
+    title: 'Gorilla Tag',
+    slug: 'gorillatag',
+    description: 'Tag other people and climb',
+    thumbnail: `${basePath}/html/gorillatag/thumb.png`,
     tags: ['popular'],
   },
 ];
