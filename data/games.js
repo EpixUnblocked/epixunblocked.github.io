@@ -246,6 +246,20 @@ const games = [
     thumbnail: `${basePath}/html/gorillatag/thumb.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Effing Zombies',
+    slug: 'effingzombies',
+    description: 'Kill the zombies',
+    thumbnail: `${basePath}/html/effingzombies/thumb.png`,
+    tags: ['new'],
+  },
+  {
+    title: 'Eggy Car',
+    slug: 'eggycar',
+    description: 'Make sure the egg doesn\'t crack',
+    thumbnail: `${basePath}/html/eggycar/thumb.png`,
+    tags: ['featured', 'popular'],
+  },
 ];
 
 export default games;
