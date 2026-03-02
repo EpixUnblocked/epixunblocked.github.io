@@ -191,10 +191,10 @@ const games = [
     tags: ['simulator'],
   },
   {
-    title: 'Slope',
-    slug: 'slope',
-    description: 'Slide down the slope to get the highest points possible!',
-    thumbnail: `${basePath}/html/slope/thumb.png`,
+    title: 'Run 3',
+    slug: 'run3',
+    description: 'Run until the end.',
+    thumbnail: `${basePath}/html/run3/thumb.png`,
     tags: ['popular'],
   },
 ];
