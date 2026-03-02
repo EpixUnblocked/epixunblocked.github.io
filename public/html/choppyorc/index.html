@@ -1,161 +1,171 @@
-<!-- Ultimate Game Stash file--> 
-<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+<!DOCTYPE html>
 
+<html lang="en-us">
 
-
-</style><script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@61317aeabd553fa3f0f839712017379e24b9185e/choff.js"></script><style type="text/css">#button {
-  display:none;
-}
-.imgb_vis {
-  animation: imgb-animation 7s linear;
-}
-@keyframes imgb-animation {
-  10% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(100px);
-  }
-  90% {
-    transform: translateX(100px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}</style></head><body dir="ltr"><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MENBM6GSNY"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-MENBM6GSNY")</script> 
-	<div id="fb-root"></div>
-	
-	<script>
-	// Issue a warning if trying to preview an exported project on disk.
-	(function(){
-		// Check for running exported on file protocol
-		if (window.location.protocol.substr(0, 4) ==="file")
-		{
-			alert("Exported games won't work until you upload them. (When running on the file:/// protocol, browsers block many features from working for security reasons.)");
-		}
-	})();
-	</script>
-	
-	<!-- The canvas must be inside a div called c2canvasdiv -->
-	<div id="c2canvasdiv" style="width: 1117px; height: 628px; margin-left: 0px; margin-top: 148px;">
-	
-		<!-- The canvas the project will render to.  If you change its ID, don't forget to change the
-		ID the runtime looks for in the jQuery events above (ready() and cr_sizeCanvas()). -->
-		<canvas height="628" id="c2canvas" width="1117" style="width: 1117px; height: 628px;">
-			<!-- This text is displayed if the visitor's browser does not support HTML5.
-			You can change it, but it is a good idea to link to a description of a browser
-			and provide some links to download some popular HTML5-compatible browsers. -->
-			<h1>Your browser does not appear to support HTML5.  Try upgrading your browser to the latest version.  <a href="http://www.whatbrowser.org">What is a browser?</a>
-			<br><br><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Microsoft Internet Explorer</a><br>
-			<a href="http://www.mozilla.com/firefox/">Mozilla Firefox</a><br>
-			<a href="http://www.google.com/chrome/">Google Chrome</a><br>
-			<a href="http://www.apple.com/safari/download/">Apple Safari</a></h1>
-		</canvas>
-		
-	</div>
-	
-	<!-- Pages load faster with scripts at the bottom -->
-	
-	<!-- Construct 2 exported games require jQuery. -->
-	<script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@61317aeabd553fa3f0f839712017379e24b9185e/choj.js"></script>
-
-
-	
-    <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
-    This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
-	<script src="https://cdn.jsdelivr.net/gh/bubbls/ruffle@61317aeabd553fa3f0f839712017379e24b9185e/chorun.js"></script>
-
+<head>
+<base href="https://cdn.jsdelivr.net/gh/greeniYT/dta6@main/" />   
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>DTA6</title>
+    <link rel="stylesheet" href="TemplateData/style.css" />
+    <script src="TemplateData/gamepush-unity.js"></script>
     <script>
-		// Start the Construct 2 project running on window load.
-		jQuery(document).ready(function ()
-		{			
-			// Create new runtime using the c2canvas
-			cr_createRuntime("c2canvas");
-		});
-		
-		// Pause and resume on page becoming visible/invisible
-		function onVisibilityChanged() {
-			if (document.hidden || document.mozHidden || document.webkitHidden || document.msHidden)
-				cr_setSuspended(true);
-			else
-				cr_setSuspended(false);
-		};
-		
-		document.addEventListener("visibilitychange", onVisibilityChanged, false);
-		document.addEventListener("mozvisibilitychange", onVisibilityChanged, false);
-		document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
-		document.addEventListener("msvisibilitychange", onVisibilityChanged, false);
-		
-		function OnRegisterSWError(e)
-		{
-			console.warn("Failed to register service worker: ", e);
-		};
-		
-		// Runtime calls this global method when ready to start caching (i.e. after startup).
-		// This registers the service worker which caches resources for offline support.
-		window.C2_RegisterSW = function C2_RegisterSW()
-		{
-			if (!navigator.serviceWorker)
-				return;		// no SW support, ignore call
-			
-			try {
-				navigator.serviceWorker.register("sw.js", { scope: "./" })
-				.then(function (reg)
-				{
-					console.log("Registered service worker on " + reg.scope);
-				})
-				.catch(OnRegisterSWError);
-			}
-			catch (e)
-			{
-				OnRegisterSWError(e);
-			}
-		};
+        const projectId = "10947";
+        const publicToken = "1jUALf4gEH9NVcmbDHHMyFvrKj9BkqrY";
+        const showPreloaderAd = "true";
+        const overlayBackgroundColor = "";
+        const progressBarFillColor = "";
+        const progressBarBackgroundColor = "";
+        const progressBarBorderColor = "";
+
+        const autocallGameReady = "";
     </script>
-	<script src=""></script>
- 
+    <script>
+        var _unityAwaiter = {};
+        _unityAwaiter.ready = new Promise((resolve, reject) => {
+            _unityAwaiter.done = resolve;
+            _unityAwaiter.abort = reject;
+        });
+
+        var _gpAwaiter = {};
+        _gpAwaiter.ready = new Promise((resolve) => {
+            _gpAwaiter.done = resolve;
+        });
+
+        window.unityInstance = null;
+        window.onGPError = () => _gpAwaiter.done();
+
+        window.onGPInit = async(gp) => {
+            if (showPreloaderAd == "true" || showPreloaderAd == "1") {
+                gp.ads.showPreloader();
+            }
+
+            window.GamePush = new GamePushUnity(gp);
+            gp.player.ready.finally(_gpAwaiter.done);
+
+            await _unityAwaiter.ready;
+
+            if (autocallGameReady != null && parseFloat(autocallGameReady) > 0) {
+                setTimeout(() => gp.gameStart(), parseFloat(autocallGameReady));
+            }
+        };
+    </script>
+    <script>
+        ((g, a, m, e) => {
+            let o = () => {
+                let p = document.createElement("script");
+                p.src = `${a[0]}?projectId=${m}&publicToken=${e}`, p.onerror = () => {
+                    a.shift(), a.length > 0 ? (o(), p.remove()) : "onGPError" in g && g.onGPError()
+                }, document.head.appendChild(p)
+            };
+            o()
+        })(window, ["./gamepush.js", "./gamepush.js", "./gamepush.js"], projectId, publicToken);
+    </script>
+</head>
+
+<body class="light">
+    <div id="unity-container" class="unity-desktop">
+        <canvas id="unity-canvas"></canvas>
+    </div>
+    <div id="loading-cover" style="display:none;">
+        <div id="unity-loading-bar">
+            <div id="unity-logo"><img src="logo.png" /></div>
+            <div id="unity-progress-bar-empty" style="display: none;">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <script>
+        (async () => {
+            const buildUrl = "https://cdn.jsdelivr.net/gh/greeniYT/dta6@main/Build/";
+            
+            const parts = [
+                buildUrl + "/cb329eb1ef692e19f43f5fddf5d5b128.data.unityweb.part1",
+                buildUrl + "/cb329eb1ef692e19f43f5fddf5d5b128.data.unityweb.part2"
+            ];
+
+            try {
+                console.log("Downloading and merging data parts...");
+                
+                const responses = await Promise.all(parts.map(url => fetch(url).then(r => {
+                    if (!r.ok) throw new Error("Failed to load part: " + url);
+                    return r.arrayBuffer();
+                })));
+
+                const mergedBlob = new Blob(responses, { type: "application/octet-stream" });
+                const mergedUrl = URL.createObjectURL(mergedBlob);
+            
+                const loaderUrl = buildUrl + "/Builds.loader.js";
+                const config = {
+                    dataUrl: mergedUrl,
+                    frameworkUrl: buildUrl + "/3dffb3ed1e706df32d3b7b014ff04f0b.js.unityweb",
+                    codeUrl: buildUrl + "/efd904c4e9e86d7a5592528dd74dfe59.wasm.unityweb",
+                    streamingAssetsUrl: "StreamingAssets",
+                    companyName: "vsegon",
+                    productName: "DTA6",
+                    productVersion: "1",
+                };
+
+                const container = document.querySelector("#unity-container");
+                const canvas = document.querySelector("#unity-canvas");
+                const loadingCover = document.querySelector("#loading-cover");
+                const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+                const progressBarFull = document.querySelector("#unity-progress-bar-full");
+                const spinner = document.querySelector('.spinner');
+
+                if (overlayBackgroundColor !== "-" && overlayBackgroundColor !== " " && overlayBackgroundColor !== "")
+                    canvas.style.background = overlayBackgroundColor;
+
+                if (progressBarFillColor !== "-" && progressBarFillColor !== " " && progressBarFillColor !== "")
+                    progressBarFull.style.background = progressBarFillColor;
+
+                if (progressBarBackgroundColor !== "-" && progressBarBackgroundColor !== " " && progressBarBackgroundColor !== "")
+                    progressBarEmpty.style.background = progressBarBackgroundColor;
+
+                if (progressBarBorderColor !== "-" && progressBarBorderColor !== " " && progressBarBorderColor !== "")
+                    progressBarEmpty.style.border.color = progressBarBorderColor;
 
 
-</script><script>gadgets.Prefs.setMessages_({});gadgets.Prefs.setDefaultPrefs_({});gadgets.io.preloaded_=[];</script><style type="text/css">
-		* {
-			padding: 0;
-			margin: 0;
-		}
-		html, body {
-			background: #000;
-			color: #fff;
-			overflow: hidden;
-			touch-action: none;
-			-ms-touch-action: none;
-		}
-		canvas {
-			touch-action-delay: none;
-			touch-action: none;
-			-ms-touch-action: none;
-		}
-    </style>
-    <meta charset="UTF-8">
-	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-	<title>Choppy Orc</title>	
-	<!-- Allow fullscreen mode on iOS devices. (These are Apple specific meta tags.) -->
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" name="viewport">
-	<meta content="yes" name="apple-mobile-web-app-capable">
-	<meta content="black" name="apple-mobile-web-app-status-bar-style">
-	<meta content="true" name="HandheldFriendly">	
-	<!-- Chrome for Android web app tags -->
-	<meta content="yes" name="mobile-web-app-capable">
-	
-    <!-- All margins and padding must be zero for the canvas to fill the screen. -->
-	
-	
+                if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                    container.className = "unity-mobile";
+                }
 
-<script>
-/* mp-start */
+                loadingCover.style.display = "";
 
-var _params = gadgets.util.getUrlParameters();
-if (_params['exp_rpc_js'] != 1) {
-  var url = _params['parent'] + '/ig/ifpc_relay';
-  gadgets.rpc.setRelayUrl('..', url, true);
-}
-/* mp-end */
-</script><style type="text/css" id="operaUserStyle">
+                const unityLoader = document.createElement("script");
+                unityLoader.src = loaderUrl;
+                unityLoader.onload = async() => {
+                    await _gpAwaiter.ready;
+                    createUnityInstance(canvas, config, (progress) => {
+                        spinner.style.display = "none";
+                        progressBarEmpty.style.display = "";
+                        progressBarFull.style.width = `${100 * progress}%`;
+                    }).then((unityInstance) => {
+                        window.unityInstance = unityInstance;
+                        _unityAwaiter.done(unityInstance);
+                        loadingCover.style.display = "none";
+                    }).catch((message) => {
+                        _unityAwaiter.abort(message);
+                        alert(message);
+                    });
+                };
+                document.body.appendChild(unityLoader);
+
+                document.addEventListener("pointerdown", () => {
+                    container.focus();
+                    window.focus();
+                    canvas.focus();
+                });
+            } catch (error) {
+                console.error("Error loading game data:", error);
+                alert("Failed to load game: " + error.message);
+                _unityAwaiter.abort(error);
+            }
+        })();
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"466cade843754106bbf20c4f18f202b6","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+
+</html>
