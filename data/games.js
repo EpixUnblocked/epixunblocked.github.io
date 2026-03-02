@@ -190,6 +190,13 @@ const games = [
     thumbnail: `${basePath}/html/stealbrainrot/thumb.png`,
     tags: ['simulator'],
   },
+  {
+    title: 'Slope',
+    slug: 'slope',
+    description: 'Slide down the slope to get the highest points possible!',
+    thumbnail: `${basePath}/html/slope/thumb.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
