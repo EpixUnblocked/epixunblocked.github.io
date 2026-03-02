@@ -114,10 +114,10 @@ const games = [
     tags: ['popular'],
   },
   {
-    title: 'Choppy Orc',
-    slug: 'choppyorc',
-    description: 'Use your axe to pass the levels.',
-    thumbnail: `${basePath}/html/choppyorc/thumb.png`,
+    title: 'Fall Guys',
+    slug: 'fallguys',
+    description: 'Beat everyone and win the crown!',
+    thumbnail: `${basePath}/html/fallguys/thumb.png`,
     tags: ['platformer'],
   },
   {
