@@ -107,11 +107,11 @@ const games = [
     tags: ['popular','horror'],
   },
   {
-    title: 'StickMan Climb 2',
-    slug: 'stickmanclimb',
-    description: 'Get to the top!!',
-    thumbnail: `${basePath}/html/stickmanclimb/apple-touch-icon.png`,
-    tags: ['popular'],
+    title: 'Fireboy and Watergirl 2',
+    slug: 'fbwg2',
+    description: 'A classic 2 player game.',
+    thumbnail: `${basePath}/html/fbwg/thumb.png`,
+    tags: ['popular', 'platformer'],
   },
   {
     title: 'Fall Guys',
