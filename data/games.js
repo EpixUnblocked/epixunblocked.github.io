@@ -107,8 +107,8 @@ const games = [
     tags: ['popular','horror'],
   },
   {
-    title: 'Fireboy and Watergirl 2',
-    slug: 'fbwg2',
+    title: 'Fireboy and Watergirl',
+    slug: 'fbwg',
     description: 'A classic 2 player game.',
     thumbnail: `${basePath}/html/fbwg/thumb.png`,
     tags: ['popular', 'platformer'],
