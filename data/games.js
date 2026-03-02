@@ -232,6 +232,13 @@ const games = [
     thumbnail: `${basePath}/html/bridgerace/thumb.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Geometry Dash SubZero',
+    slug: 'gdsubzero',
+    description: 'Gather your bricks and be the first to build your bridge.',
+    thumbnail: `${basePath}/html/gdsubzero/thumb.png`,
+    tags: ['popular'],
+  },
 ];
 
 export default games;
