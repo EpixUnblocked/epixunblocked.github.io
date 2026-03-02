@@ -226,11 +226,11 @@ const games = [
     tags: ['popular', 'featured'],
   },
   {
-    title: 'Geometry Dash SubZero',
-    slug: 'gdsubzero',
-    description: 'Reach the end.',
-    thumbnail: `${basePath}/html/gdsubzero/thumb.png`,
-    tags: ['platformer'],
+    title: 'Buckshot Roulette',
+    slug: 'buckshot',
+    description: 'Shoot the dealer or shoot yourself.',
+    thumbnail: `${basePath}/html/buckshot/thumb.png`,
+    tags: ['horror'],
   },
 ];
 
