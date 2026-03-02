@@ -114,11 +114,11 @@ const games = [
     tags: ['popular'],
   },
   {
-    title: 'Idle Startup Tycoon',
-    slug: 'idlestartup',
-    description: 'Become rich!',
-    thumbnail: `${basePath}/html/idlestartup/logo.png`,
-    tags: ['popular'],
+    title: 'Choppy Orc',
+    slug: 'choppyorc',
+    description: 'Use your axe to pass the levels.',
+    thumbnail: `${basePath}/html/choppyorc/thumb.png`,
+    tags: ['platformer'],
   },
   {
     title: 'Idle Mining Tycoon',
