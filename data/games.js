@@ -218,6 +218,20 @@ const games = [
     thumbnail: `${basePath}/html/baldibasic/thumb.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Five Nights at Epsteins',
+    slug: 'fnae',
+    description: 'Survive the nights on Little Saint James.',
+    thumbnail: `${basePath}/html/fnae/thumb.png`,
+    tags: ['popular', 'featured'],
+  },
+  {
+    title: 'Geometry Dash SubZero',
+    slug: 'gdsubzero',
+    description: 'Reach the end.',
+    thumbnail: `${basePath}/html/gdsubzero/thumb.png`,
+    tags: ['platformer'],
+  },
 ];
 
 export default games;
