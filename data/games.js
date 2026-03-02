@@ -197,6 +197,13 @@ const games = [
     thumbnail: `${basePath}/html/run3/thumb.png`,
     tags: ['popular'],
   },
+  {
+    title: 'Rooftop Snipers',
+    slug: 'rooftopsnipers',
+    description: 'Snipe people from the roof',
+    thumbnail: `${basePath}/html/rooftopsnipers/thumb.png`,
+    tags: ['new', 'shooter'],
+  },
 ];
 
 export default games;
