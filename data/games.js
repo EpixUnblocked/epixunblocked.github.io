@@ -226,11 +226,11 @@ const games = [
     tags: ['popular', 'featured'],
   },
   {
-    title: 'Buckshot Roulette',
-    slug: 'buckshot',
-    description: 'Shoot the dealer or shoot yourself.',
-    thumbnail: `${basePath}/html/buckshot/thumb.png`,
-    tags: ['horror'],
+    title: 'Bridge Race',
+    slug: 'bridgerace',
+    description: 'Gather your bricks and be the first to build your bridge.',
+    thumbnail: `${basePath}/html/bridgerace/thumb.png`,
+    tags: ['popular'],
   },
 ];
 
