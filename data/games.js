@@ -183,6 +183,13 @@ const games = [
     thumbnail: `${basePath}/html/mariokart/thumb.png`,
     tags: ['featured', 'driving'],
   },
+  {
+    title: 'Steal a Brainrot',
+    slug: 'stealbrainrot',
+    description: 'Rob brainrots from others!',
+    thumbnail: `${basePath}/html/stealbrainrot/thumb.png`,
+    tags: ['simulator'],
+  },
 ];
 
 export default games;
