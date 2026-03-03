@@ -276,9 +276,9 @@ const games = [
   },
   {
     title: 'Airline Tycoon Idle',
-    slug: 'airline',
+    slug: 'airlineidle',
     description: 'Build and manage your own airline!',
-    thumbnail: `${basePath}/html/airline/thumb.png`,
+    thumbnail: `${basePath}/html/airlineidle/thumb.png`,
     tags: ['simulator'],
   },
 ];
