@@ -281,6 +281,13 @@ const games = [
     thumbnail: `${basePath}/html/airlineidle/thumb.png`,
     tags: ['simulator'],
   },
+  {
+    title: 'Grow a Garden',
+    slug: 'growagarden',
+    description: 'Grow your garden and watch it flourish!',
+    thumbnail: `${basePath}/html/growagarden/thumb.png`,
+    tags: ['simulator'],
+  },
 ];
 
 export default games;
