@@ -100,7 +100,7 @@ const games = [
     tags: ['popular'],
   },
   {
-    title: 'Fnaf Custom',
+    title: 'Fnaf Ultimate Custom Night',
     slug: 'fnafcustom',
     description: 'Survive the night!',
     thumbnail: `${basePath}/html/fnafcustom/fnaf.png`,
@@ -275,10 +275,10 @@ const games = [
     tags: ['simulator'],
   },
   {
-    title: 'Airport Tycoon Idle',
-    slug: 'airportidle',
-    description: 'Build and manage your own airport!',
-    thumbnail: `${basePath}/html/airportidle/thumb.png`,
+    title: 'Airline Tycoon Idle',
+    slug: 'airline',
+    description: 'Build and manage your own airline!',
+    thumbnail: `${basePath}/html/airline/thumb.png`,
     tags: ['simulator'],
   },
 ];
