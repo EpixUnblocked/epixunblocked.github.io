@@ -274,6 +274,13 @@ const games = [
     thumbnail: `${basePath}/html/gachaverse/thumb.png`,
     tags: ['simulator'],
   },
+  {
+    title: 'Airport Tycoon Idle',
+    slug: 'airportidle',
+    description: 'Build and manage your own airport!',
+    thumbnail: `${basePath}/html/airportidle/thumb.png`,
+    tags: ['simulator'],
+  },
 ];
 
 export default games;
