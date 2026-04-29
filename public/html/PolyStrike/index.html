@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Poly Striker 3D</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #87CEEB;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: none;
+        }
+        #gameCanvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+        #uiLayer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .hud-top {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            color: white;
+        }
+        .score-board {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .team-blue { color: #4facf7; }
+        .team-red { color: #f74f4f; }
+        .timer {
+            font-size: 1.5rem;
+            margin-top: 5px;
+            color: #ffd700;
+        }
+        #messageBox {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 4px 4px 0 #000;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+       
+        #menuOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14,40,80,0.9), rgba(40,14,20,0.9));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+            z-index: 100;
+            color: white;
+            text-align: center;
+        }
+        #menuOverlay h1 {
+            font-size: 5rem;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+        #menuOverlay p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: #ddd;
+        }
+        .btn {
+            background: #4facf7;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.1s, background 0.2s;
+        }
+        .btn:hover { background: #3a8ee0; transform: scale(1.05); }
+        .btn:active { transform: scale(0.95); }
+
+        #touchControls {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+        }
+        .joystick-zone {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            pointer-events: auto;
+        }
+        .joystick-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .action-button {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 50, 50, 0.4);
+            border: 2px solid rgba(255, 50, 50, 0.8);
+            border-radius: 50%;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            user-select: none;
+            transition: opacity 0.2s;
+        }
+       
+        .kick-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            display: none;
+        }
+
+        .secondary-btn {
+            bottom: 160px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            font-size: 1rem;
+            background: rgba(255, 150, 50, 0.4);
+            border: 2px solid rgba(255, 150, 50, 0.8);
+        }
+        .secondary-btn:active { background: rgba(255, 150, 50, 0.7); }
+
+        @media (max-width: 768px) {
+            #touchControls { display: block; }
+            #menuOverlay p.desktop-hint { display: none; }
+        }
+        @media (min-width: 769px) {
+            #menuOverlay p.mobile-hint { display: none; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div id="uiLayer">
+        <div class="hud-top">
+            <div class="score-board">
+                <span class="team-blue" id="scoreBlue">0</span> - <span class="team-red" id="scoreRed">0</span>
+                <div class="timer" id="gameTimer">03:00</div>
+            </div>
+        </div>
+        <div id="messageBox">GOAL!</div>
+    </div>
+
+    <div id="touchControls">
+        <div class="joystick-zone" id="joystickZone">
+            <div class="joystick-knob" id="joystickKnob"></div>
+        </div>
+        <div class="action-button secondary-btn" id="tackleBtn">TACKLE</div>
+        <div class="action-button" id="kickBtn">
+            <div class="kick-knob" id="kickKnob"></div>
+            KICK
+        </div>
+    </div>
+
+    <div id="menuOverlay">
+        <h1>Poly Striker</h1>
+        <p class="desktop-hint">Use <b>W A S D</b> to move.<br>Hold & Release <b>SPACE</b> to Aim/Pass. Press <b>SHIFT</b> to Tackle/Avoid.</p>
+        <p class="mobile-hint">Use the virtual joystick to move.<br>Hold & Drag the KICK button to aim passes.</p>
+        <button class="btn" id="startBtn">PLAY NOW</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // --- AUDIO SYSTEM ---
+            let audioCtx;
+            const sounds = {
+                init: function() {
+                    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+                },
+                play: function(type) {
+                    if (!audioCtx) return;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                   
+                    const now = audioCtx.currentTime;
+                    if (type === 'kick') {
+                        osc.type = 'square';
+                        osc.frequency.setValueAtTime(150, now);
+                        osc.frequency.exponentialRampToValueAtTime(10, now + 0.1);
+                        gain.gain.setValueAtTime(0.5, now);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                        osc.start(now); osc.stop(now + 0.1);
+                    } else if (type === 'bounce') {
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(400, now);
+                        osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+                        gain.gain.setValueAtTime(0.2, now);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                        osc.start(now); osc.stop(now + 0.1);
+                    } else if (type === 'whistle') {
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(2000, now);
+                        osc.frequency.setValueAtTime(2500, now + 0.1);
+                        gain.gain.setValueAtTime(0.5, now);
+                        gain.gain.linearRampToValueAtTime(0.0, now + 0.6);
+                        osc.start(now); osc.stop(now + 0.6);
+                    } else if (type === 'goal') {
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(300, now);
+                        osc.frequency.linearRampToValueAtTime(600, now + 0.2);
+                        osc.frequency.linearRampToValueAtTime(800, now + 0.5);
+                        gain.gain.setValueAtTime(0, now);
+                        gain.gain.linearRampToValueAtTime(0.4, now + 0.1);
+                        gain.gain.linearRampToValueAtTime(0, now + 1.0);
+                        osc.start(now); osc.stop(now + 1.0);
+                    }
+                }
+            };
+
+            // --- GAME CONSTANTS ---
+            const FIELD_WIDTH = 100;
+            const FIELD_LENGTH = 140;
+            const GOAL_WIDTH = 24;
+            const GOAL_DEPTH = 5;
+            const BALL_RADIUS = 1.2;
+            const PLAYER_RADIUS = 1.5;
+            const PLAYER_SPEED = 0.4;
+            const KICK_POWER = 1.4; // Perfectly balanced for passing and shooting
+            const STATE_MENU = 0, STATE_PLAYING = 1, STATE_GOAL = 2, STATE_GAMEOVER = 3;
+
+            // --- ENGINE SETUP ---
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87CEEB);
+            scene.fog = new THREE.Fog(0x87CEEB, 60, 200);
+
+            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.body.appendChild(renderer.domElement);
+            renderer.domElement.id = 'gameCanvas';
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(50, 100, 50);
+            dirLight.castShadow = true;
+            dirLight.shadow.camera.left = -80;
+            dirLight.shadow.camera.right = 80;
+            dirLight.shadow.camera.top = 80;
+            dirLight.shadow.camera.bottom = -80;
+            dirLight.shadow.mapSize.width = 2048;
+            dirLight.shadow.mapSize.height = 2048;
+            scene.add(dirLight);
+
+            // --- FIELD GENERATION ---
+            function createFieldTexture() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1024; canvas.height = 1024;
+                const ctx = canvas.getContext('2d');
+               
+                ctx.fillStyle = '#2e8b57';
+                ctx.fillRect(0, 0, 1024, 1024);
+               
+                ctx.fillStyle = '#27774a';
+                for (let i = 0; i < 14; i += 2) {
+                    ctx.fillRect(0, i * (1024/14), 1024, 1024/14);
+                }
+
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 6;
+                const padX = 50; const padY = 50;
+                const w = 1024 - padX*2; const h = 1024 - padY*2;
+               
+                ctx.strokeRect(padX, padY, w, h);
+               
+                ctx.beginPath();
+                ctx.moveTo(padX, 512); ctx.lineTo(1024-padX, 512);
+                ctx.stroke();
+               
+                ctx.beginPath();
+                ctx.arc(512, 512, 80, 0, Math.PI * 2);
+                ctx.stroke();
+
+                const penW = 300; const penH = 150;
+                ctx.strokeRect(512 - penW/2, padY, penW, penH);
+                ctx.strokeRect(512 - penW/2, 1024 - padY - penH, penW, penH);
+
+                const goalAreaW = 120; const goalAreaH = 50;
+                ctx.strokeRect(512 - goalAreaW/2, padY, goalAreaW, goalAreaH);
+                ctx.strokeRect(512 - goalAreaW/2, 1024 - padY - goalAreaH, goalAreaW, goalAreaH);
+
+                const tex = new THREE.CanvasTexture(canvas);
+                tex.wrapS = THREE.RepeatWrapping;
+                tex.wrapT = THREE.RepeatWrapping;
+                return tex;
+            }
+
+            const fieldGeo = new THREE.PlaneGeometry(FIELD_WIDTH, FIELD_LENGTH);
+            const fieldMat = new THREE.MeshStandardMaterial({
+                map: createFieldTexture(),
+                roughness: 0.8
+            });
+            const field = new THREE.Mesh(fieldGeo, fieldMat);
+            field.rotation.x = -Math.PI / 2;
+            field.receiveShadow = true;
+            scene.add(field);
+
+            function createGoal(color, zPos) {
+                const goalGroup = new THREE.Group();
+                const postGeo = new THREE.CylinderGeometry(0.5, 0.5, 8);
+                const postMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
+               
+                const leftPost = new THREE.Mesh(postGeo, postMat);
+                leftPost.position.set(-GOAL_WIDTH/2, 4, zPos);
+                leftPost.castShadow = true;
+               
+                const rightPost = new THREE.Mesh(postGeo, postMat);
+                rightPost.position.set(GOAL_WIDTH/2, 4, zPos);
+                rightPost.castShadow = true;
+               
+                const crossGeo = new THREE.CylinderGeometry(0.5, 0.5, GOAL_WIDTH);
+                const crossBar = new THREE.Mesh(crossGeo, postMat);
+                crossBar.rotation.z = Math.PI / 2;
+                crossBar.position.set(0, 8, zPos);
+                crossBar.castShadow = true;
+
+                const netGeo = new THREE.BoxGeometry(GOAL_WIDTH, 8, GOAL_DEPTH);
+                const netMat = new THREE.MeshStandardMaterial({
+                    color: color, transparent: true, opacity: 0.3, wireframe: true
+                });
+                const net = new THREE.Mesh(netGeo, netMat);
+                net.position.set(0, 4, zPos + (zPos > 0 ? GOAL_DEPTH/2 : -GOAL_DEPTH/2));
+
+                goalGroup.add(leftPost);
+                goalGroup.add(rightPost);
+                goalGroup.add(crossBar);
+                goalGroup.add(net);
+                scene.add(goalGroup);
+                return goalGroup;
+            }
+            createGoal(0x4facf7, FIELD_LENGTH/2); // Blue Defends +Z
+            createGoal(0xf74f4f, -FIELD_LENGTH/2);  // Red Defends -Z
+
+            // --- ENTITIES ---
+            class Ball {
+                constructor() {
+                    const geo = new THREE.IcosahedronGeometry(BALL_RADIUS, 1);
+                    const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, flatShading: true });
+                    this.mesh = new THREE.Mesh(geo, mat);
+                    this.mesh.castShadow = true;
+                    this.mesh.position.y = BALL_RADIUS;
+                    scene.add(this.mesh);
+
+                    const patchGeo = new THREE.IcosahedronGeometry(BALL_RADIUS * 1.01, 0);
+                    const patchMat = new THREE.MeshBasicMaterial({ color: 0x111111, wireframe: true });
+                    const patches = new THREE.Mesh(patchGeo, patchMat);
+                    this.mesh.add(patches);
+
+                    this.vel = new THREE.Vector3();
+                    this.radius = BALL_RADIUS;
+                }
+
+                reset() {
+                    this.mesh.position.set(0, BALL_RADIUS + 10, 0);
+                    this.vel.set(0, 0, 0);
+                }
+
+                update() {
+                    this.vel.y -= 0.02; // Gravity
+                    this.mesh.position.add(this.vel);
+                   
+                    this.vel.x *= 0.98; // Friction
+                    this.vel.z *= 0.98;
+
+                    if (this.mesh.position.y < this.radius) {
+                        this.mesh.position.y = this.radius;
+                        if (Math.abs(this.vel.y) > 0.1) sounds.play('bounce');
+                        this.vel.y *= -0.6;
+                        this.vel.x *= 0.95;
+                        this.vel.z *= 0.95;
+                    }
+
+                    if (this.mesh.position.y <= this.radius + 0.1) {
+                        const rollSpeed = 0.5;
+                        this.mesh.rotation.x += this.vel.z * rollSpeed;
+                        this.mesh.rotation.z -= this.vel.x * rollSpeed;
+                    }
+
+                    if (Math.abs(this.mesh.position.x) > FIELD_WIDTH/2 - this.radius) {
+                        this.mesh.position.x = Math.sign(this.mesh.position.x) * (FIELD_WIDTH/2 - this.radius);
+                        this.vel.x *= -0.8;
+                        sounds.play('bounce');
+                    }
+                    if (Math.abs(this.mesh.position.z) > FIELD_LENGTH/2) {
+                        if (Math.abs(this.mesh.position.x) >= GOAL_WIDTH/2) {
+                            this.mesh.position.z = Math.sign(this.mesh.position.z) * (FIELD_LENGTH/2 - this.radius);
+                            this.vel.z *= -0.8;
+                            sounds.play('bounce');
+                        }
+                    }
+                }
+            }
+
+            class Player {
+                constructor(team, isUser, startPos) {
+                    this.team = team;
+                    this.isUser = isUser;
+                    this.startPos = new THREE.Vector3(startPos.x, startPos.y, startPos.z);
+                   
+                    const group = new THREE.Group();
+                   
+                    const bodyGeo = new THREE.CylinderGeometry(PLAYER_RADIUS, PLAYER_RADIUS, 3, 16);
+                    const bodyMat = new THREE.MeshStandardMaterial({
+                        color: team === 0 ? 0x4facf7 : 0xf74f4f,
+                        roughness: 0.6
+                    });
+                    const body = new THREE.Mesh(bodyGeo, bodyMat);
+                    body.position.y = 1.5;
+                    body.castShadow = true;
+                    group.add(body);
+
+                    const headGeo = new THREE.SphereGeometry(1.2, 16, 16);
+                    const headMat = new THREE.MeshStandardMaterial({ color: 0xffddcc });
+                    const head = new THREE.Mesh(headGeo, headMat);
+                    head.position.y = 3.8;
+                    head.castShadow = true;
+                    group.add(head);
+
+                    const eyeGeo = new THREE.BoxGeometry(1.5, 0.4, 0.4);
+                    const eyeMat = new THREE.MeshBasicMaterial({ color: 0x222222 });
+                    const eyes = new THREE.Mesh(eyeGeo, eyeMat);
+                    eyes.position.set(0, 4, 1);
+                    group.add(eyes);
+
+                    if (isUser) {
+                        const ringGeo = new THREE.TorusGeometry(PLAYER_RADIUS + 0.5, 0.2, 8, 24);
+                        const ringMat = new THREE.MeshBasicMaterial({ color: 0xffeb3b });
+                        const ring = new THREE.Mesh(ringGeo, ringMat);
+                        ring.rotation.x = Math.PI / 2;
+                        ring.position.y = 0.2;
+                        group.add(ring);
+                        this.ring = ring;
+
+                        // Aim indicator arrow (Added directly to SCENE, not group, to prevent double rotation)
+                        this.aimArrow = new THREE.ArrowHelper(
+                            new THREE.Vector3(0,0,-1),
+                            new THREE.Vector3(0, 0.5, 0),
+                            8,
+                            0xffff00,
+                            2,
+                            1
+                        );
+                        this.aimArrow.visible = false;
+                        scene.add(this.aimArrow);
+                    }
+
+                    scene.add(group);
+                    this.mesh = group;
+                    this.vel = new THREE.Vector3();
+                    this.facing = new THREE.Vector3(0, 0, 1);
+                    this.radius = PLAYER_RADIUS;
+                   
+                    this.role = 'mid';
+                    this.stunTimer = 0;
+                    this.tackleTimer = 0;
+                    this.avoidTimer = 0;
+                    this.kickCooldown = 0;
+                    this.actionCooldown = 0;
+                    this.grabTimer = 0;
+                    this.grabCooldown = 0;
+                    this.reset();
+                }
+
+                reset() {
+                    this.mesh.position.copy(this.startPos);
+                    this.vel.set(0, 0, 0);
+                    if(this.team === 0) this.facing.set(0,0,-1);
+                    else this.facing.set(0,0,1);
+                    this.stunTimer = 0;
+                    this.tackleTimer = 0;
+                    this.avoidTimer = 0;
+                    this.kickCooldown = 0;
+                    this.actionCooldown = 0;
+                    this.grabTimer = 0;
+                    this.grabCooldown = 0;
+                    this.updateRotation();
+                }
+
+                updateRotation() {
+                    if (this.avoidTimer > 0) {
+                        this.mesh.rotation.y += 0.8;
+                        return;
+                    }
+                    if (this.facing.lengthSq() > 0.01) {
+                        const targetAngle = Math.atan2(this.facing.x, this.facing.z);
+                        let diff = targetAngle - this.mesh.rotation.y;
+                        while (diff < -Math.PI) diff += Math.PI * 2;
+                        while (diff > Math.PI) diff -= Math.PI * 2;
+                        this.mesh.rotation.y += diff * 0.2;
+                    }
+                }
+
+                updatePhysics() {
+                    if (this.stunTimer > 0) {
+                        this.stunTimer--;
+                        this.mesh.rotation.z = Math.PI / 2.5;
+                    } else {
+                        this.mesh.rotation.z = 0;
+                    }
+
+                    if (this.tackleTimer > 0) {
+                        this.tackleTimer--;
+                        this.mesh.rotation.x = -Math.PI / 3;
+                    } else {
+                        this.mesh.rotation.x = 0;
+                    }
+
+                    if (this.avoidTimer > 0) this.avoidTimer--;
+                    if (this.kickCooldown > 0) this.kickCooldown--;
+                    if (this.actionCooldown > 0) this.actionCooldown--;
+
+                    this.mesh.position.add(this.vel);
+                   
+                    if (this.stunTimer > 0) {
+                        this.vel.multiplyScalar(0.85);
+                    } else {
+                        this.vel.multiplyScalar(0.8);
+                    }
+                   
+                    if (this.isUser && this.ring) {
+                        this.ring.rotation.z += 0.05;
+                    }
+                }
+
+                kick(ball, aimVec) {
+                    if (this.kickCooldown > 0 || this.stunTimer > 0) return;
+                    this.kickCooldown = 25; // Setup Cooldown
+
+                    let dx = ball.mesh.position.x - this.mesh.position.x;
+                    let dz = ball.mesh.position.z - this.mesh.position.z;
+                    let dist = Math.sqrt(dx*dx + dz*dz);
+                   
+                    if (dist < this.radius + ball.radius + 3.0) {
+                        sounds.play('kick');
+                       
+                        let kickDir = new THREE.Vector3(this.facing.x, 0, this.facing.z);
+                       
+                        if (aimVec && aimVec.lengthSq() > 0.01) {
+                            kickDir.set(aimVec.x, 0, aimVec.y).normalize();
+                            this.facing.copy(kickDir);
+                        }
+
+                        // AIM ASSIST (Snap to teammate if looking generally at them)
+                        if (this.isUser) {
+                            let bestTeammate = null;
+                            let bestDot = 0.85; // ~30 degrees tolerance
+                           
+                            players.forEach(t => {
+                                if (t.team === this.team && t !== this) {
+                                    let tx = t.mesh.position.x - this.mesh.position.x;
+                                    let tz = t.mesh.position.z - this.mesh.position.z;
+                                    let tLen = Math.sqrt(tx*tx + tz*tz);
+                                    if (tLen > 5) {
+                                        let dot = kickDir.x * (tx/tLen) + kickDir.z * (tz/tLen);
+                                        if (dot > bestDot) {
+                                            bestDot = dot;
+                                            bestTeammate = t;
+                                        }
+                                    }
+                                }
+                            });
+
+                            if (bestTeammate) {
+                                let tx = bestTeammate.mesh.position.x - this.mesh.position.x;
+                                let tz = bestTeammate.mesh.position.z - this.mesh.position.z;
+                                let tLen = Math.sqrt(tx*tx + tz*tz);
+                                kickDir.set(tx/tLen, 0, tz/tLen);
+                                this.facing.copy(kickDir);
+                            }
+                        }
+
+                        ball.vel.x += kickDir.x * KICK_POWER;
+                        ball.vel.y += KICK_POWER * 0.3; // Less vertical pop for smoother passing
+                        ball.vel.z += kickDir.z * KICK_POWER;
+                       
+                        this.vel.x += this.facing.x * 0.5;
+                        this.vel.z += this.facing.z * 0.5;
+                    } else if (this.isUser) {
+                        this.vel.x += this.facing.x * 0.8;
+                        this.vel.z += this.facing.z * 0.8;
+                    }
+                }
+
+                doAction2(ball) {
+                    if (this.actionCooldown > 0 || this.stunTimer > 0 || this.tackleTimer > 0 || this.avoidTimer > 0) return;
+                    this.actionCooldown = 40;
+
+                    let dx = ball.mesh.position.x - this.mesh.position.x;
+                    let dz = ball.mesh.position.z - this.mesh.position.z;
+                    let dist = Math.sqrt(dx*dx + dz*dz);
+                   
+                    if (dist < this.radius + ball.radius + 2.5) {
+                        this.avoidTimer = 25;
+                        this.vel.x += this.facing.x * 1.6;
+                        this.vel.z += this.facing.z * 1.6;
+                        ball.vel.x += this.facing.x * 1.6;
+                        ball.vel.z += this.facing.z * 1.6;
+                        sounds.play('bounce');
+                    } else {
+                        this.tackleTimer = 15;
+                        this.vel.x += this.facing.x * 1.6;
+                        this.vel.z += this.facing.z * 1.6;
+                        sounds.play('kick');
+                    }
+                }
+            }
+
+            // --- GAME STATE ---
+            let gameState = STATE_MENU;
+            let scoreBlue = 0;
+            let scoreRed = 0;
+            let timeLeft = 180;
+            let lastTime = Date.now();
+
+            const ball = new Ball();
+           
+            const player1 = new Player(0, true, {x: 0, y: 0, z: 20});
+            const blueAI1 = new Player(0, false, {x: -20, y: 0, z: 30}); blueAI1.role = 'atk';
+            const blueAI2 = new Player(0, false, {x: 20, y: 0, z: 30}); blueAI2.role = 'def';
+            const blueGK = new Player(0, false, {x: 0, y: 0, z: FIELD_LENGTH/2 - 5}); blueGK.role = 'gk';
+           
+            const redAI1 = new Player(1, false, {x: 0, y: 0, z: -20}); redAI1.role = 'atk';
+            const redAI2 = new Player(1, false, {x: -20, y: 0, z: -30}); redAI2.role = 'mid';
+            const redAI3 = new Player(1, false, {x: 20, y: 0, z: -30}); redAI3.role = 'def';
+            const redGK = new Player(1, false, {x: 0, y: 0, z: -FIELD_LENGTH/2 + 5}); redGK.role = 'gk';
+
+            const players = [player1, blueAI1, blueAI2, blueGK, redAI1, redAI2, redAI3, redGK];
+
+            // --- INPUT HANDLING ---
+            const keys = { w: false, a: false, s: false, d: false, space: false, shift: false };
+            let joyVec = new THREE.Vector2(0,0);
+           
+            let isAimingKick = false;
+            let aimJoyVec = new THREE.Vector2(0,0);
+
+            window.addEventListener('keydown', (e) => {
+                if (gameState !== STATE_PLAYING) return;
+                const k = e.key.toLowerCase();
+                if (k === 'w' || e.key === 'ArrowUp') keys.w = true;
+                if (k === 'a' || e.key === 'ArrowLeft') keys.a = true;
+                if (k === 's' || e.key === 'ArrowDown') keys.s = true;
+                if (k === 'd' || e.key === 'ArrowRight') keys.d = true;
+                if (k === ' ' && !keys.space) {
+                    keys.space = true;
+                    isAimingKick = true;
+                }
+                if (e.key === 'Shift' && !keys.shift) {
+                    keys.shift = true;
+                    player1.doAction2(ball);
+                }
+            });
+            window.addEventListener('keyup', (e) => {
+                const k = e.key.toLowerCase();
+                if (k === 'w' || e.key === 'ArrowUp') keys.w = false;
+                if (k === 'a' || e.key === 'ArrowLeft') keys.a = false;
+                if (k === 's' || e.key === 'ArrowDown') keys.s = false;
+                if (k === 'd' || e.key === 'ArrowRight') keys.d = false;
+                if (k === ' ') {
+                    if (keys.space) {
+                        player1.kick(ball, null); // Will use facing dir + aim assist
+                        isAimingKick = false;
+                    }
+                    keys.space = false;
+                }
+                if (e.key === 'Shift') keys.shift = false;
+            });
+
+            // Movement Joystick
+            const joystickZone = document.getElementById('joystickZone');
+            const joystickKnob = document.getElementById('joystickKnob');
+            let joyActive = false;
+            let joyCenter = {x:0, y:0};
+
+            joystickZone.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.changedTouches[0];
+                const rect = joystickZone.getBoundingClientRect();
+                joyCenter = { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
+                joyActive = true;
+                updateJoy(touch.clientX, touch.clientY);
+            }, {passive: false});
+
+            joystickZone.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if(!joyActive) return;
+                const touch = e.changedTouches[0];
+                updateJoy(touch.clientX, touch.clientY);
+            }, {passive: false});
+
+            const endJoy = (e) => {
+                e.preventDefault();
+                joyActive = false;
+                joyVec.set(0,0);
+                joystickKnob.style.transform = `translate(-50%, -50%)`;
+            };
+            joystickZone.addEventListener('touchend', endJoy, {passive: false});
+            joystickZone.addEventListener('touchcancel', endJoy, {passive: false});
+
+            function updateJoy(tx, ty) {
+                let dx = tx - joyCenter.x;
+                let dy = ty - joyCenter.y;
+                const maxDist = 40;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist > maxDist) {
+                    dx = (dx/dist) * maxDist;
+                    dy = (dy/dist) * maxDist;
+                }
+                joystickKnob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+                joyVec.set(dx/maxDist, dy/maxDist);
+            }
+
+            // Kick Joystick (Aiming)
+            const kickBtn = document.getElementById('kickBtn');
+            const kickKnob = document.getElementById('kickKnob');
+            const tackleBtn = document.getElementById('tackleBtn');
+            let kickCenter = {x:0, y:0};
+
+            kickBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.changedTouches[0];
+                const rect = kickBtn.getBoundingClientRect();
+                kickCenter = { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
+                isAimingKick = true;
+                aimJoyVec.set(0,0);
+                kickKnob.style.display = 'block';
+            }, {passive: false});
+
+            kickBtn.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if(!isAimingKick) return;
+                const touch = e.changedTouches[0];
+                let dx = touch.clientX - kickCenter.x;
+                let dy = touch.clientY - kickCenter.y;
+                const maxDist = 40;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+               
+                if (dist > maxDist) {
+                    dx = (dx/dist) * maxDist;
+                    dy = (dy/dist) * maxDist;
+                }
+               
+                if (dist > 5) aimJoyVec.set(dx/dist, dy/dist);
+                kickKnob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+            }, {passive: false});
+
+            // Using a shared function for touch ending to ensure kicks always fire
+            const endKick = (e) => {
+                e.preventDefault();
+                if (gameState === STATE_PLAYING && isAimingKick) {
+                    player1.kick(ball, aimJoyVec);
+                }
+                isAimingKick = false;
+                aimJoyVec.set(0,0);
+                kickKnob.style.display = 'none';
+                kickKnob.style.transform = `translate(-50%, -50%)`;
+            };
+            kickBtn.addEventListener('touchend', endKick, {passive: false});
+            kickBtn.addEventListener('touchcancel', endKick, {passive: false});
+
+            tackleBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (gameState === STATE_PLAYING) player1.doAction2(ball);
+            }, {passive: false});
+
+            document.getElementById('startBtn').addEventListener('click', () => {
+                sounds.init();
+                sounds.play('whistle');
+                document.getElementById('menuOverlay').style.display = 'none';
+                resetPositions();
+                gameState = STATE_PLAYING;
+                lastTime = Date.now();
+            });
+
+            function resetPositions() {
+                ball.reset();
+                players.forEach(p => p.reset());
+                isAimingKick = false;
+            }
+
+            function triggerGoal(scoringTeam) {
+                gameState = STATE_GOAL;
+                sounds.play('goal');
+               
+                const msg = document.getElementById('messageBox');
+                msg.textContent = "GOAL!";
+                msg.style.color = scoringTeam === 0 ? '#4facf7' : '#f74f4f';
+                msg.style.opacity = 1;
+
+                if (scoringTeam === 0) {
+                    scoreBlue++;
+                    document.getElementById('scoreBlue').innerText = scoreBlue;
+                } else {
+                    scoreRed++;
+                    document.getElementById('scoreRed').innerText = scoreRed;
+                }
+
+                setTimeout(() => {
+                    msg.style.opacity = 0;
+                    resetPositions();
+                    sounds.play('whistle');
+                    gameState = STATE_PLAYING;
+                }, 3000);
+            }
+
+            function triggerGameOver() {
+                gameState = STATE_GAMEOVER;
+                sounds.play('whistle');
+                setTimeout(() => sounds.play('whistle'), 400);
+               
+                const msg = document.getElementById('messageBox');
+                if (scoreBlue > scoreRed) {
+                    msg.textContent = "BLUE WINS!";
+                    msg.style.color = '#4facf7';
+                } else if (scoreRed > scoreBlue) {
+                    msg.textContent = "RED WINS!";
+                    msg.style.color = '#f74f4f';
+                } else {
+                    msg.textContent = "DRAW!";
+                    msg.style.color = '#ffffff';
+                }
+                msg.style.opacity = 1;
+
+                setTimeout(() => {
+                    msg.style.opacity = 0;
+                    document.getElementById('menuOverlay').style.display = 'flex';
+                    document.getElementById('startBtn').innerText = "PLAY AGAIN";
+                    scoreBlue = 0; scoreRed = 0;
+                    timeLeft = 180;
+                    document.getElementById('scoreBlue').innerText = "0";
+                    document.getElementById('scoreRed').innerText = "0";
+                }, 4000);
+            }
+
+            // --- MAIN LOGIC LOOP ---
+            function update() {
+                if (gameState !== STATE_PLAYING && gameState !== STATE_GOAL) return;
+
+                // Handle Aim Assist UI - attached to world space so it points properly
+                if (isAimingKick && player1.kickCooldown <= 0 && player1.stunTimer <= 0) {
+                    player1.aimArrow.visible = true;
+                    player1.aimArrow.position.copy(player1.mesh.position);
+                    player1.aimArrow.position.y = 0.5;
+                   
+                    let dir = new THREE.Vector3(player1.facing.x, 0, player1.facing.z).normalize();
+                    if (aimJoyVec.lengthSq() > 0.01) {
+                        dir.set(aimJoyVec.x, 0, aimJoyVec.y).normalize();
+                    }
+                    player1.aimArrow.setDirection(dir);
+                } else {
+                    player1.aimArrow.visible = false;
+                }
+
+                let ballPossessor = null;
+                let minBallDist = Infinity;
+                players.forEach(p => {
+                    // BUG FIX: Ignore players who JUST kicked the ball so they don't immediately glue it back to their feet
+                    if (p.stunTimer > 0 || p.grabTimer > 0 || p.kickCooldown > 10) return;
+                   
+                    let dist = p.mesh.position.distanceTo(ball.mesh.position);
+                    if (dist < p.radius + ball.radius + 0.8 && dist < minBallDist) {
+                        minBallDist = dist;
+                        ballPossessor = p;
+                    }
+                });
+
+                if (gameState === STATE_PLAYING) {
+                    const now = Date.now();
+                    if (now - lastTime >= 1000) {
+                        timeLeft--;
+                        lastTime = now;
+                        let m = Math.floor(timeLeft / 60);
+                        let s = timeLeft % 60;
+                        document.getElementById('gameTimer').innerText = `0${m}:${s<10?'0':''}${s}`;
+                       
+                        if (timeLeft <= 0) triggerGameOver();
+                    }
+                   
+                    const distToBall = player1.mesh.position.distanceTo(ball.mesh.position);
+                    kickBtn.style.opacity = player1.kickCooldown > 0 ? "0.5" : "1.0";
+                   
+                    if (player1.actionCooldown > 0) {
+                        tackleBtn.style.opacity = "0.5";
+                    } else {
+                        tackleBtn.style.opacity = "1.0";
+                        if (distToBall < player1.radius + ball.radius + 2.5) {
+                            tackleBtn.innerText = "AVOID";
+                            tackleBtn.style.background = "rgba(50, 150, 255, 0.4)";
+                            tackleBtn.style.borderColor = "rgba(50, 150, 255, 0.8)";
+                        } else {
+                            tackleBtn.innerText = "TACKLE";
+                            tackleBtn.style.background = "rgba(255, 150, 50, 0.4)";
+                            tackleBtn.style.borderColor = "rgba(255, 150, 50, 0.8)";
+                        }
+                    }
+                }
+
+                if (gameState === STATE_PLAYING && player1.stunTimer <= 0) {
+                    let moveX = 0, moveZ = 0;
+                    if (keys.w) moveZ -= 1;
+                    if (keys.s) moveZ += 1;
+                    if (keys.a) moveX -= 1;
+                    if (keys.d) moveX += 1;
+                   
+                    if (joyActive) {
+                        moveX = joyVec.x;
+                        moveZ = joyVec.y;
+                    }
+
+                    if (moveX !== 0 || moveZ !== 0) {
+                        const len = Math.sqrt(moveX*moveX + moveZ*moveZ);
+                        const normX = moveX/len; const normZ = moveZ/len;
+                        player1.vel.x += normX * PLAYER_SPEED * 0.2;
+                        player1.vel.z += normZ * PLAYER_SPEED * 0.2;
+                        player1.facing.set(normX, 0, normZ);
+                    }
+                }
+
+                if (gameState === STATE_PLAYING) {
+                    let closestBlue = null, closestRed = null;
+                    let minDistBlue = Infinity, minDistRed = Infinity;
+                   
+                    let holdingGK = players.find(gk => gk.role === 'gk' && gk.grabTimer > 0);
+
+                    players.forEach(p => {
+                        if (p.role === 'gk' || p.isUser) return;
+                        const d = p.mesh.position.distanceTo(ball.mesh.position);
+                        if (p.team === 0 && d < minDistBlue) { minDistBlue = d; closestBlue = p; }
+                        if (p.team === 1 && d < minDistRed) { minDistRed = d; closestRed = p; }
+                    });
+
+                    if (ballPossessor) {
+                        if (ballPossessor.team === 0) closestBlue = ballPossessor;
+                        if (ballPossessor.team === 1) closestRed = ballPossessor;
+                    }
+
+                    players.forEach(p => {
+                        if (p.isUser) return;
+                        if (p.role === 'gk' && p.grabTimer > 0) return;
+
+                        const targetOppGoalZ = p.team === 0 ? -FIELD_LENGTH/2 : FIELD_LENGTH/2;
+                        const targetDefGoalZ = p.team === 0 ? FIELD_LENGTH/2 : -FIELD_LENGTH/2;
+                       
+                        let targetX = p.startPos.x;
+                        let targetZ = p.startPos.z;
+                        let speedMult = 0.15;
+
+                        const distToBall = p.mesh.position.distanceTo(ball.mesh.position);
+                        const isActiveChaser = (p === closestBlue || p === closestRed);
+                       
+                        if (holdingGK) {
+                            // EVERYBODY clear the penalty box area to give GK space!
+                            targetX = p.startPos.x * 1.5;
+                            let gkGoalZ = holdingGK.team === 0 ? FIELD_LENGTH/2 : -FIELD_LENGTH/2;
+                            targetZ = gkGoalZ > 0 ? 35 : -35;
+                            speedMult = 0.25;
+                        }
+                        else if (p.role === 'gk') {
+                            let timeToGoal = 0;
+                            if (ball.vel.z !== 0) {
+                                 timeToGoal = (targetDefGoalZ - ball.mesh.position.z) / ball.vel.z;
+                            }
+                            let predictedX = ball.mesh.position.x;
+                            if (timeToGoal > 0 && timeToGoal < 40 && (p.team === 0 ? ball.vel.z > 0 : ball.vel.z < 0)) {
+                                 predictedX = ball.mesh.position.x + (ball.vel.x * timeToGoal);
+                            }
+                            targetX = Math.max(-GOAL_WIDTH/2 + 2, Math.min(GOAL_WIDTH/2 - 2, predictedX));
+                            targetZ = targetDefGoalZ + (p.team === 0 ? -4 : 4);
+                            speedMult = 0.35;
+                            if (distToBall < 25) speedMult = 0.5;
+                        }
+                        else if (isActiveChaser) {
+                            if (p === ballPossessor) {
+                                targetX = 0;
+                                targetZ = targetOppGoalZ;
+                                speedMult = 0.16;
+                            } else {
+                                targetX = ball.mesh.position.x;
+                                targetZ = ball.mesh.position.z;
+                                speedMult = 0.18;
+                               
+                                if (distToBall < 5 && !ballPossessor) {
+                                    const dirToGoalX = 0 - ball.mesh.position.x;
+                                    const dirToGoalZ = targetOppGoalZ - ball.mesh.position.z;
+                                    const len = Math.sqrt(dirToGoalX*dirToGoalX + dirToGoalZ*dirToGoalZ);
+                                    targetX = ball.mesh.position.x - (dirToGoalX/len)*2;
+                                    targetZ = ball.mesh.position.z - (dirToGoalZ/len)*2;
+                                }
+                            }
+                        }
+                        else {
+                            targetX = p.startPos.x;
+                            if (p.role === 'atk') {
+                                targetZ = ball.mesh.position.z + (p.team === 0 ? 15 : -15);
+                            } else if (p.role === 'def') {
+                                targetZ = (ball.mesh.position.z + targetDefGoalZ * 2) / 3;
+                            } else {
+                                targetZ = (ball.mesh.position.z + targetDefGoalZ) / 2;
+                            }
+                            speedMult = 0.14;
+                        }
+
+                        targetX = Math.max(-FIELD_WIDTH/2 + 2, Math.min(FIELD_WIDTH/2 - 2, targetX));
+                        targetZ = Math.max(-FIELD_LENGTH/2 + 2, Math.min(FIELD_LENGTH/2 - 2, targetZ));
+
+                        const dx = targetX - p.mesh.position.x;
+                        const dz = targetZ - p.mesh.position.z;
+                        const dist = Math.sqrt(dx*dx + dz*dz);
+                       
+                        if (dist > 1) {
+                            p.vel.x += (dx/dist) * PLAYER_SPEED * speedMult;
+                            p.vel.z += (dz/dist) * PLAYER_SPEED * speedMult;
+                            p.facing.set(dx/dist, 0, dz/dist);
+                        }
+
+                        if (distToBall < p.radius + ball.radius + 1.5 && !holdingGK) {
+                            const gx = 0 - p.mesh.position.x;
+                            const gz = targetOppGoalZ - p.mesh.position.z;
+                            const glen = Math.sqrt(gx*gx + gz*gz);
+                           
+                            const dot = (p.facing.x * gx/glen) + (p.facing.z * gz/glen);
+                            if (dot > 0.5 && Math.random() < 0.1) {
+                                p.kick(ball, null);
+                            }
+                        } else if (isActiveChaser && distToBall > 5 && distToBall < 10 && Math.random() < 0.02 && !holdingGK) {
+                            if (!ballPossessor || ballPossessor.team !== p.team) {
+                                p.doAction2(ball);
+                            }
+                        }
+                    });
+                }
+
+                ball.update();
+                players.forEach(p => {
+                    p.updatePhysics();
+                    p.updateRotation();
+
+                    if (p.role === 'gk') {
+                        if (p.grabCooldown > 0) p.grabCooldown--;
+                       
+                        if (p.grabTimer > 0) {
+                            p.grabTimer--;
+                            ball.mesh.position.x = p.mesh.position.x;
+                            ball.mesh.position.y = 3.5;
+                            ball.mesh.position.z = p.mesh.position.z + p.facing.z * 1.5;
+                            ball.vel.set(0, 0, 0);
+                            p.facing.set(0, 0, p.team === 0 ? -1 : 1);
+                           
+                            if (p.grabTimer === 0) {
+                                sounds.play('kick');
+                                ball.mesh.position.y = BALL_RADIUS;
+                               
+                                let targetTeammate = null;
+                               
+                                // ALWAYS pass to the User if they are on our team!
+                                if (p.team === player1.team) {
+                                    targetTeammate = player1;
+                                } else {
+                                    // Otherwise find the safest AI
+                                    let maxEnemyDist = -1;
+                                    players.forEach(t => {
+                                        if (t.team === p.team && t.role !== 'gk') {
+                                            let closestEnemyDist = Infinity;
+                                            players.forEach(e => {
+                                                if (e.team !== p.team) {
+                                                    let dist = t.mesh.position.distanceTo(e.mesh.position);
+                                                    if (dist < closestEnemyDist) closestEnemyDist = dist;
+                                                }
+                                            });
+                                            if (closestEnemyDist > maxEnemyDist) {
+                                                maxEnemyDist = closestEnemyDist;
+                                                targetTeammate = t;
+                                            }
+                                        }
+                                    });
+                                }
+
+                                if (targetTeammate) {
+                                    let dx = targetTeammate.mesh.position.x - p.mesh.position.x;
+                                    let dz = targetTeammate.mesh.position.z - p.mesh.position.z;
+                                    let dist = Math.sqrt(dx*dx + dz*dz);
+                                   
+                                    // FIX: Prevent Division by Zero NaN camera crash!
+                                    if (dist > 0.1) {
+                                        ball.vel.x = (dx / dist) * 1.4; // Nerfed goalie pass
+                                        ball.vel.z = (dz / dist) * 1.4;
+                                        ball.vel.y = 0.6; // Lower arc
+                                        p.facing.set(dx/dist, 0, dz/dist);
+                                    } else {
+                                        ball.vel.y = 0.6;
+                                        ball.vel.z = (p.team === 0 ? -1 : 1) * 1.4;
+                                        ball.vel.x = 0;
+                                    }
+                                } else {
+                                    // Fallback field clearing
+                                    ball.vel.y = 0.8;
+                                    ball.vel.z = (p.team === 0 ? -1 : 1) * 1.4;
+                                    ball.vel.x = (Math.random() - 0.5) * 1.0;
+                                }
+                                p.grabCooldown = 60;
+                            }
+                        }
+                    }
+                });
+
+                players.forEach(p => {
+                    if (p.stunTimer > 0) return;
+                   
+                    let dx = ball.mesh.position.x - p.mesh.position.x;
+                    let dz = ball.mesh.position.z - p.mesh.position.z;
+                    let dist = Math.sqrt(dx*dx + dz*dz);
+                    let minDist = ball.radius + p.radius;
+
+                    if (p.role === 'gk' && p.grabTimer === 0 && p.grabCooldown === 0 && p.stunTimer <= 0 && ballPossessor !== p) {
+                        const inBlueBox = (ball.mesh.position.z > 40 && Math.abs(ball.mesh.position.x) < 25);
+                        const inRedBox = (ball.mesh.position.z < -40 && Math.abs(ball.mesh.position.x) < 25);
+                        if ((p.team === 0 && inBlueBox) || (p.team === 1 && inRedBox)) {
+                            if (dist < minDist + 2.0 && ball.mesh.position.y < 5) {
+                                p.grabTimer = 90;
+                                sounds.play('bounce');
+                                return;
+                            }
+                        }
+                    }
+                   
+                    if (dist < minDist) {
+                        let overlap = minDist - dist;
+                        let nx = dx / dist;
+                        let nz = dz / dist;
+                       
+                        ball.mesh.position.x += nx * overlap;
+                        ball.mesh.position.z += nz * overlap;
+                       
+                        // NOTE: ballPossessor already excludes players who just kicked the ball.
+                        if (p === ballPossessor && p.kickCooldown <= 5) {
+                            ball.vel.x = p.vel.x * 1.05 + p.facing.x * 0.02;
+                            ball.vel.z = p.vel.z * 1.05 + p.facing.z * 0.02;
+                            ball.vel.y *= 0.4;
+
+                            let frontX = p.mesh.position.x + p.facing.x * minDist;
+                            let frontZ = p.mesh.position.z + p.facing.z * minDist;
+                            ball.mesh.position.x += (frontX - ball.mesh.position.x) * 0.15;
+                            ball.mesh.position.z += (frontZ - ball.mesh.position.z) * 0.15;
+                        }
+                    }
+                });
+
+                for (let i=0; i<players.length; i++) {
+                    for (let j=i+1; j<players.length; j++) {
+                        let p1 = players[i]; let p2 = players[j];
+                        let dx = p2.mesh.position.x - p1.mesh.position.x;
+                        let dz = p2.mesh.position.z - p1.mesh.position.z;
+                        let dist = Math.sqrt(dx*dx + dz*dz);
+                        let minDist = p1.radius + p2.radius;
+                       
+                        if (dist < minDist + 2.0) {
+                            if (p1.tackleTimer > 0 && p2.avoidTimer === 0 && p1.team !== p2.team && p2.stunTimer <= 0) {
+                                p2.stunTimer = 60;
+                                sounds.play('bounce');
+                            }
+                            if (p2.tackleTimer > 0 && p1.avoidTimer === 0 && p1.team !== p2.team && p1.stunTimer <= 0) {
+                                p1.stunTimer = 60;
+                                sounds.play('bounce');
+                            }
+                        }
+
+                        if (dist < minDist) {
+                            let overlap = (minDist - dist) / 2;
+                            let nx = dx / dist; let nz = dz / dist;
+                            p1.mesh.position.x -= nx * overlap; p1.mesh.position.z -= nz * overlap;
+                            p2.mesh.position.x += nx * overlap; p2.mesh.position.z += nz * overlap;
+                        }
+                    }
+                }
+
+                players.forEach(p => {
+                    if (Math.abs(p.mesh.position.x) > FIELD_WIDTH/2 - p.radius) {
+                        p.mesh.position.x = Math.sign(p.mesh.position.x) * (FIELD_WIDTH/2 - p.radius);
+                        p.vel.x = 0;
+                    }
+                    if (Math.abs(p.mesh.position.z) > FIELD_LENGTH/2 - p.radius) {
+                        p.mesh.position.z = Math.sign(p.mesh.position.z) * (FIELD_LENGTH/2 - p.radius);
+                        p.vel.z = 0;
+                    }
+                });
+
+                if (gameState === STATE_PLAYING) {
+                    if (Math.abs(ball.mesh.position.z) > FIELD_LENGTH/2 && Math.abs(ball.mesh.position.x) < GOAL_WIDTH/2) {
+                        if (ball.mesh.position.z < 0) {
+                            triggerGoal(0);
+                        } else {
+                            triggerGoal(1);
+                        }
+                    }
+                }
+
+                const targetCamX = (player1.mesh.position.x + ball.mesh.position.x) / 2;
+                const targetCamZ = (player1.mesh.position.z + ball.mesh.position.z) / 2 + 40;
+               
+                camera.position.x += (targetCamX - camera.position.x) * 0.05;
+                camera.position.y += (35 - camera.position.y) * 0.05;
+                camera.position.z += (targetCamZ - camera.position.z) * 0.05;
+               
+                const lookTarget = new THREE.Vector3(
+                    (player1.mesh.position.x + ball.mesh.position.x)/2,
+                    0,
+                    (player1.mesh.position.z + ball.mesh.position.z)/2 - 10
+                );
+                camera.lookAt(lookTarget);
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                update();
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            camera.position.set(0, 40, 60);
+            camera.lookAt(0, 0, 0);
+
+            animate();
+        };
+    </script>
+</body>
+</html>
