@@ -4,7 +4,7 @@ const games = [
   {
     title: 'Chat App',
     slug: 'chat',
-    description: 'Chat with strangers with this unblocked chatting app!',
+    description: 'Chat with to other gamers chatting app!',
     thumbnail: `${basePath}/thumbnails/chatapp.png`,
     tags: ['featured','chat','new'],
   },
