@@ -165,9 +165,9 @@ export default function Layout({ children }) {
                 <strong>{String(categories.length - 1).padStart(2, '0')}</strong>
                 CHANNELS
               </span>
-              <span className={styles.stageMetaItem}>
+              {/* <span className={styles.stageMetaItem}>
                 <strong>EST.</strong>2024
-              </span>
+              </span> */}
             </div>
           </div>
         )}
