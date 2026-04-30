@@ -74,11 +74,18 @@ export default function Game() {
       </Head>
 
       <div className={styles.container}>
-        <button onClick={() => router.push('/')} className={styles.backBtn}>
-          ← Back
-        </button>
+        <div className={styles.topRow}>
+          <button onClick={() => router.push('/')} className={styles.backBtn}>
+            ◀ BACK TO ARCADE
+          </button>
+          <span className={styles.gameMeta}>
+            <strong>NOW PLAYING</strong> // {game.tags?.[0] || 'arcade'}
+          </span>
+        </div>
 
-        <h1 className={styles.title}>{game.title}</h1>
+        <h1 className={styles.title}>
+          <em>{game.title}</em>
+        </h1>
         <p className={styles.description}>{game.description}</p>
 
         <div className={styles.iframeWrapper} ref={iframeRef}>
@@ -89,7 +96,7 @@ export default function Game() {
             allowFullScreen
           />
           <button className={styles.fullscreenBtn} onClick={toggleFullscreen}>
-            {isFullscreen ? '⛶ Exit Fullscreen' : '⛶ Fullscreen'}
+            {isFullscreen ? '⛶ EXIT FULLSCREEN' : '⛶ FULLSCREEN'}
           </button>
         </div>
       </div>

@@ -1,21 +1,132 @@
+/* EPIX // FORBIDDEN ARCADE
+   Pirate-broadcast brutalism. Acid yellow over ink black. */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Archivo+Black&family=Archivo:wght@500;700;900&family=DM+Mono:wght@400;500&display=swap');
 
-body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #0d0d0d;
-  color: #fff;
+:root {
+  --ink: #0a0a09;
+  --ink-2: #13130f;
+  --ink-3: #1c1c17;
+  --acid: #ffe600;
+  --acid-dim: #c8b300;
+  --hot: #ff2d55;
+  --paper: #f5f1e5;
+  --paper-dim: #c8c4ba;
+  --muted: #6b675e;
+  --line: #2a2823;
+
+  --font-display: 'Bungee Inline', 'Archivo Black', sans-serif;
+  --font-headline: 'Archivo Black', 'Archivo', sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --shadow-brut: 6px 6px 0 var(--acid);
+  --shadow-brut-hot: 6px 6px 0 var(--hot);
+  --shadow-brut-paper: 6px 6px 0 var(--paper);
+
+  --halftone:
+    radial-gradient(circle at 1px 1px, rgba(245, 241, 229, 0.05) 1px, transparent 0);
 }
 
-html {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--ink);
+  background-image:
+    var(--halftone),
+    radial-gradient(1200px 600px at 80% -10%, rgba(255, 230, 0, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(255, 45, 85, 0.05), transparent 60%);
+  background-size: 4px 4px, auto, auto;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* CRT scanlines overlay — subtle */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.18) 3px,
+      rgba(0, 0, 0, 0.18) 3px
+    );
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+}
+
+/* Grain noise overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  animation: grainShift 1.2s steps(4) infinite;
+}
+
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-3%, 2%); }
+  50%  { transform: translate(2%, -2%); }
+  75%  { transform: translate(-2%, -3%); }
+  100% { transform: translate(0, 0); }
 }
 
 .page-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb {
+  background: var(--acid);
+  border: 3px solid var(--ink);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--hot); }
+
+/* Utility: blinking caret */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Utility: ticker scroll */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }

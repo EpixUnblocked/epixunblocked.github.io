@@ -1,97 +1,148 @@
-/* Game css */
+/* EPIX // Game player — Arcade cabinet */
 
 .container {
-    padding: 20px;
-    animation: fadeIn 0.4s ease-in;
-  }
-  
-  .backBtn {
-    background: #222;
-    color: #ccc;
-    padding: 8px 16px;
-    border: 1px solid #444;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-    transition: background 0.2s ease;
-  }
-  
-  .backBtn:hover {
-    background: #333;
-    color: #fff;
-  }
-  
-  .title {
-    font-size: 2rem;
-    margin-bottom: 8px;
-    color: white;
-  }
-  
-  .description {
-    color: #bbb;
-    margin-bottom: 20px;
-  }
-  
-  .iframeWrapper {
-    position: relative;
-    width: 100%;
-    height: 75vh;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.4s ease-out;
-  }
-  
-  .iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  
-  .fullscreenBtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(30, 30, 30, 0.8);
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  
-  .fullscreenBtn:hover {
-    background: rgba(60, 60, 60, 0.9);
-  }
-  
-  .notFound {
-    padding: 40px;
-    color: #999;
-    text-align: center;
-  }
-  
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
+  padding: 26px 32px 50px;
+  animation: fadeIn 0.4s ease-in;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.backBtn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink-2);
+  padding: 9px 16px;
+  border: 2px solid var(--paper);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.backBtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--acid);
+  background: var(--ink);
+}
+
+.gameMeta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gameMeta strong {
+  color: var(--acid);
+  font-weight: 500;
+}
+
+.title {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+.title em {
+  font-style: normal;
+  background: var(--acid);
+  color: var(--ink);
+  padding: 0 0.15em;
+  display: inline-block;
+  transform: rotate(-1deg);
+  margin-right: 0.05em;
+}
+
+.description {
+  color: var(--paper-dim);
+  margin: 0 0 22px;
+  font-size: 1rem;
+  line-height: 1.55;
+  max-width: 720px;
+}
+
+.iframeWrapper {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+  background: var(--ink);
+  border: 3px solid var(--paper);
+  box-shadow: 10px 10px 0 var(--acid);
+  animation: slideUp 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: var(--ink);
+}
+
+.fullscreenBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+}
+
+.fullscreenBtn:hover {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--ink);
+  transform: translate(-1px, -1px);
+}
+
+.notFound {
+  padding: 80px 40px;
+  color: var(--paper-dim);
+  text-align: center;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+@keyframes slideUp {
+  0%   { opacity: 0; transform: translateY(28px); clip-path: inset(0 0 100% 0); }
+  100% { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 700px) {
+  .container { padding: 18px 18px 40px; }
+  .iframeWrapper { box-shadow: 6px 6px 0 var(--acid); height: 65vh; }
+}
