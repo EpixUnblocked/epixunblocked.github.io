@@ -1,0 +1,138 @@
+/* GridToolbar — sort + random above the game grid */
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 32px 0;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sortWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: transparent;
+  border: 2px solid var(--paper);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.sortBtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--acid);
+}
+
+.sortBtnOpen {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--paper);
+}
+
+.caret {
+  font-size: 0.7rem;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 44px;
+  min-width: 180px;
+  background: var(--ink);
+  border: 3px solid var(--paper);
+  box-shadow: 5px 5px 0 var(--acid), 5px 5px 0 4px var(--ink);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  animation: sortIn 0.16s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+@keyframes sortIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.option {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 9px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  cursor: pointer;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.option:last-child { border-bottom: none; }
+.option:hover { background: var(--ink-2); }
+
+.optionActive {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.optionActive:hover {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.randomBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--acid);
+  border: 2px solid var(--ink);
+  padding: 8px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.18s ease;
+  box-shadow: 4px 4px 0 var(--paper);
+}
+
+.randomBtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--paper);
+  background: var(--paper);
+}
+
+.randomBtn:active {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 var(--paper);
+}
+
+@media (max-width: 560px) {
+  .bar { padding: 14px 20px 0; }
+  .menu { left: 0; }
+}

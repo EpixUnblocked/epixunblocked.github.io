@@ -1,0 +1,128 @@
+/* CloakSwitcher — Tab disguise dropdown */
+
+.wrap {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: transparent;
+  border: 2px solid var(--paper);
+  padding: 8px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.trigger:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--acid);
+}
+
+.triggerOpen {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--paper);
+  transform: translate(-1px, -1px);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 240px;
+  background: var(--ink);
+  border: 3px solid var(--paper);
+  box-shadow: 6px 6px 0 var(--acid), 6px 6px 0 5px var(--ink);
+  z-index: 200;
+  animation: cloakDown 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes cloakDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.menuTitle {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  color: var(--acid);
+  padding: 10px 14px 8px;
+  text-transform: uppercase;
+  border-bottom: 2px dashed var(--line);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover {
+  background: var(--ink-2);
+}
+
+.optionActive {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.optionActive:hover {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.optionFavicon {
+  width: 16px;
+  height: 16px;
+  background: var(--paper);
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.optionCheck {
+  font-size: 0.7rem;
+  color: var(--ink);
+  margin-left: 4px;
+}
+
+@media (max-width: 560px) {
+  .triggerLabel { display: none; }
+  .trigger { padding: 8px 10px; }
+  .menu { right: -40px; min-width: 220px; }
+}

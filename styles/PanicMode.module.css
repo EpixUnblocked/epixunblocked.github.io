@@ -1,0 +1,236 @@
+/* PanicMode — Convincing Google Classroom mimic */
+
+.shell {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #f1f3f4;
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  color: #202124;
+  overflow-y: auto;
+  animation: panicIn 0.05s linear;
+}
+
+@keyframes panicIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Header bar */
+.header {
+  background: #fff;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #dadce0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #5f6368;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+}
+
+.iconBtn:hover { background: #f1f3f4; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Google Sans', 'Product Sans', 'Roboto', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #5f6368;
+  letter-spacing: -0.01em;
+}
+
+.brandIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1a73e8;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+/* Sub-tabs */
+.subBar {
+  display: flex;
+  gap: 28px;
+  padding: 0 28px;
+  background: #fff;
+  border-bottom: 1px solid #dadce0;
+  height: 48px;
+  align-items: center;
+}
+
+.tab {
+  font-size: 0.88rem;
+  color: #5f6368;
+  padding: 14px 0 13px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+
+.tabActive {
+  color: #1a73e8;
+  border-bottom-color: #1a73e8;
+  font-weight: 500;
+}
+
+/* Class card grid */
+.grid {
+  max-width: 1280px;
+  margin: 24px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.18s ease;
+}
+
+.card:hover {
+  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.16), 0 4px 8px 3px rgba(60, 64, 67, 0.08);
+}
+
+.cardBanner {
+  padding: 16px 18px 18px;
+  color: #fff;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cardTitle {
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.cardTeacher {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.cardBody {
+  padding: 16px 18px 8px;
+  flex: 1;
+  min-height: 80px;
+}
+
+.cardNotice {
+  font-size: 0.88rem;
+  color: #1a73e8;
+  margin: 0;
+}
+
+.cardNotice strong {
+  font-weight: 500;
+}
+
+.cardNoticeMuted {
+  font-size: 0.85rem;
+  color: #80868b;
+  margin: 0;
+}
+
+.cardActions {
+  border-top: 1px solid #dadce0;
+  padding: 6px 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cardActionBtn {
+  background: none;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+}
+
+.cardActionBtn:hover { background: #f1f3f4; }
+
+/* Resume hint */
+.resumeHint {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: #202124;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.18s;
+  z-index: 10;
+}
+
+.resumeHint:hover { opacity: 1; }
+
+.resumeHint kbd {
+  background: #3c4043;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  margin: 0 2px;
+}

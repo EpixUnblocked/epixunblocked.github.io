@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { useEffect, useState, useRef } from 'react';
 import games from '../../data/games';
 import styles from '../../styles/Game.module.css';
+import { useGameContext } from '../../context/GameContext';
 
 export default function Game() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function Game() {
   const [game, setGame] = useState(null);
   const iframeRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const { pushRecent, isFavorite, toggleFavorite, hydrated } = useGameContext();
 
   useEffect(() => {
     if (!slug) return;
@@ -20,12 +22,18 @@ export default function Game() {
     setGame(foundGame || null);
   }, [slug]);
 
-  // Only run if game is valid
   useEffect(() => {
     if (typeof window !== 'undefined' && game?.slug) {
       localStorage.setItem('lastGameRoute', `/games/${game.slug}`);
     }
   }, [game]);
+
+  // Track recents once context is hydrated and game is loaded
+  useEffect(() => {
+    if (hydrated && game?.slug) {
+      pushRecent(game.slug);
+    }
+  }, [hydrated, game?.slug, pushRecent]);
 
   useEffect(() => {
     const handleChange = () => {
@@ -43,7 +51,6 @@ export default function Game() {
 
   const toggleFullscreen = () => {
     const iframeWrapper = iframeRef.current;
-
     if (!iframeWrapper) return;
 
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
@@ -65,7 +72,25 @@ export default function Game() {
     }
   };
 
+  // F shortcut for fullscreen
+  useEffect(() => {
+    const onKey = (e) => {
+      const tag = e.target?.tagName;
+      const isTyping =
+        tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable;
+      if (isTyping) return;
+      if ((e.key === 'f' || e.key === 'F') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   if (!game) return <p className={styles.notFound}>Game not found.</p>;
+
+  const fav = hydrated && isFavorite(game.slug);
 
   return (
     <>
@@ -78,9 +103,20 @@ export default function Game() {
           <button onClick={() => router.push('/')} className={styles.backBtn}>
             ◀ BACK TO ARCADE
           </button>
-          <span className={styles.gameMeta}>
-            <strong>NOW PLAYING</strong> // {game.tags?.[0] || 'arcade'}
-          </span>
+          <div className={styles.topRowRight}>
+            <button
+              type="button"
+              className={`${styles.favBtn} ${fav ? styles.favBtnActive : ''}`}
+              onClick={() => toggleFavorite(game.slug)}
+              aria-pressed={fav}
+              aria-label={fav ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              {fav ? '★ SAVED' : '☆ SAVE'}
+            </button>
+            <span className={styles.gameMeta}>
+              <strong>NOW PLAYING</strong> // {game.tags?.[0] || 'arcade'}
+            </span>
+          </div>
         </div>
 
         <h1 className={styles.title}>
@@ -96,7 +132,7 @@ export default function Game() {
             allowFullScreen
           />
           <button className={styles.fullscreenBtn} onClick={toggleFullscreen}>
-            {isFullscreen ? '⛶ EXIT FULLSCREEN' : '⛶ FULLSCREEN'}
+            {isFullscreen ? '⛶ EXIT FULLSCREEN (F)' : '⛶ FULLSCREEN (F)'}
           </button>
         </div>
       </div>

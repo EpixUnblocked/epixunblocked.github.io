@@ -4,10 +4,12 @@
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
 import TabCloak from '../components/TabCloak';
+import PanicMode from '../components/PanicMode';
+import CloakSwitcher from '../components/CloakSwitcher';
 import { useGameContext } from '../context/GameContext';
 import { useRouter } from 'next/router';
 import games from '../data/games';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 
 export default function Layout({ children }) {
   const {
@@ -24,6 +26,44 @@ export default function Layout({ children }) {
   const router = useRouter();
   const isGamePage = router.pathname.startsWith('/games/');
   const [showInfo, setShowInfo] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMounted, setChatMounted] = useState(false);
+  const searchRef = useRef(null);
+
+  const openChat = () => {
+    setChatMounted(true);
+    setChatOpen(true);
+  };
+  const closeChat = () => setChatOpen(false);
+
+  useEffect(() => {
+    if (!chatOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') closeChat(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [chatOpen]);
+
+  // Global keyboard shortcuts: / focus search, R random
+  useEffect(() => {
+    const onKey = (e) => {
+      const tag = e.target?.tagName;
+      const isTyping =
+        tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable;
+      if (isTyping) return;
+
+      if (e.key === '/') {
+        e.preventDefault();
+        searchRef.current?.focus();
+      } else if (e.key === 'r' || e.key === 'R') {
+        if (e.metaKey || e.ctrlKey) return;
+        if (!games.length) return;
+        const pick = games[Math.floor(Math.random() * games.length)];
+        router.push(`/games/${pick.slug}`);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [router]);
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
   const handleClearSearch = () => setSearchTerm('');
@@ -69,6 +109,7 @@ export default function Layout({ children }) {
   return (
     <>
       <TabCloak />
+      <PanicMode />
 
       <div className={styles.shell}>
         {/* === MAIN HEADER === */}
@@ -85,9 +126,10 @@ export default function Layout({ children }) {
             <div className={styles.searchWrapper}>
               <span className={styles.searchPrompt}>&gt; FIND</span>
               <input
+                ref={searchRef}
                 className={styles.search}
                 type="text"
-                placeholder="type a title..."
+                placeholder="type a title... (press /)"
                 value={searchTerm}
                 onChange={handleSearchChange}
                 spellCheck="false"
@@ -106,6 +148,35 @@ export default function Layout({ children }) {
             </div>
           )}
 
+          <div className={styles.headerActions}>
+            <CloakSwitcher />
+            <button
+              className={`${styles.chatBtn} ${chatOpen ? styles.chatBtnActive : ''}`}
+              onClick={chatOpen ? closeChat : openChat}
+              aria-label="Toggle chat"
+              aria-expanded={chatOpen}
+            >
+            <svg
+              className={styles.chatBtnIcon}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 4h18v13H11l-5 4v-4H3z"
+                fill="currentColor"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+              <circle className={styles.chatBtnDot1} cx="8" cy="10.5" r="1.3" />
+              <circle className={styles.chatBtnDot2} cx="12" cy="10.5" r="1.3" />
+              <circle className={styles.chatBtnDot3} cx="16" cy="10.5" r="1.3" />
+              </svg>
+              <span className={styles.chatBtnLabel}>CHAT</span>
+            </button>
+          </div>
         </div>
 
         {/* === CATEGORY BAR === */}
@@ -226,6 +297,40 @@ export default function Layout({ children }) {
         {!isGamePage && !showInfo && children}
         {isGamePage && children}
       </main>
+
+      {/* === CHAT DRAWER === */}
+      {chatMounted && (
+        <div
+          className={`${styles.chatBackdrop} ${chatOpen ? styles.chatBackdropOpen : ''}`}
+          onClick={closeChat}
+          aria-hidden="true"
+        />
+      )}
+      {chatMounted && (
+        <aside
+          className={`${styles.chatDrawer} ${chatOpen ? styles.chatDrawerOpen : ''}`}
+          role="dialog"
+          aria-label="Live chat"
+          aria-hidden={!chatOpen}
+        >
+          <div className={styles.chatDrawerHeader}>
+            <span className={styles.chatDrawerTag}>// LIVE</span>
+            <span className={styles.chatDrawerTitle}>EPIX CHAT</span>
+            <button
+              className={styles.chatDrawerClose}
+              onClick={closeChat}
+              aria-label="Close chat"
+            >
+              ×
+            </button>
+          </div>
+          <iframe
+            src="/html/chat/index.html"
+            className={styles.chatDrawerFrame}
+            title="Epix live chat"
+          />
+        </aside>
+      )}
     </>
   );
 }

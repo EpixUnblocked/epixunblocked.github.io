@@ -1,17 +1,20 @@
-// TabCloak.js
+// TabCloak.js — Multi-cloak tab disguise
 // @scriptedCoke
 
 import { useEffect } from 'react';
+import { useGameContext } from '../context/GameContext';
+import cloaks from '../data/cloaks';
 
 export default function TabCloak() {
+  const { cloakKey, hydrated } = useGameContext();
+
   useEffect(() => {
-    const originalTitle = document.title;
-    const originalFavicon = document.querySelector("link[rel='icon']")?.href;
+    if (!hydrated) return;
 
-    const cloakTitle = 'Home - Google Drive';
-    const cloakFavicon = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
+    const cloak = cloaks.find((c) => c.key === cloakKey) || cloaks[0];
+    const isOff = cloak.key === 'epix';
 
-    const changeFavicon = (src) => {
+    const setFavicon = (src) => {
       let link = document.querySelector("link[rel='icon']");
       if (!link) {
         link = document.createElement('link');
@@ -21,24 +24,16 @@ export default function TabCloak() {
       link.href = src;
     };
 
-    const handleBlur = () => {
-      document.title = cloakTitle;
-      changeFavicon(cloakFavicon);
-    };
+    // For "epix" preset (off), no cloak — title and favicon stay native.
+    if (isOff) {
+      setFavicon('/favicon.ico');
+      return;
+    }
 
-    const handleFocus = () => {
-      document.title = originalTitle;
-      if (originalFavicon) changeFavicon(originalFavicon);
-    };
-
-    window.addEventListener('blur', handleBlur);
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('focus', handleFocus);
-    };
-  }, []);
+    // Otherwise: apply cloak immediately (persistent disguise)
+    document.title = cloak.title;
+    setFavicon(cloak.favicon);
+  }, [cloakKey, hydrated]);
 
   return null;
 }

@@ -1,0 +1,224 @@
+/* HomeBanner — Game of the Day + Continue/Favorites strip */
+
+.banner {
+  padding: 24px 32px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  border-bottom: 2px dashed var(--line);
+}
+
+/* === GAME OF THE DAY === */
+.gotd {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+  background: var(--ink-2);
+  border: 3px solid var(--paper);
+  text-decoration: none;
+  color: var(--paper);
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 280px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.gotd:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--acid);
+  border-color: var(--acid);
+}
+
+.gotdImage {
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ink);
+  position: relative;
+}
+
+.gotdImage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 9, 0) 60%,
+    rgba(10, 10, 9, 0.8) 100%
+  );
+}
+
+.gotdInner {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 28px 32px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  border-left: 3px solid var(--ink);
+}
+
+.gotdTag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hot);
+  font-weight: 500;
+}
+
+.gotdTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.gotdDescription {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--ink);
+  opacity: 0.85;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gotdCta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--acid);
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  margin-top: 8px;
+  border: 2px solid var(--ink);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.gotd:hover .gotdCta {
+  background: var(--hot);
+  color: var(--paper);
+}
+
+.gotdCtaArrow {
+  transition: transform 0.18s ease;
+}
+
+.gotd:hover .gotdCtaArrow {
+  transform: translateX(4px);
+}
+
+/* === STRIP (Continue / Favorites) === */
+.strip {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stripGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stripLabel {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stripLabelDot {
+  width: 8px;
+  height: 8px;
+  background: var(--acid);
+  display: inline-block;
+}
+
+.stripLabelStar {
+  color: var(--hot);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.stripRail {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  scroll-snap-type: x mandatory;
+}
+
+.stripRail::-webkit-scrollbar {
+  height: 8px;
+}
+
+.stripCard {
+  flex: 0 0 auto;
+  width: 156px;
+  background: var(--ink-2);
+  border: 2px solid var(--paper);
+  text-decoration: none;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.stripCard:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--acid);
+  border-color: var(--acid);
+}
+
+.stripCardImg {
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ink);
+  border-bottom: 2px solid var(--paper);
+}
+
+.stripCard:hover .stripCardImg {
+  border-bottom-color: var(--acid);
+}
+
+.stripCardTitle {
+  font-family: var(--font-headline);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  background: var(--paper);
+  color: var(--ink);
+  border-top: 2px solid var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  letter-spacing: -0.005em;
+}
+
+@media (max-width: 720px) {
+  .banner { padding: 18px 20px 4px; }
+  .gotd { grid-template-columns: 1fr; min-height: 0; }
+  .gotdImage { aspect-ratio: 16 / 9; }
+  .gotdInner { border-left: none; border-top: 3px solid var(--ink); padding: 22px 20px 20px; }
+  .stripCard { width: 130px; }
+}

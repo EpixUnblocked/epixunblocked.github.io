@@ -103,6 +103,7 @@
   overflow: hidden;
   border-bottom: 3px solid var(--paper);
   background: var(--ink);
+  flex: 0 0 auto;
 }
 
 .card:hover .cardImageWrap {
@@ -121,6 +122,52 @@
   background-color: var(--ink-3);
   transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.05), filter 0.3s ease;
   z-index: 0;
+}
+
+/* Favorite star button */
+.cardFav {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 5;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-mono);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  opacity: 0;
+}
+
+.card:hover .cardFav,
+.cardFavActive {
+  opacity: 1;
+}
+
+.cardFav:hover {
+  background: var(--hot);
+  color: var(--paper);
+  border-color: var(--paper);
+  transform: scale(1.08);
+}
+
+.cardFavActive {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.cardFavActive:hover {
+  background: var(--acid);
+  color: var(--ink);
 }
 
 /* Top bar overlay on image: number stamp + tag */
@@ -191,6 +238,11 @@
   position: relative;
   z-index: 4;
   border-top: 3px solid var(--ink);
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .card:hover .cardInfo {

@@ -2,13 +2,6 @@ const basePath = ''; // Required for GitHub Pages subpath
 
 const games = [
   {
-    title: 'Chat App',
-    slug: 'chat',
-    description: 'Chat with to other gamers chatting app!',
-    thumbnail: `${basePath}/thumbnails/chatapp.png`,
-    tags: ['featured','chat','new'],
-  },
-  {
     title: 'Block Blast',
     slug: 'blockblast',
     description: 'Block Blast involves in matching blocks together to make specific patterns that explode with points, the more points you earn, the higher your score.',

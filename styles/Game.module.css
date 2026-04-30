@@ -36,6 +36,44 @@
   background: var(--ink);
 }
 
+.topRowRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.favBtn {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: transparent;
+  border: 2px solid var(--paper);
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.favBtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--hot);
+}
+
+.favBtnActive {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--paper);
+}
+
+.favBtnActive:hover {
+  box-shadow: 6px 6px 0 var(--paper);
+  background: var(--acid);
+}
+
 .gameMeta {
   font-family: var(--font-mono);
   font-size: 0.7rem;
