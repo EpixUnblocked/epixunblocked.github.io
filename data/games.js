@@ -295,6 +295,13 @@ const games = [
     thumbnail: `${basePath}/html/granny/granny.jpg`,
     tags: ['horror'],
   },
+  {
+    title: 'Knife Hit!',
+    slug: 'knifehit',
+    description: 'Fun knife throwing game!',
+    thumbnail: `${basePath}/html/knifehit/knifehit.webp`,
+    tags: ['simulator'],
+  },
 ];
 
 export default games;
