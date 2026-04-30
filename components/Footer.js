@@ -12,7 +12,7 @@ export default function Footer() {
         <div className={styles.brand}>
           <span className={styles.brandMark}>EPIX</span>
           <span className={styles.brandTag}>
-            Pirate broadcast <em>//</em> always unblocked
+            Unblocked games <em>//</em> Ad free
           </span>
         </div>
 
@@ -29,12 +29,12 @@ export default function Footer() {
         </nav>
 
         <p className={styles.copyright}>
-          <em>© {year} EPIX</em> &nbsp; All signals reserved
+          <em>© {year} EPIX</em> &nbsp; All rights reserved
         </p>
       </div>
 
       <p className={styles.signoff}>
-        // <strong>END OF BROADCAST</strong> // STAY UNBLOCKED // PRESS START //
+        // <strong>END OF BROADCAST</strong> //
       </p>
     </footer>
   );
