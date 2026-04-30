@@ -288,6 +288,13 @@ const games = [
     thumbnail: `${basePath}/html/growagarden/thumb.png`,
     tags: ['simulator'],
   },
+  {
+    title: 'Granny',
+    slug: 'granny',
+    description: 'Survive Grannys house',
+    thumbnail: `${basePath}/html/granny/granny.jpg`,
+    tags: ['horror'],
+  },
 ];
 
 export default games;
