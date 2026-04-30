@@ -302,6 +302,13 @@ const games = [
     thumbnail: `${basePath}/html/knifehit/knifehit.webp`,
     tags: ['simulator'],
   },
+  {
+    title: 'Poly Strike 3D',
+    slug: 'polystrike',
+    description: 'Epic soccer game made by william K!',
+    thumbnail: `${basePath}/html/polystrike/polystrike.png`,
+    tags: ['simulator'],
+  },
 ];
 
 export default games;
