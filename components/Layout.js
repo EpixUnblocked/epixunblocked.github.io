@@ -19,10 +19,15 @@ export default function Layout({ children }) {
     setSelectedCategory,
   } = useGameContext();
 
-  const categories = useMemo(
-    () => ['All', ...new Set(games.flatMap((g) => g.tags))],
-    []
-  );
+  const categories = useMemo(() => {
+    const BADGE_ORDER = ['featured', 'popular', 'new'];
+    const allTags = [...new Set(games.flatMap((g) => g.tags))];
+    const badges = BADGE_ORDER.filter((b) => allTags.includes(b));
+    const genres = allTags
+      .filter((t) => !BADGE_ORDER.includes(t))
+      .sort((a, b) => a.localeCompare(b));
+    return ['All', ...badges, ...genres];
+  }, []);
   const router = useRouter();
   const isGamePage = router.pathname.startsWith('/games/');
   const [showInfo, setShowInfo] = useState(false);
@@ -192,17 +197,28 @@ export default function Layout({ children }) {
               >
                 About
               </button>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  className={`${styles.categoryBtn} ${
-                    selectedCategory === cat ? styles.active : ''
-                  }`}
-                  onClick={() => handleCategoryClick(cat)}
-                >
-                  {formatCat(cat)}
-                </button>
-              ))}
+              {categories.map((cat, idx) => {
+                const isBadge = ['featured', 'popular', 'new'].includes(cat);
+                const prevCat = categories[idx - 1];
+                const prevIsBadge =
+                  prevCat && ['featured', 'popular', 'new'].includes(prevCat);
+                const showDivider = !isBadge && prevIsBadge;
+                return (
+                  <span key={cat} className={styles.catWrap}>
+                    {showDivider && (
+                      <span className={styles.catDivider} aria-hidden="true" />
+                    )}
+                    <button
+                      className={`${styles.categoryBtn} ${
+                        isBadge ? styles.badgeBtn : ''
+                      } ${selectedCategory === cat ? styles.active : ''}`}
+                      onClick={() => handleCategoryClick(cat)}
+                    >
+                      {formatCat(cat)}
+                    </button>
+                  </span>
+                );
+              })}
             </div>
           </div>
         )}
@@ -219,7 +235,7 @@ export default function Layout({ children }) {
                 </>
               ) : selectedCategory === 'All' ? (
                 <>
-                  All <em>signals</em>
+                  All <em>channels</em>
                 </>
               ) : (
                 <>
@@ -289,7 +305,7 @@ export default function Layout({ children }) {
               behavior, or damage caused by external services.
             </p>
             <p style={{ marginTop: '24px', fontSize: '0.85rem', opacity: 0.7 }}>
-              © {new Date().getFullYear()} EPIX. All signals reserved.
+              © {new Date().getFullYear()} EPIX. All rights reserved.
             </p>
           </div>
         )}

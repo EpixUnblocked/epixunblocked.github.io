@@ -2,6 +2,7 @@
 import '../styles/globals.css';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
+import CookieBanner from '../components/CookieBanner';
 import { GameProvider } from '../context/GameContext';
 import Head from 'next/head';
 
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
         <Footer />
+        <CookieBanner />
       </div>
     </GameProvider>
   );

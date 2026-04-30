@@ -1,0 +1,154 @@
+/* CookieBanner — bottom-left brutalist consent card */
+
+.banner {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 200;
+  width: min(440px, calc(100vw - 48px));
+  background: var(--paper);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--acid), 8px 8px 0 4px var(--ink);
+  padding: 26px 24px 22px;
+  font-family: var(--font-body);
+  animation: cookieIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+.bannerClosing {
+  animation: cookieOut 0.28s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes cookieIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes cookieOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(20px); }
+}
+
+.stamp {
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  background: var(--hot);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-family: var(--font-headline);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.title em {
+  font-style: normal;
+  background: var(--acid);
+  padding: 0 0.18em;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+}
+
+.text {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--ink);
+}
+
+.link {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hot);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.link:hover {
+  background: var(--ink);
+  color: var(--acid);
+  text-decoration-color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 130px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 11px 14px;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btnAllow {
+  background: var(--ink);
+  color: var(--acid);
+  box-shadow: 4px 4px 0 var(--hot);
+}
+
+.btnAllow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--hot);
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.btnDecline {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btnDecline:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+@media (max-width: 520px) {
+  .banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    padding: 22px 18px 18px;
+  }
+  .title { font-size: 1.2rem; }
+  .text { font-size: 0.88rem; }
+}

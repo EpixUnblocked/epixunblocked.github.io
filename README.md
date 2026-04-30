@@ -31,4 +31,4 @@ Follow these simple steps to add your game to the platform:
 
 By following these steps, you can easily contribute and share games with the Epix Unblocked community. Let's make internet freedom more fun together!
 
-**© EpixUnblocked 2025 - Licensed under the MIT license.**
+**© EpixUnblocked 2026 - Licensed under the MIT license.**

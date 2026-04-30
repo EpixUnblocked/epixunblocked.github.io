@@ -111,7 +111,8 @@ export default function Game() {
               aria-pressed={fav}
               aria-label={fav ? 'Remove from favorites' : 'Add to favorites'}
             >
-              {fav ? '★ SAVED' : '☆ SAVE'}
+              <span className={styles.favStar}>{fav ? '★' : '☆'}</span>
+              {fav ? 'SAVED' : 'SAVE'}
             </button>
             <span className={styles.gameMeta}>
               <strong>NOW PLAYING</strong> // {game.tags?.[0] || 'arcade'}

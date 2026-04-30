@@ -44,6 +44,9 @@
 }
 
 .favBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.74rem;
   letter-spacing: 0.16em;
@@ -51,10 +54,21 @@
   color: var(--paper);
   background: transparent;
   border: 2px solid var(--paper);
-  padding: 8px 12px;
+  padding: 8px 14px;
   cursor: pointer;
   white-space: nowrap;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.favStar {
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: 0;
+  display: inline-block;
+}
+
+.favBtnActive .favStar {
+  color: var(--ink);
 }
 
 .favBtn:hover {

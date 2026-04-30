@@ -19,6 +19,15 @@ export default function Footer() {
         <nav className={styles.links}>
           <Link href="/terms"><span>Terms</span></Link>
           <Link href="/privacy"><span>Privacy</span></Link>
+          <button
+            type="button"
+            className={styles.linkButton}
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent('epix:manage-cookies'))
+            }
+          >
+            <span>Cookies</span>
+          </button>
           <a
             href="https://github.com/EpixUnblocked/epixunblocked.github.io"
             target="_blank"

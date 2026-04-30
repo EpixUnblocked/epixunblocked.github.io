@@ -291,6 +291,38 @@
   color: var(--ink);
 }
 
+.catWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.catDivider {
+  display: inline-block;
+  width: 2px;
+  align-self: stretch;
+  background: var(--line);
+  margin: 4px 6px 4px 0;
+}
+
+.categoryBtn.badgeBtn {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+
+.categoryBtn.badgeBtn:hover {
+  box-shadow: 3px 3px 0 var(--acid);
+  background: var(--ink-2);
+  color: var(--acid);
+}
+
+.categoryBtn.badgeBtn.active {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--paper);
+}
+
 .categoryBtn.aboutBtn {
   background: var(--hot);
   color: var(--paper);

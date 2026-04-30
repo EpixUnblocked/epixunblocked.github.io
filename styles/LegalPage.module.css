@@ -1,0 +1,239 @@
+/* LegalPage — shared brutalist document treatment for Privacy / Terms */
+
+.shell {
+  padding: 56px 28px 80px;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.backBtn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink-2);
+  padding: 9px 16px;
+  border: 2px solid var(--paper);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  align-self: flex-start;
+}
+
+.backBtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--acid);
+  background: var(--ink);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.meta strong {
+  color: var(--acid);
+  font-weight: 500;
+}
+
+/* === Document === */
+.doc {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 56px 50px 44px;
+  border: 3px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--acid), 12px 12px 0 4px var(--ink);
+  font-family: var(--font-body);
+  animation: docIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+@keyframes docIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) rotate(-0.4deg) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+.docStamp {
+  position: absolute;
+  top: -16px;
+  left: 28px;
+  background: var(--hot);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  padding: 5px 10px;
+  border: 2px solid var(--ink);
+}
+
+.docFile {
+  position: absolute;
+  top: -16px;
+  right: 28px;
+  background: var(--ink);
+  color: var(--acid);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  padding: 5px 10px;
+  border: 2px solid var(--ink);
+}
+
+.docTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  line-height: 0.92;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.docTitle em {
+  font-style: normal;
+  background: var(--acid);
+  padding: 0 0.15em;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  margin-right: 0.04em;
+}
+
+.docLead {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 30px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.docLead strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.section {
+  margin-top: 28px;
+}
+
+.section:first-of-type {
+  margin-top: 8px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 10px;
+}
+
+.sectionNum {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  background: var(--ink);
+  color: var(--acid);
+  padding: 4px 8px;
+  flex-shrink: 0;
+  border: 2px solid var(--ink);
+}
+
+.sectionTitle {
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.05;
+}
+
+.section p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.section p:last-child {
+  margin-bottom: 0;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.section li {
+  padding: 8px 0 8px 24px;
+  position: relative;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  border-bottom: 1px dashed var(--ink);
+}
+
+.section li:last-child { border-bottom: none; }
+
+.section li::before {
+  content: '►';
+  position: absolute;
+  left: 4px;
+  top: 11px;
+  color: var(--hot);
+  font-size: 0.7rem;
+}
+
+.signoff {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 2px dashed var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.signoff strong {
+  color: var(--hot);
+  font-weight: 500;
+}
+
+@media (max-width: 700px) {
+  .shell { padding: 32px 18px 60px; }
+  .doc { padding: 42px 24px 32px; }
+  .docStamp, .docFile {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+  }
+  .sectionHead { flex-direction: column; gap: 6px; align-items: flex-start; }
+}
