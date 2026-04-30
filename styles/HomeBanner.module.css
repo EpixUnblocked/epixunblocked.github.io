@@ -8,6 +8,28 @@
   border-bottom: 2px dashed var(--line);
 }
 
+@keyframes bannerSlam {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+    clip-path: inset(0 100% 0 0);
+  }
+  60% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes bannerRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* === GAME OF THE DAY === */
 .gotd {
   position: relative;
@@ -22,6 +44,8 @@
   isolation: isolate;
   min-height: 280px;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  opacity: 0;
+  animation: bannerSlam 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.05) 40ms forwards;
 }
 
 .gotd:hover {
@@ -131,6 +155,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  opacity: 0;
+  animation: bannerRise 0.45s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  animation-delay: var(--group-delay, 240ms);
 }
 
 .stripLabel {
@@ -180,6 +207,9 @@
   flex-direction: column;
   scroll-snap-align: start;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  opacity: 0;
+  animation: bannerRise 0.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  animation-delay: var(--card-delay, 0ms);
 }
 
 .stripCard:hover {

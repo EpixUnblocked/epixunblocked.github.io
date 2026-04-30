@@ -490,6 +490,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  grid-column: 3 / 4;
+  justify-self: end;
 }
 
 /* === CHAT BUTTON === */

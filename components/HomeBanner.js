@@ -62,17 +62,21 @@ export default function HomeBanner() {
       {hydrated && (recentGames.length > 0 || favGames.length > 0) && (
         <div className={styles.strip}>
           {recentGames.length > 0 && (
-            <div className={styles.stripGroup}>
+            <div
+              className={styles.stripGroup}
+              style={{ '--group-delay': '220ms' }}
+            >
               <span className={styles.stripLabel}>
                 <span className={styles.stripLabelDot} />
                 Continue
               </span>
               <div className={styles.stripRail}>
-                {recentGames.map((g) => (
+                {recentGames.map((g, i) => (
                   <Link
                     href={`/games/${g.slug}`}
                     key={`r-${g.slug}`}
                     className={styles.stripCard}
+                    style={{ '--card-delay': `${280 + i * 50}ms` }}
                   >
                     <div
                       className={styles.stripCardImg}
@@ -86,17 +90,23 @@ export default function HomeBanner() {
           )}
 
           {favGames.length > 0 && (
-            <div className={styles.stripGroup}>
+            <div
+              className={styles.stripGroup}
+              style={{ '--group-delay': `${recentGames.length > 0 ? 320 : 220}ms` }}
+            >
               <span className={styles.stripLabel + ' ' + styles.stripLabelHot}>
                 <span className={styles.stripLabelStar}>★</span>
                 Favorites
               </span>
               <div className={styles.stripRail}>
-                {favGames.map((g) => (
+                {favGames.map((g, i) => (
                   <Link
                     href={`/games/${g.slug}`}
                     key={`f-${g.slug}`}
                     className={styles.stripCard}
+                    style={{
+                      '--card-delay': `${(recentGames.length > 0 ? 380 : 280) + i * 50}ms`,
+                    }}
                   >
                     <div
                       className={styles.stripCardImg}
