@@ -20,6 +20,7 @@ const thumbnails = {
   'gachaverse': '/html/gachaverse/thumb.png',
   'gdsubzero': '/html/gdsubzero/thumb.png',
   'gorillatag': '/html/gorillatag/thumb.png',
+  'grandshiftauto': '/html/grandshiftauto/image.png',
   'granny': '/html/granny/granny.jpg',
   'growagarden': '/html/growagarden/thumb.png',
   'iceypurplehead3': '/html/iceypurplehead3/thumb.png',

@@ -290,6 +290,12 @@ const rawGames = [
     description: 'Eat pellets, grow big, and avoid other snakes in this addictive multiplayer game.',
     tags: ['popular', 'arcade'],
   },
+  {
+    title: "Grand Shift Auto",
+    slug: "grandshiftauto",
+    description: "A game about granding and shifting",
+    tags: ['arcade'],
+  },
 ];
 
 // Build the final games list:

@@ -102,11 +102,15 @@ function copySource(srcPath, slugDir) {
   const stat = fs.statSync(srcPath);
   if (stat.isDirectory()) {
     fs.cpSync(srcPath, slugDir, { recursive: true });
-  } else {
-    // single file — assume it's the game's index.html unless named otherwise
-    const destName = path.basename(srcPath);
-    fs.copyFileSync(srcPath, path.join(slugDir, destName));
+    return;
   }
+  // Single HTML file → always land as index.html so the iframe at
+  // /html/{slug}/index.html resolves. Other file types keep their name.
+  const ext = path.extname(srcPath).toLowerCase();
+  const destName = ext === '.html' || ext === '.htm'
+    ? 'index.html'
+    : path.basename(srcPath);
+  fs.copyFileSync(srcPath, path.join(slugDir, destName));
 }
 
 function formatEntry({ title, slug, description, tags }) {
