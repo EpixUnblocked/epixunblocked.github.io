@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import styles from '../styles/Layout.module.css';
 import TabCloak from '../components/TabCloak';
+import CountdownBanner from '../components/CountdownBanner';
 import { useGameContext } from '../context/GameContext';
 import { useRouter } from 'next/router';
 import games from '../data/games';
@@ -46,6 +47,7 @@ export default function Layout({ children }) {
   return (
     <>
       <TabCloak />
+      <CountdownBanner />
       <header className={styles.header}>
         <div className={styles.topBarContent}>
           <div className={styles.logoRow}>
