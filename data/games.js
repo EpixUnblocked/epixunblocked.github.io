@@ -1,66 +1,75 @@
 const basePath = ''; // Required for GitHub Pages subpath
 
-// Tag system:
-//   Badges (status):  featured · popular · new
+// === HOW TO ADD A GAME ==================================================
+//
+// Minimal entry — only `title` and `slug` are required:
+//   { title: 'My New Game', slug: 'mynewgame' }
+//
+// Defaults applied automatically:
+//   • thumbnail   → /html/{slug}/thumb.png   (drop a thumb.png in that folder)
+//   • description → ''                       (you should still write one)
+//   • tags        → []
+//   • new badge   → injected automatically for the LAST NEW_COUNT entries
+//
+// Override any default by setting the field explicitly.
+//
+// === TAGS ================================================================
+//   Badges (status):  featured · popular · new (auto)
 //   Genres:           arcade · driving · horror · idle · platformer · puzzle ·
 //                     runner · shooter · simulator · sport
-// Convention: badges come first in the array, then genres.
+//
+// Convention: list badges first, then genres. Add fresh games to the END.
+// =========================================================================
 
-const games = [
+const NEW_COUNT = 10;
+
+const rawGames = [
   {
     title: 'Block Blast',
     slug: 'blockblast',
     description: 'Block Blast involves in matching blocks together to make specific patterns that explode with points, the more points you earn, the higher your score.',
-    thumbnail: `${basePath}/html/blockblast/block.png`,
     tags: ['featured', 'puzzle'],
   },
   {
     title: 'Poly Track',
     slug: 'polytrack',
     description: 'Polytrack is a driving game where you drive around.',
-    thumbnail: `${basePath}/thumbnails/polytrack.png`,
     tags: ['featured', 'driving'],
   },
   {
     title: 'Ultrakill',
     slug: 'ultrakill',
     description: 'Shoot things.',
-    thumbnail: `${basePath}/html/ultrakill/thumb.png`,
     tags: ['featured', 'shooter'],
   },
   {
     title: 'Moto X3M',
     slug: 'motox3m',
     description: 'Moto X3M consists of multiple levels and stages where you have you get by on a motorbike, there is also a point system where you can do cool flips and tricks.',
-    thumbnail: `${basePath}/html/motox3m/thumb.png`,
     tags: ['popular', 'driving'],
   },
   {
     title: 'Police Chase Drifter',
     slug: 'policechasedrift',
     description: 'Drift away from the cops while collecting moneybags, the more you progress, the bigger and stronger the cop cars become, preform sick slides and drifts but just dont crash into any walls',
-    thumbnail: `${basePath}/html/policechasedrift/thumb.png`,
     tags: ['popular', 'driving'],
   },
   {
     title: 'Tiny Fishing',
     slug: 'tinyfishing',
     description: 'Hold down the middle button and release at the perfect time to reach maximum depth to catch bigger, better, cooler and more expensive fish.',
-    thumbnail: `${basePath}/html/tinyfishing/IMG_0199.png`,
     tags: ['popular', 'arcade'],
   },
   {
     title: 'Basketball Random',
     slug: 'basketballrandom',
     description: 'You play 2d basketball where you take control of the ball, you then jump high and shoot it, there are multiple mods and features to take the experience to its highest.',
-    thumbnail: `${basePath}/html/basketballrandom/2Q==.jpeg`,
     tags: ['sport'],
   },
   {
     title: 'Soccer Random',
     slug: 'soccerrandom',
     description: 'A cool game about soccer.',
-    thumbnail: `${basePath}/html/soccerrandom/soccerrandom.png`,
     tags: ['sport'],
   },
   {
@@ -109,64 +118,55 @@ const games = [
     title: 'Fireboy and Watergirl',
     slug: 'fbwg',
     description: 'A classic 2 player game.',
-    thumbnail: `${basePath}/html/fbwg/thumb.png`,
     tags: ['popular', 'platformer'],
   },
   {
     title: 'Fall Guys',
     slug: 'fallguys',
     description: 'Beat everyone and win the crown!',
-    thumbnail: `${basePath}/html/fallguys/thumb.png`,
     tags: ['platformer'],
   },
   {
     title: 'Idle Mining Tycoon',
     slug: 'idlemining',
     description: 'Become rich!',
-    thumbnail: `${basePath}/thumbnails/idleminer.png`,
     tags: ['popular', 'idle'],
   },
   {
     title: 'Stickman Hook',
     slug: 'stickmanhook',
     description: 'Swing to the finish line.',
-    thumbnail: `${basePath}/thumbnails/stickhook.png`,
     tags: ['featured', 'arcade'],
   },
   {
     title: 'Jetpack Joyride',
     slug: 'jetpack',
     description: 'Pls play me.',
-    thumbnail: `${basePath}/thumbnails/Jetpack.png`,
     tags: ['featured', 'runner'],
   },
   {
     title: 'Level Devil',
     slug: 'leveldevil',
     description: 'Try not to rage.',
-    thumbnail: `${basePath}/thumbnails/devil.png`,
-    tags: ['featured', 'new', 'puzzle'],
+    tags: ['featured', 'puzzle'],
   },
   {
     title: 'Subway Surfers: Tokyo',
     slug: 'subwaysurf',
     description: 'Race through tokyo.',
-    thumbnail: `${basePath}/thumbnails/tokyo.png`,
-    tags: ['featured', 'new', 'runner'],
+    tags: ['featured', 'runner'],
   },
   {
     title: 'Icey Purple Head 3',
     slug: 'iceypurplehead3',
     description: 'Cool game!',
-    thumbnail: `${basePath}/thumbnails/icy.png`,
-    tags: ['new', 'platformer'],
+    tags: ['platformer'],
   },
   {
     title: 'We Become What We Behold',
     slug: 'wbwwb',
     description: 'A minigame about the news.',
-    thumbnail: `${basePath}/thumbnails/wbwwb.png`,
-    tags: ['new', 'puzzle'],
+    tags: ['puzzle'],
   },
   {
     title: 'Backrooms',
@@ -179,112 +179,96 @@ const games = [
     title: 'Super Mario Kart',
     slug: 'mariokart',
     description: 'Join multiple races!',
-    thumbnail: `${basePath}/html/mariokart/thumb.png`,
     tags: ['featured', 'driving'],
   },
   {
     title: 'Steal a Brainrot',
     slug: 'stealbrainrot',
     description: 'Rob brainrots from others!',
-    thumbnail: `${basePath}/html/stealbrainrot/thumb.png`,
     tags: ['simulator'],
   },
   {
     title: 'Run 3',
     slug: 'run3',
     description: 'Run until the end.',
-    thumbnail: `${basePath}/html/run3/thumb.png`,
     tags: ['popular', 'runner'],
   },
   {
     title: 'Rooftop Snipers',
     slug: 'rooftopsnipers',
     description: 'Snipe people from the roof',
-    thumbnail: `${basePath}/html/rooftopsnipers/thumb.png`,
-    tags: ['new', 'shooter'],
+    tags: ['shooter'],
   },
   {
     title: 'Friday Night Funkin',
     slug: 'fnf',
     description: 'A rhythm game.',
-    thumbnail: `${basePath}/html/fnf/thumb.png`,
     tags: ['popular', 'arcade'],
   },
   {
     title: 'Baldi\'s Basics',
     slug: 'baldibasic',
     description: 'Escape baldi.',
-    thumbnail: `${basePath}/html/baldibasic/thumb.png`,
     tags: ['popular', 'horror'],
   },
   {
     title: 'Five Nights at Epsteins',
     slug: 'fnae',
     description: 'Survive the nights on Little Saint James.',
-    thumbnail: `${basePath}/html/fnae/thumb.png`,
     tags: ['featured', 'popular', 'horror'],
   },
   {
     title: 'Bridge Race',
     slug: 'bridgerace',
     description: 'Gather your bricks and be the first to build your bridge.',
-    thumbnail: `${basePath}/html/bridgerace/thumb.png`,
     tags: ['popular', 'runner'],
   },
   {
     title: 'Geometry Dash SubZero',
     slug: 'gdsubzero',
     description: 'Reach the end!',
-    thumbnail: `${basePath}/html/gdsubzero/thumb.png`,
     tags: ['platformer'],
   },
   {
     title: 'Gorilla Tag',
     slug: 'gorillatag',
     description: 'Tag other people and climb.',
-    thumbnail: `${basePath}/html/gorillatag/thumb.png`,
     tags: ['popular', 'arcade'],
   },
   {
     title: 'Effing Zombies',
     slug: 'effingzombies',
     description: 'Kill the zombies with guns and grenades.',
-    thumbnail: `${basePath}/html/effingzombies/thumb.png`,
-    tags: ['new', 'shooter'],
+    tags: ['shooter'],
   },
   {
     title: 'Eggy Car',
     slug: 'eggycar',
     description: 'Make sure the egg doesn\'t crack.',
-    thumbnail: `${basePath}/html/eggycar/thumb.png`,
     tags: ['featured', 'popular', 'driving'],
   },
   {
     title: 'Pokemon Emerald',
     slug: 'pokemonemerald',
     description: 'Play in trainer battles and upgrade your pokemon!',
-    thumbnail: `${basePath}/html/pokemonemerald/thumb.png`,
     tags: ['popular', 'simulator'],
   },
   {
     title: 'GachaVerse',
     slug: 'gachaverse',
     description: 'GachaVerse is a gacha game where you can collect characters and items, there are also multiple game modes to play in.',
-    thumbnail: `${basePath}/html/gachaverse/thumb.png`,
     tags: ['simulator'],
   },
   {
     title: 'Airline Tycoon Idle',
     slug: 'airlineidle',
     description: 'Build and manage your own airline!',
-    thumbnail: `${basePath}/html/airlineidle/thumb.png`,
     tags: ['idle'],
   },
   {
     title: 'Grow a Garden',
     slug: 'growagarden',
     description: 'Grow your garden and watch it flourish!',
-    thumbnail: `${basePath}/html/growagarden/thumb.png`,
     tags: ['idle'],
   },
   {
@@ -292,8 +276,40 @@ const games = [
     slug: 'granny',
     description: 'Survive Grannys house',
     thumbnail: `${basePath}/html/granny/granny.jpg`,
-    tags: ['horror'],
+    tags: ['horror', 'popular'],
+  },
+  {
+    title: 'Slope',
+    slug: 'slope3',
+    description: 'Survive the slopes',
+    tags: ['popular', 'runner'],
+  },
+  {
+    title: 'Slither.io',
+    slug: 'slitherio',
+    description: 'Eat pellets, grow big, and avoid other snakes in this addictive multiplayer game.',
+    tags: ['popular', 'arcade'],
   },
 ];
+
+// Build the final games list:
+//   1. Apply field defaults (thumbnail, description, tags) for any entry
+//      that omits them.
+//   2. Inject the 'new' badge for the last NEW_COUNT entries.
+const newSlugs = new Set(rawGames.slice(-NEW_COUNT).map((g) => g.slug));
+const BADGES = new Set(['featured', 'popular']);
+
+const games = rawGames.map((raw) => {
+  const g = {
+    description: '',
+    tags: [],
+    thumbnail: `${basePath}/html/${raw.slug}/thumb.png`,
+    ...raw,
+  };
+  if (!newSlugs.has(g.slug)) return g;
+  const existingBadges = g.tags.filter((t) => BADGES.has(t));
+  const genres = g.tags.filter((t) => !BADGES.has(t) && t !== 'new');
+  return { ...g, tags: [...existingBadges, 'new', ...genres] };
+});
 
 export default games;

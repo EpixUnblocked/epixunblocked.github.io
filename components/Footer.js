@@ -28,6 +28,15 @@ export default function Footer() {
           >
             <span>Cookies</span>
           </button>
+          <button
+            type="button"
+            className={styles.linkButton}
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent('epix:open-request'))
+            }
+          >
+            <span>Request</span>
+          </button>
           <a
             href="https://github.com/EpixUnblocked/epixunblocked.github.io"
             target="_blank"

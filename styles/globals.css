@@ -51,6 +51,7 @@ body {
     radial-gradient(1200px 600px at 80% -10%, rgba(255, 230, 0, 0.06), transparent 60%),
     radial-gradient(900px 500px at 0% 110%, rgba(255, 45, 85, 0.05), transparent 60%);
   background-size: 4px 4px, auto, auto;
+  background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
 }

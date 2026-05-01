@@ -238,11 +238,12 @@
   background: var(--paper);
   color: var(--ink);
   border-top: 2px solid var(--ink);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   letter-spacing: -0.005em;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 @media (max-width: 720px) {
