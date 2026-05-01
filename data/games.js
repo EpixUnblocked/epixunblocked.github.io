@@ -1,12 +1,20 @@
+import thumbnailMap from './thumbnails.generated';
+
 const basePath = ''; // Required for GitHub Pages subpath
 
 // === HOW TO ADD A GAME ==================================================
 //
-// Minimal entry — only `title` and `slug` are required:
+// Easiest path: run `npm run new:game` and answer the prompts. It scaffolds
+// the folder, copies your thumbnail, and appends the entry below for you.
+//
+// Manual path — minimal entry, only `title` and `slug` are required:
 //   { title: 'My New Game', slug: 'mynewgame' }
 //
 // Defaults applied automatically:
-//   • thumbnail   → /html/{slug}/thumb.png   (drop a thumb.png in that folder)
+//   • thumbnail   → auto-detected from public/html/{slug}/ (any image works;
+//                   thumb.png/jpg/jpeg/webp wins, otherwise first image
+//                   alphabetically). Run `npm run gen:thumbnails` after adding
+//                   art to refresh the map.
 //   • description → ''                       (you should still write one)
 //   • tags        → []
 //   • new badge   → injected automatically for the LAST NEW_COUNT entries
@@ -76,42 +84,36 @@ const rawGames = [
     title: 'Wonder Rocket',
     slug: 'wonderrocket',
     description: 'A game about shooting for the stars.',
-    thumbnail: `${basePath}/html/wonderrocket/image098.png`,
     tags: ['popular', 'idle'],
   },
   {
     title: 'Drift Boss 3D',
     slug: 'driftboss',
     description: 'A game about perfect drifts.',
-    thumbnail: `${basePath}/html/driftboss/driftboss.png`,
     tags: ['driving'],
   },
   {
     title: 'OvO Dimensions',
     slug: 'ovo',
     description: 'The best OvO game out there.',
-    thumbnail: `${basePath}/html/ovo/ovo.png`,
     tags: ['popular', 'platformer'],
   },
   {
     title: 'BitLife',
     slug: 'bitlife',
     description: 'Its Bitlife!',
-    thumbnail: `${basePath}/html/bitlife/bitlife.png`,
     tags: ['popular', 'simulator'],
   },
   {
     title: 'Neon Swing',
     slug: 'neonswing',
     description: 'A cool swinging game where you doge obsticals.',
-    thumbnail: `${basePath}/html/neonswing/neonswing.png`,
     tags: ['popular', 'arcade'],
   },
   {
     title: 'Fnaf Ultimate Custom Night',
     slug: 'fnafcustom',
     description: 'Survive the night!',
-    thumbnail: `${basePath}/html/fnafcustom/fnaf.png`,
     tags: ['popular', 'horror'],
   },
   {
@@ -172,7 +174,6 @@ const rawGames = [
     title: 'Backrooms',
     slug: 'backrooms',
     description: 'You need to hide from a monster, and you\'re trapped in the backrooms.',
-    thumbnail: `${basePath}/html/backrooms/Backrooms_1.png`,
     tags: ['horror'],
   },
   {
@@ -275,7 +276,6 @@ const rawGames = [
     title: 'Granny',
     slug: 'granny',
     description: 'Survive Grannys house',
-    thumbnail: `${basePath}/html/granny/granny.jpg`,
     tags: ['horror', 'popular'],
   },
   {
@@ -300,10 +300,13 @@ const newSlugs = new Set(rawGames.slice(-NEW_COUNT).map((g) => g.slug));
 const BADGES = new Set(['featured', 'popular']);
 
 const games = rawGames.map((raw) => {
+  const autoThumb = thumbnailMap[raw.slug];
   const g = {
     description: '',
     tags: [],
-    thumbnail: `${basePath}/html/${raw.slug}/thumb.png`,
+    thumbnail: autoThumb
+      ? `${basePath}${autoThumb}`
+      : `${basePath}/html/${raw.slug}/thumb.png`,
     ...raw,
   };
   if (!newSlugs.has(g.slug)) return g;

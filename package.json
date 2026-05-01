@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "npm run gen:thumbnails && next dev",
+    "build": "npm run gen:thumbnails && next build",
+    "start": "next start",
+    "new:game": "node scripts/new-game.js",
+    "gen:thumbnails": "node scripts/generate-thumbnail-map.js"
   },
   "dependencies": {
     "next": "13.5.11",

@@ -5,21 +5,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/RequestModal.module.css';
+import { GENRES } from '../data/tags';
 
 const REPO = 'EpixUnblocked/epixunblocked.github.io';
-
-const GENRES = [
-  'arcade',
-  'driving',
-  'horror',
-  'idle',
-  'platformer',
-  'puzzle',
-  'runner',
-  'shooter',
-  'simulator',
-  'sport',
-];
 
 const formatGenre = (g) => g.charAt(0).toUpperCase() + g.slice(1);
 
