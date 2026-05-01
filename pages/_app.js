@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import CookieBanner from '../components/CookieBanner';
 import RequestModal from '../components/RequestModal';
+import KeyboardHelp from '../components/KeyboardHelp';
 import { GameProvider } from '../context/GameContext';
 import Head from 'next/head';
 
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }) {
         <Footer />
         <CookieBanner />
         <RequestModal />
+        <KeyboardHelp />
       </div>
     </GameProvider>
   );

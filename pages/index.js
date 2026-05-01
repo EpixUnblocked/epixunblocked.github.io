@@ -5,6 +5,7 @@ import { useGameContext } from '../context/GameContext';
 import { useEffect, useMemo, useState } from 'react';
 import HomeBanner from '../components/HomeBanner';
 import GridToolbar from '../components/GridToolbar';
+import ResumeBanner from '../components/ResumeBanner';
 
 const PRIORITY_TAGS = ['featured', 'new', 'popular'];
 const POPULAR_TAGS = new Set(['popular', 'featured']);
@@ -84,6 +85,7 @@ export default function Home() {
 
   return (
     <>
+      {isUnfiltered && <ResumeBanner />}
       {isUnfiltered && <HomeBanner />}
       <GridToolbar />
       <div className={styles.grid}>
