@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
         <Head>
           <title>Epix</title>
           <link rel="icon" href="/favicon.ico" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta property="og:title" content="Epix Unblocked" />
           <meta property="og:description" content="Epix Unblocked games has a wide range of games that bypasses your school or workplace internet restrictions and hides itself once you exit the tab." />
           <meta property="og:url" content="https://epixunblocked.github.io/" />

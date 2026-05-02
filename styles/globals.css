@@ -44,9 +44,6 @@ html {
   background-size: 4px 4px, auto, auto;
   background-attachment: fixed;
   background-repeat: repeat, no-repeat, no-repeat;
-  /* Moved off <body> so position: sticky works on iOS Safari. The grain
-     overlay is fixed so it can't trigger horizontal scroll. */
-  overflow-x: clip;
 }
 
 body {
@@ -59,6 +56,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   position: relative;
+  overflow-x: hidden;
 }
 
 /* CRT scanlines overlay — subtle */

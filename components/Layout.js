@@ -116,7 +116,6 @@ export default function Layout({ children }) {
       <TabCloak />
       <PanicMode />
 
-      <div className={styles.safeAreaTop} aria-hidden="true" />
       <div className={styles.shell}>
         {/* === MAIN HEADER === */}
         <div className={styles.header}>
