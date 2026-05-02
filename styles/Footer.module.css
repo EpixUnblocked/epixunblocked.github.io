@@ -146,13 +146,16 @@
   .brand { align-items: center; }
 
   .links { justify-self: stretch; flex-direction: column; }
+  .linkButton { display: block; width: 100%; text-align: center; }
   .links > span,
-  .links > a > span {
+  .links > a > span,
+  .links > button > span {
     border-right: none;
     border-bottom: 2px solid var(--paper);
     display: block;
   }
   .links > a:last-child > span,
+  .links > button:last-child > span,
   .links > span:last-child {
     border-bottom: none;
   }

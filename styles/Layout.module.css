@@ -6,6 +6,10 @@
   z-index: 90;
   background: var(--ink);
   border-bottom: 3px solid var(--paper);
+  /* Push content below the iOS dynamic island / notch when the page is
+     rendered with viewport-fit=cover. The shell's black background fills
+     the inset area so it reads as one continuous bar. */
+  padding-top: env(safe-area-inset-top);
 }
 
 /* === TICKER TAPE === */
