@@ -123,6 +123,19 @@ function formatEntry({ title, slug, description, tags }) {
   return `  {\n${lines.join(',\n')},\n  },`;
 }
 
+function appendGenres(newGenres) {
+  if (!newGenres.length) return;
+  const text = fs.readFileSync(TAGS_FILE, 'utf8');
+  const re = /export const GENRES\s*=\s*\[([\s\S]*?)\];/;
+  const m = text.match(re);
+  if (!m) throw new Error('could not locate GENRES array in data/tags.js');
+  const current = [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
+  const merged = [...new Set([...current, ...newGenres])].sort();
+  const body = merged.map((g) => `  '${g}',`).join('\n');
+  const next = text.replace(re, `export const GENRES = [\n${body}\n];`);
+  fs.writeFileSync(TAGS_FILE, next, 'utf8');
+}
+
 function appendEntry(text, entry) {
   const start = text.indexOf('const rawGames = [');
   if (start < 0) throw new Error('could not locate rawGames in data/games.js');
@@ -185,8 +198,16 @@ async function main() {
     .filter((t) => t !== 'new'); // 'new' badge is auto-injected
 
   const unknown = tags.filter((t) => !SUGGESTED_TAGS.includes(t));
+  let genresToRegister = [];
   if (unknown.length) {
-    console.log(`  note: unknown tags will create new categories — ${unknown.join(', ')}`);
+    console.log(`  note: new tag(s) — ${unknown.join(', ')}`);
+    const interactive = flags.tags === undefined;
+    if (interactive) {
+      const ans = await ask('  add to GENRES in data/tags.js? [Y/n]: ');
+      if (!/^n/i.test(ans)) genresToRegister = unknown;
+    } else {
+      genresToRegister = unknown;
+    }
   }
 
   // 5. thumbnail
@@ -224,6 +245,11 @@ async function main() {
   const entry = formatEntry({ title, slug, description, tags });
   fs.writeFileSync(GAMES_FILE, appendEntry(text, entry), 'utf8');
   console.log(`  ✓ appended entry to data/games.js`);
+
+  if (genresToRegister.length) {
+    appendGenres(genresToRegister);
+    console.log(`  ✓ registered new genre(s) in data/tags.js — ${genresToRegister.join(', ')}`);
+  }
 
   const gen = spawnSync(process.execPath, [GEN_SCRIPT], { stdio: 'inherit' });
   if (gen.status !== 0) {

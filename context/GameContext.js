@@ -1,9 +1,11 @@
 // context/GameContext.js
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import games from '../data/games';
 
 const GameContext = createContext();
 
 const RECENTS_LIMIT = 8;
+const VALID_SLUGS = new Set(games.map((g) => g.slug));
 
 const safeParse = (raw, fallback) => {
   try { return raw ? JSON.parse(raw) : fallback; }
@@ -21,8 +23,11 @@ export function GameProvider({ children }) {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    setFavorites(safeParse(localStorage.getItem('epix:favorites'), []));
-    setRecents(safeParse(localStorage.getItem('epix:recents'), []));
+    // Drop slugs for games that no longer exist so the Continue/Favorites
+    // strips stay tightly packed and don't silently lose entries downstream.
+    const prune = (list) => list.filter((s) => VALID_SLUGS.has(s));
+    setFavorites(prune(safeParse(localStorage.getItem('epix:favorites'), [])));
+    setRecents(prune(safeParse(localStorage.getItem('epix:recents'), [])));
     setSortMode(localStorage.getItem('epix:sortMode') || 'default');
     setCloakKeyState(localStorage.getItem('epix:cloak') || 'drive');
     setHydrated(true);

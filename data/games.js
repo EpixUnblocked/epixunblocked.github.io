@@ -296,6 +296,30 @@ const rawGames = [
     description: "A game about granding and shifting",
     tags: ['arcade'],
   },
+  {
+    title: "Half Life",
+    slug: "halflife",
+    description: "It's half life, a FPS shooter developed by Valve.",
+    tags: ['popular', 'shooter'],
+  },
+  {
+    title: "Hole io",
+    slug: "holeio",
+    description: "Suck everything into your hole!",
+    tags: ['arcade'],
+  },
+  {
+    title: "Idle Football Manager",
+    slug: "idlefootballmanager",
+    description: "Manage your own football club!",
+    tags: ['idle'],
+  },
+  {
+    title: "Indian Truck Simulator",
+    slug: "indiantrucksimulator",
+    description: "Drive trucks in india!",
+    tags: ['driving', 'simulator'],
+  },
 ];
 
 // Build the final games list:

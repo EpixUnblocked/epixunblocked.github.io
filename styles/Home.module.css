@@ -328,11 +328,28 @@
   .cardTitle { font-size: 0.95rem; }
   .cardNumber { font-size: 0.62rem; padding: 3px 6px; }
   .cardTag { font-size: 0.55rem; padding: 2px 5px; }
+  .cardInfo { padding: 12px 12px 10px; }
 }
 
 @media (max-width: 420px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    padding: 14px 12px 40px;
   }
+}
+
+/* On touch devices (no hover), the favorite star is hidden behind a hover
+   state and is unreachable. Make it always visible and big enough to tap. */
+@media (hover: none) {
+  .card:hover { transform: none; box-shadow: none; }
+  .card:hover .cardImage { transform: none; filter: none; }
+  .card:hover .cardInfo { background: var(--paper); }
+  .card:nth-child(5n+3):hover .cardInfo { background: var(--paper); color: var(--ink); }
+  .card:nth-child(5n+3):hover .cardTitle { color: var(--ink); }
+  .card:nth-child(5n+3):hover .cardCta { color: var(--ink); }
+
+  .cardFav { opacity: 1; width: 38px; height: 38px; }
+  /* Kill the staggered rotation jitter — looks cluttered in a 2-col mobile grid. */
+  .card { --rot: 0deg !important; }
 }

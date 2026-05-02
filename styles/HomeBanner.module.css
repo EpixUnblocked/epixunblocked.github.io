@@ -247,9 +247,25 @@
 }
 
 @media (max-width: 720px) {
-  .banner { padding: 18px 20px 4px; }
+  .banner { padding: 18px 20px 4px; gap: 20px; }
   .gotd { grid-template-columns: 1fr; min-height: 0; }
   .gotdImage { aspect-ratio: 16 / 9; }
   .gotdInner { border-left: none; border-top: 3px solid var(--ink); padding: 22px 20px 20px; }
   .stripCard { width: 130px; }
+}
+
+@media (max-width: 420px) {
+  .banner { padding: 14px 12px 2px; gap: 16px; }
+  .gotdInner { padding: 18px 16px 16px; gap: 8px; }
+  .gotdDescription { -webkit-line-clamp: 2; font-size: 0.9rem; }
+  .gotdCta { font-size: 0.72rem; padding: 8px 11px; }
+  .stripCard { width: 116px; }
+  .stripCardTitle { font-size: 0.72rem; padding: 6px 8px; }
+  .stripLabel { font-size: 0.68rem; }
+}
+
+@media (hover: none) {
+  .gotd:hover { transform: none; box-shadow: none; border-color: var(--paper); }
+  .stripCard:hover { transform: none; box-shadow: none; border-color: var(--paper); }
+  .stripCard:hover .stripCardImg { border-bottom-color: var(--paper); }
 }

@@ -114,6 +114,21 @@ body::after {
 
 a { color: inherit; text-decoration: none; }
 
+/* iOS Safari zooms in when an input has font-size < 16px. Per-component
+   styles bump search/text inputs explicitly; this is a safety net. */
+input, textarea, select {
+  font-family: inherit;
+}
+
+@media (max-width: 560px) {
+  input[type='text'],
+  input[type='search'],
+  input[type='email'],
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-track { background: var(--ink); }

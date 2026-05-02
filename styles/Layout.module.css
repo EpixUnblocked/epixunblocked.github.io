@@ -748,4 +748,37 @@
   .stageMark { font-size: 2.2rem; }
   .chatBtnLabel { display: none; }
   .chatBtn { padding: 9px 11px; }
+
+  /* Prevent iOS Safari auto-zoom when focusing the search input. */
+  .search { font-size: 16px; }
+  .searchPrompt { font-size: 0.75rem; padding: 0 10px; }
+
+  /* The double-stacked acid+ink shadow blew the box past the viewport. */
+  .infoBox {
+    margin: 18px auto 28px;
+    padding: 22px 18px 18px;
+    width: calc(100% - 24px);
+    box-shadow: 6px 6px 0 var(--acid), 6px 6px 0 3px var(--ink);
+  }
+  .infoBox::before {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    left: 16px;
+    top: -14px;
+  }
+  .infoBox p { font-size: 0.95rem; line-height: 1.55; }
+  .infoBox li { font-size: 0.9rem; padding: 7px 0 7px 24px; }
+
+  .stage { padding: 16px 18px; gap: 14px; }
+  .stageMetaItem { font-size: 0.65rem; padding: 5px 8px; }
+}
+
+@media (max-width: 380px) {
+  .header { padding: 12px 14px 10px; gap: 10px; }
+  .logo { font-size: 1.55rem; }
+  .logoStamp { font-size: 0.55rem; padding: 2px 5px; transform: rotate(-3deg) translateY(-10px); }
+  .stageMark { font-size: 1.85rem; }
+  .subBar { padding: 0 14px; }
+  .chatBtn { padding: 8px 9px; }
+  .closeButton { padding: 6px 10px; font-size: 0.9rem; }
 }
