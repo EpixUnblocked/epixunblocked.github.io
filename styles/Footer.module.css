@@ -6,6 +6,9 @@
   color: var(--paper);
   border-top: 3px solid var(--paper);
   position: relative;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .footer::before {
@@ -146,14 +149,17 @@
   .brand { align-items: center; }
 
   .links { justify-self: stretch; flex-direction: column; }
+  .links > button { display: block; width: 100%; text-align: center; }
   .links > span,
-  .links > a > span {
+  .links > a > span,
+  .links > button > span {
     border-right: none;
     border-bottom: 2px solid var(--paper);
     display: block;
   }
   .links > a:last-child > span,
-  .links > span:last-child {
+  .links > span:last-child,
+  .links > button:last-child > span {
     border-bottom: none;
   }
   .copyright { text-align: center; }

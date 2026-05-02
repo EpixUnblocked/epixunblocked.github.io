@@ -6,6 +6,11 @@
   z-index: 90;
   background: var(--ink);
   border-bottom: 3px solid var(--paper);
+  /* Fill behind the iOS dynamic island / notch with the bar's own background
+     instead of leaving a gap above the ticker. Pairs with viewport-fit=cover. */
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 /* === TICKER TAPE === */
