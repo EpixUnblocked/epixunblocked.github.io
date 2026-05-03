@@ -1,6 +1,6 @@
 # Epix Unblocked
-**Your Gateway to Unrestricted Internet Gaming**
 [![Deploy](https://github.com/EpixUnblocked/epixunblocked.github.io/actions/workflows/nextjs.yml/badge.svg?branch=main)](https://github.com/EpixUnblocked/epixunblocked.github.io/actions/workflows/nextjs.yml)
+**Your Gateway to Unrestricted Internet Gaming**
 
 A growing platform for accessing your favourite games, free from online restrictions.
 
