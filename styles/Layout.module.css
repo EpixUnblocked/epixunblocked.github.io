@@ -12,21 +12,6 @@
   padding-top: env(safe-area-inset-top);
 }
 
-/* On mobile, lock the shell to the viewport rather than letting it scroll
-   with the page. `position: sticky` interacts poorly with body's
-   `overflow-x: hidden` on iOS Safari (causes drift during the address-bar
-   shrink/expand dance) and can also flicker against the dynamic island.
-   The page wrapper reserves space via --shell-h (set from JS) so content
-   doesn't slide under the bar. */
-@media (max-width: 900px) {
-  .shell {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-}
-
 /* === TICKER TAPE === */
 .ticker {
   background: var(--acid);

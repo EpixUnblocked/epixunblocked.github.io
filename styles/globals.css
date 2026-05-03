@@ -107,16 +107,6 @@ body::after {
   z-index: 1;
 }
 
-/* The shell flips to `position: fixed` on mobile (see Layout.module.css).
-   --shell-h is updated by JS to mirror the shell's live height; this
-   reserves exactly that much space at the top of the document so nothing
-   slides underneath. */
-@media (max-width: 900px) {
-  .page-wrapper {
-    padding-top: var(--shell-h, 0);
-  }
-}
-
 ::selection {
   background: var(--acid);
   color: var(--ink);
