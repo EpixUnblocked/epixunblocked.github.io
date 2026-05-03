@@ -34,6 +34,32 @@ export default function Layout({ children }) {
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMounted, setChatMounted] = useState(false);
   const searchRef = useRef(null);
+  const shellRef = useRef(null);
+
+  // Mirror the shell's height into a CSS variable so mobile (where the shell
+  // is `position: fixed`) can reserve exactly that much top padding on the
+  // page wrapper. Updates on resize and when the shell's content reflows
+  // (e.g. category bar appears/disappears between routes).
+  useEffect(() => {
+    const el = shellRef.current;
+    if (!el) return;
+    const update = () => {
+      document.documentElement.style.setProperty(
+        '--shell-h',
+        `${el.offsetHeight}px`
+      );
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener('resize', update);
+    window.addEventListener('orientationchange', update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', update);
+      window.removeEventListener('orientationchange', update);
+    };
+  }, [isGamePage]);
 
   const openChat = () => {
     setChatMounted(true);
@@ -116,7 +142,7 @@ export default function Layout({ children }) {
       <TabCloak />
       <PanicMode />
 
-      <div className={styles.shell}>
+      <div className={styles.shell} ref={shellRef}>
         {/* === MAIN HEADER === */}
         <div className={styles.header}>
           <div className={styles.logoLockup}>
