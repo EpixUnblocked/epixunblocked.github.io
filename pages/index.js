@@ -1,11 +1,42 @@
 import styles from '../styles/Home.module.css';
 import games from '../data/games';
 import Link from 'next/link';
+import Head from 'next/head';
 import { useGameContext } from '../context/GameContext';
 import { useEffect, useMemo, useState } from 'react';
 import HomeBanner from '../components/HomeBanner';
 import GridToolbar from '../components/GridToolbar';
 import ResumeBanner from '../components/ResumeBanner';
+
+const SITE_URL = 'https://epixunblocked.github.io';
+
+const HOME_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: 'Epix Unblocked',
+      description:
+        'Free unblocked browser games — instant-play, no signup, no ads.',
+      inLanguage: 'en',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${SITE_URL}/?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': `${SITE_URL}/#collection`,
+      url: `${SITE_URL}/`,
+      name: 'Epix Unblocked Games',
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: 'Curated unblocked browser games',
+    },
+  ],
+};
 
 const PRIORITY_TAGS = ['featured', 'new', 'popular'];
 const POPULAR_TAGS = new Set(['popular', 'featured']);
@@ -85,6 +116,13 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <link rel="canonical" href={`${SITE_URL}/`} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(HOME_JSON_LD) }}
+        />
+      </Head>
       {isUnfiltered && <ResumeBanner />}
       {isUnfiltered && <HomeBanner />}
       <GridToolbar />

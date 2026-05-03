@@ -28,7 +28,7 @@ const consentScript = `
 
 export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head>
         {/* Google Analytics 4 — consent-gated via Consent Mode v2 */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />

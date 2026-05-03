@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Custom404() {
   const router = useRouter();
@@ -13,5 +14,10 @@ export default function Custom404() {
     }
   }, [router]);
 
-  return null;
+  return (
+    <Head>
+      <title>404 — Epix Unblocked</title>
+      <meta name="robots" content="noindex, follow" />
+    </Head>
+  );
 }

@@ -8,19 +8,25 @@ import games from '../../data/games';
 import styles from '../../styles/Game.module.css';
 import { useGameContext } from '../../context/GameContext';
 
-export default function Game() {
+const SITE_URL = 'https://epixunblocked.github.io';
+
+export async function getStaticPaths() {
+  return {
+    paths: games.map((g) => ({ params: { slug: g.slug } })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const game = games.find((g) => g.slug === params.slug) || null;
+  return { props: { game } };
+}
+
+export default function Game({ game }) {
   const router = useRouter();
-  const { slug } = router.query;
-  const [game, setGame] = useState(null);
   const iframeRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const { pushRecent, isFavorite, toggleFavorite, hydrated } = useGameContext();
-
-  useEffect(() => {
-    if (!slug) return;
-    const foundGame = games.find((g) => g.slug === slug);
-    setGame(foundGame || null);
-  }, [slug]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && game?.slug) {
@@ -92,10 +98,65 @@ export default function Game() {
 
   const fav = hydrated && isFavorite(game.slug);
 
+  const pageUrl = `${SITE_URL}/games/${game.slug}`;
+  const pageTitle = `Play ${game.title} Unblocked — Epix`;
+  const rawDesc = (game.description || '').trim();
+  const pageDesc = rawDesc
+    ? `${rawDesc} Play ${game.title} free in your browser, no downloads, no signup.`
+    : `Play ${game.title} unblocked free in your browser. Instant load, no signup, no ads.`;
+  const imageUrl = game.thumbnail?.startsWith('http')
+    ? game.thumbnail
+    : `${SITE_URL}${game.thumbnail || `/html/${game.slug}/thumb.png`}`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: game.title,
+    description: pageDesc,
+    url: pageUrl,
+    image: imageUrl,
+    genre: (game.tags || []).filter(
+      (t) => !['featured', 'popular', 'new'].includes(t)
+    ),
+    applicationCategory: 'Game',
+    operatingSystem: 'Web Browser',
+    inLanguage: 'en',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Epix Unblocked',
+      url: SITE_URL,
+    },
+  };
+
   return (
     <>
       <Head>
-        <title>{game.title} | Epix</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+        <link rel="canonical" href={pageUrl} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:site_name" content="Epix Unblocked" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDesc} />
+        <meta name="twitter:image" content={imageUrl} />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </Head>
 
       <div className={styles.container}>

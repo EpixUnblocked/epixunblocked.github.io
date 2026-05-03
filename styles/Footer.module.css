@@ -99,6 +99,7 @@
 }
 
 .links a:hover span,
+.links button:hover span,
 .links > span:hover {
   background: var(--acid);
   color: var(--ink);

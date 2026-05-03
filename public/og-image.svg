@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Epix Unblocked">
+  <title>Epix Unblocked Games</title>
+
+  <defs>
+    <!-- Each letter is a single closed path so the ink outline traces only
+         the outer silhouette (and inner hole for P). -->
+    <path id="OG-E" d="M0,0 H190 V40 H40 V80 H150 V120 H40 V160 H190 V200 H0 Z"/>
+    <path id="OG-P" d="M0,0 H190 V120 H40 V200 H0 Z M40,40 H150 V80 H40 Z" fill-rule="evenodd"/>
+    <path id="OG-I" d="M0,0 H100 V40 H70 V160 H100 V200 H0 V160 H30 V40 H0 Z"/>
+    <path id="OG-X" d="M0,0 H38 L95,60 L152,0 H190 V40 L133,100 L190,160 V200 H152 L95,140 L38,200 H0 V160 L57,100 L0,40 Z"/>
+
+    <!-- E(190) + 40gap + P(190) + 40gap + I(100) + 40gap + X(190) = 790 -->
+    <g id="OG-wordmark">
+      <use href="#OG-E" x="0"/>
+      <use href="#OG-P" x="230"/>
+      <use href="#OG-I" x="460"/>
+      <use href="#OG-X" x="600"/>
+    </g>
+
+    <radialGradient id="og-glow-y" cx="80%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#ffe600" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffe600" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="og-glow-r" cx="0%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="#ff2d55" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ff2d55" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="og-dots" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#f5f1e5" opacity="0.05"/>
+    </pattern>
+    <pattern id="og-scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="3" height="1" fill="#000" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <!-- ink background w/ halftone + glows -->
+  <rect width="1200" height="630" fill="#0a0a09"/>
+  <rect width="1200" height="630" fill="url(#og-glow-y)"/>
+  <rect width="1200" height="630" fill="url(#og-glow-r)"/>
+  <rect width="1200" height="630" fill="url(#og-dots)"/>
+
+  <!-- striped tape borders top/bottom -->
+  <g>
+    <rect x="0" y="0" width="1200" height="10" fill="#ffe600"/>
+    <rect x="0" y="0" width="1200" height="6" fill="#0a0a09"/>
+    <rect x="0" y="0" width="1200" height="3" fill="#ff2d55"/>
+    <rect x="0" y="620" width="1200" height="10" fill="#ffe600"/>
+    <rect x="0" y="624" width="1200" height="6" fill="#0a0a09"/>
+    <rect x="0" y="627" width="1200" height="3" fill="#ff2d55"/>
+  </g>
+
+  <!-- "UNBLOCKED" banner ABOVE the wordmark, tilted, centered -->
+  <g transform="rotate(-5 600 120)">
+    <rect x="450" y="92" width="300" height="56" fill="#ffe600" stroke="#0a0a09" stroke-width="4"/>
+    <text x="600" y="130" text-anchor="middle"
+          font-family="'DM Mono','Courier New',monospace"
+          font-size="26" font-weight="700"
+          fill="#0a0a09" letter-spacing="6">UNBLOCKED</text>
+  </g>
+
+  <!-- main wordmark, centered horizontally: (1200-790)/2 = 205 -->
+  <g transform="translate(205 190)">
+    <use href="#OG-wordmark" fill="#ff2d55" transform="translate(14 14)"/>
+    <use href="#OG-wordmark"
+         fill="#ffe600"
+         stroke="#0a0a09"
+         stroke-width="8"
+         stroke-linejoin="miter"
+         paint-order="stroke fill"/>
+  </g>
+
+  <!-- tagline, centered -->
+  <g transform="translate(600 470)">
+    <text text-anchor="middle" y="0"
+          font-family="'Archivo Black','Archivo',sans-serif"
+          font-size="40" font-weight="900"
+          fill="#f5f1e5" letter-spacing="-0.5">FREE BROWSER GAMES.</text>
+    <text text-anchor="middle" y="42"
+          font-family="'DM Mono','Courier New',monospace"
+          font-size="18" font-weight="500"
+          fill="#c8c4ba" letter-spacing="4">NO SIGNUP // NO ADS // INSTANT-PLAY</text>
+  </g>
+
+  <!-- centered URL stamp at bottom -->
+  <g transform="translate(600 580)">
+    <rect x="-170" y="-22" width="340" height="36" fill="#0a0a09" stroke="#ffe600" stroke-width="3"/>
+    <text x="0" y="3" text-anchor="middle"
+          font-family="'DM Mono','Courier New',monospace"
+          font-size="16" font-weight="700"
+          fill="#ffe600" letter-spacing="3">epixunblocked.github.io</text>
+  </g>
+
+  <!-- scanlines overlay -->
+  <rect width="1200" height="630" fill="url(#og-scan)"/>
+</svg>

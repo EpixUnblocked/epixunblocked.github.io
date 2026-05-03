@@ -44,6 +44,8 @@ export default function TermsOfService() {
       fileLabel="TERMS-001"
       lastUpdated="2026-04-30"
       sections={sections}
+      canonicalPath="/terms"
+      description="Epix Unblocked terms of service — acceptable use, intellectual property, and disclaimers for the games hosted on the site."
     />
   );
 }

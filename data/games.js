@@ -138,19 +138,19 @@ const rawGames = [
     title: 'Stickman Hook',
     slug: 'stickmanhook',
     description: 'Swing to the finish line.',
-    tags: ['featured', 'arcade'],
+    tags: ['arcade'],
   },
   {
     title: 'Jetpack Joyride',
     slug: 'jetpack',
     description: 'Pls play me.',
-    tags: ['featured', 'runner'],
+    tags: ['runner'],
   },
   {
     title: 'Level Devil',
     slug: 'leveldevil',
     description: 'Try not to rage.',
-    tags: ['featured', 'puzzle'],
+    tags: ['puzzle'],
   },
   {
     title: 'Subway Surfers: Tokyo',
@@ -180,7 +180,7 @@ const rawGames = [
     title: 'Super Mario Kart',
     slug: 'mariokart',
     description: 'Join multiple races!',
-    tags: ['featured', 'driving'],
+    tags: ['driving'],
   },
   {
     title: 'Steal a Brainrot',
@@ -204,7 +204,7 @@ const rawGames = [
     title: 'Friday Night Funkin',
     slug: 'fnf',
     description: 'A rhythm game.',
-    tags: ['popular', 'arcade'],
+    tags: ['popular', 'arcade', 'rhythm'],
   },
   {
     title: 'Baldi\'s Basics',
@@ -216,7 +216,7 @@ const rawGames = [
     title: 'Five Nights at Epsteins',
     slug: 'fnae',
     description: 'Survive the nights on Little Saint James.',
-    tags: ['featured', 'popular', 'horror'],
+    tags: ['popular', 'horror'],
   },
   {
     title: 'Bridge Race',
@@ -252,7 +252,7 @@ const rawGames = [
     title: 'Pokemon Emerald',
     slug: 'pokemonemerald',
     description: 'Play in trainer battles and upgrade your pokemon!',
-    tags: ['popular', 'simulator'],
+    tags: ['simulator'],
   },
   {
     title: 'GachaVerse',
@@ -276,7 +276,7 @@ const rawGames = [
     title: 'Granny',
     slug: 'granny',
     description: 'Survive Grannys house',
-    tags: ['horror', 'popular'],
+    tags: ['featured', 'horror', 'popular'],
   },
   {
     title: 'Slope',
@@ -288,7 +288,7 @@ const rawGames = [
     title: 'Slither.io',
     slug: 'slitherio',
     description: 'Eat pellets, grow big, and avoid other snakes in this addictive multiplayer game.',
-    tags: ['popular', 'arcade'],
+    tags: ['featured', 'popular', 'arcade'],
   },
   {
     title: "Grand Shift Auto",
@@ -300,7 +300,7 @@ const rawGames = [
     title: "Half Life",
     slug: "halflife",
     description: "It's half life, a FPS shooter developed by Valve.",
-    tags: ['popular', 'shooter'],
+    tags: ['featured', 'popular', 'shooter'],
   },
   {
     title: "Hole io",
@@ -319,6 +319,30 @@ const rawGames = [
     slug: "indiantrucksimulator",
     description: "Drive trucks in india!",
     tags: ['driving', 'simulator'],
+  },
+  {
+    title: "Minecraft",
+    slug: "minecraft",
+    description: "Its a block game with endless possibilities",
+    tags: ['featured', 'popular', 'arcade'],
+  },
+  {
+    title: "Osu",
+    slug: "osu",
+    description: "Test your ability to tap, slide, hold and spin to the beat in this rhythm game!",
+    tags: ['rhythm'],
+  },
+  {
+    title: "OvO 2",
+    slug: "ovo2",
+    description: "The classic platformer v2!",
+    tags: ['platformer'],
+  },
+  {
+    title: "Buckshot Roulette",
+    slug: "buckshotroulette",
+    description: "A game about buckshot roulette.",
+    tags: ['featured', 'popular', 'shooter'],
   },
 ];
 

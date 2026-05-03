@@ -15,6 +15,7 @@ export const GENRES = [
   'idle',
   'platformer',
   'puzzle',
+  'rhythm',
   'runner',
   'shooter',
   'simulator',

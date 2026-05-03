@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npm run gen:thumbnails && next dev",
-    "build": "npm run gen:thumbnails && next build",
+    "dev": "npm run gen && next dev",
+    "build": "npm run gen && next build",
     "start": "next start",
     "new:game": "node scripts/new-game.js",
-    "gen:thumbnails": "node scripts/generate-thumbnail-map.js"
+    "gen": "npm run gen:thumbnails && npm run gen:sitemap",
+    "gen:thumbnails": "node scripts/generate-thumbnail-map.js",
+    "gen:sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "next": "13.5.11",

@@ -41,6 +41,8 @@ export default function PrivacyPolicy() {
       fileLabel="POLICY-001"
       lastUpdated="2026-04-30"
       sections={sections}
+      canonicalPath="/privacy"
+      description="Epix Unblocked privacy policy — what data we collect (almost none), how cookies and local storage are used, and your choices."
     />
   );
 }

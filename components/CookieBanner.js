@@ -17,33 +17,52 @@ function applyConsent(state) {
 }
 
 export default function CookieBanner() {
+  // mode: 'first' = bottom-left consent card (initial visit)
+  //       'manage' = centered modal triggered by footer "Cookies" button
+  const [mode, setMode] = useState('first');
   const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [current, setCurrent] = useState(null); // 'granted' | 'denied' | null
 
-  // First mount: show only if no choice has been made yet.
+  // First mount: show consent card only if no choice has been made yet.
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved !== 'granted' && saved !== 'denied') {
-        setVisible(true);
-      } else {
-        // Ensure GA gets the saved choice this session too.
+      if (saved === 'granted' || saved === 'denied') {
+        setCurrent(saved);
         applyConsent(saved);
+      } else {
+        setMode('first');
+        setVisible(true);
       }
     } catch {
+      setMode('first');
       setVisible(true);
     }
   }, []);
 
-  // Allow other UI (footer link) to re-open the banner.
+  // Footer "Cookies" button → open the manage modal.
   useEffect(() => {
     const open = () => {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        setCurrent(saved === 'granted' || saved === 'denied' ? saved : null);
+      } catch {}
       setClosing(false);
+      setMode('manage');
       setVisible(true);
     };
     window.addEventListener('epix:manage-cookies', open);
     return () => window.removeEventListener('epix:manage-cookies', open);
   }, []);
+
+  // Esc closes the manage modal.
+  useEffect(() => {
+    if (!visible || mode !== 'manage') return;
+    const onKey = (e) => { if (e.key === 'Escape') dismiss(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [visible, mode]);
 
   const dismiss = () => {
     setClosing(true);
@@ -58,10 +77,86 @@ export default function CookieBanner() {
       localStorage.setItem(STORAGE_KEY, state);
     } catch {}
     applyConsent(state);
+    setCurrent(state);
     dismiss();
   };
 
   if (!visible) return null;
+
+  if (mode === 'manage') {
+    return (
+      <>
+        <div
+          className={`${styles.backdrop} ${closing ? styles.backdropClosing : ''}`}
+          onClick={dismiss}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.modal} ${closing ? styles.modalClosing : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Manage cookies"
+        >
+          <div className={styles.modalHeader}>
+            <span className={styles.stamp}>// MANAGE</span>
+            <button
+              type="button"
+              className={styles.closeBtn}
+              onClick={dismiss}
+              aria-label="Close"
+            >×</button>
+          </div>
+
+          <div className={styles.body}>
+            <h3 className={styles.title}>
+              Cookie <em>preferences.</em>
+            </h3>
+
+            <div className={styles.statusRow}>
+              <span className={styles.statusLabel}>Current</span>
+              <span
+                className={`${styles.statusValue} ${
+                  current === 'granted' ? styles.statusGranted :
+                  current === 'denied' ? styles.statusDenied :
+                  styles.statusUnset
+                }`}
+              >
+                {current === 'granted' ? 'ALLOWED'
+                  : current === 'denied' ? 'DECLINED'
+                  : 'NOT SET'}
+              </span>
+            </div>
+
+            <p className={styles.text}>
+              Analytics cookies (Google Analytics) help us see how Epix is used.
+              No ads, no profile sales. Switch your choice anytime — it takes
+              effect on the next page load. See our{' '}
+              <Link href="/privacy" className={styles.link}>Privacy Policy</Link>.
+            </p>
+
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnAllow} ${current === 'granted' ? styles.btnActive : ''}`}
+                onClick={() => choose('granted')}
+                disabled={current === 'granted'}
+              >
+                {current === 'granted' ? '✓ ALLOWED' : 'ALLOW'}
+              </button>
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnDecline} ${current === 'denied' ? styles.btnActive : ''}`}
+                onClick={() => choose('denied')}
+                disabled={current === 'denied'}
+              >
+                {current === 'denied' ? '✓ DECLINED' : 'DECLINE'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div

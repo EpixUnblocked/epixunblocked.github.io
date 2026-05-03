@@ -12,11 +12,23 @@ export default function LegalPage({
   fileLabel,
   lastUpdated,
   sections,
+  description,
+  canonicalPath,
 }) {
+  const SITE_URL = 'https://epixunblocked.github.io';
+  const canonical = canonicalPath ? `${SITE_URL}${canonicalPath}` : undefined;
+  const desc =
+    description ||
+    `${docTitle} for Epix Unblocked — last updated ${lastUpdated}.`;
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="description" content={desc} />
+        {canonical && <link rel="canonical" href={canonical} />}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={desc} />
+        {canonical && <meta property="og:url" content={canonical} />}
       </Head>
 
       <div className={styles.shell}>

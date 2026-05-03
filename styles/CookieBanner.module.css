@@ -152,3 +152,175 @@
   .title { font-size: 1.2rem; }
   .text { font-size: 0.88rem; }
 }
+
+/* === MANAGE MODAL (footer-triggered) === */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 9, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  animation: backdropIn 0.22s ease forwards;
+}
+
+.backdropClosing {
+  animation: backdropOut 0.22s ease forwards;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes backdropOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 201;
+  width: min(460px, calc(100vw - 32px));
+  background: var(--paper);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--acid), 10px 10px 0 4px var(--ink);
+  padding: 22px 22px 20px;
+  font-family: var(--font-body);
+  animation: modalIn 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+.modalClosing {
+  animation: modalOut 0.22s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes modalOut {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to   { opacity: 0; transform: translate(-50%, -52%) scale(0.97); }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.modal .stamp {
+  position: static;
+  background: var(--hot);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  align-self: flex-start;
+}
+
+.closeBtn {
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.closeBtn:hover {
+  background: var(--hot);
+  color: var(--paper);
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px dashed var(--ink);
+  padding: 10px 14px;
+  margin-top: 4px;
+}
+
+.statusLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.statusValue {
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+}
+
+.statusGranted {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.statusDenied {
+  background: var(--ink);
+  color: var(--hot);
+  border-color: var(--hot);
+}
+
+.statusUnset {
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.btnActive {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.btnActive:hover {
+  transform: none;
+}
+
+.btnAllow.btnActive {
+  background: var(--acid);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btnDecline.btnActive {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--hot);
+}
+
+.btn:disabled {
+  cursor: default;
+}
+
+@media (max-width: 520px) {
+  .modal {
+    padding: 18px 16px 16px;
+    box-shadow: 6px 6px 0 var(--acid), 6px 6px 0 3px var(--ink);
+  }
+  .modal .title { font-size: 1.2rem; }
+  .modal .text { font-size: 0.88rem; }
+  .statusRow { flex-wrap: wrap; gap: 8px; padding: 9px 12px; }
+}
