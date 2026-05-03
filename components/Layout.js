@@ -250,6 +250,11 @@ export default function Layout({ children }) {
         )}
       </div>
 
+      {/* Mobile-only ghost that reserves the shell's footprint in the
+          document flow (the real shell is `position: fixed` on mobile).
+          Empty/invisible; height is mirrored from the live shell via JS. */}
+      <div className={styles.shellSpacer} aria-hidden="true" />
+
       <main className={styles.main}>
         {/* === STAGE BANNER === */}
         {!isGamePage && !showInfo && (

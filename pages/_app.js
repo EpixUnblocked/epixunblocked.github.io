@@ -7,6 +7,7 @@ import RequestModal from '../components/RequestModal';
 import KeyboardHelp from '../components/KeyboardHelp';
 import { GameProvider } from '../context/GameContext';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 const SITE_URL = 'https://epixunblocked.github.io';
 const SITE_NAME = 'Epix Unblocked';
@@ -16,6 +17,15 @@ const DEFAULT_DESCRIPTION =
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export default function App({ Component, pageProps }) {
+  // Register the service worker once, in production only. Localhost dev
+  // should not cache aggressively — that just frustrates iteration.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!('serviceWorker' in navigator)) return;
+    if (process.env.NODE_ENV !== 'production') return;
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }, []);
+
   return (
     <GameProvider>
       <div className="page-wrapper">
@@ -25,10 +35,11 @@ export default function App({ Component, pageProps }) {
           {/* Favicon stack:
               - .ico: catch-all for older browsers / RSS readers / GitHub previews
               - SVG: modern browsers; scales crisp from 16px to OS app-icon size
-              No apple-touch-icon yet — iOS doesn't render SVG touch icons; drop
-              a 180x180 PNG at /apple-touch-icon.png to enable the iOS home-screen icon. */}
+              - PNG: fallback for clients that prefer raster (and iOS touch icon) */}
           <link rel="icon" href="/favicon.ico" sizes="32x32" />
           <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+          <link rel="icon" type="image/png" sizes="256x256" href="/logo.png" />
+          <link rel="apple-touch-icon" href="/logo.png" />
           <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
           <meta name="theme-color" content="#0a0a09" />
           <meta name="robots" content="index, follow, max-image-preview:large" />

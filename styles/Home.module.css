@@ -81,6 +81,13 @@
   border-color: var(--acid);
 }
 
+.card:focus-visible {
+  outline: none;
+  transform: translate(-4px, -4px) rotate(0deg);
+  box-shadow: 8px 8px 0 var(--hot);
+  border-color: var(--hot);
+}
+
 .card:nth-child(5n+3):hover {
   box-shadow: 8px 8px 0 var(--hot);
   border-color: var(--hot);

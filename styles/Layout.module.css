@@ -12,18 +12,30 @@
   padding-top: env(safe-area-inset-top);
 }
 
+/* Sibling ghost that reserves the shell's footprint in document flow on
+   mobile (the real shell is `position: fixed`). Hidden on desktop. */
+.shellSpacer {
+  display: none;
+}
+
 /* On mobile, lock the shell to the viewport rather than letting it scroll
    with the page. `position: sticky` interacts poorly with body's
    `overflow-x: hidden` on iOS Safari (causes drift during the address-bar
    shrink/expand dance) and can also flicker against the dynamic island.
-   The page wrapper reserves space via --shell-h (set from JS) so content
-   doesn't slide under the bar. */
+   The shellSpacer above takes the place of the shell in flow.
+
+   The fallback height (200px) covers the SSR / pre-hydration paint so
+   content never paints under the shell even before --shell-h is set. */
 @media (max-width: 900px) {
   .shell {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+  }
+  .shellSpacer {
+    display: block;
+    height: var(--shell-h, 200px);
   }
 }
 

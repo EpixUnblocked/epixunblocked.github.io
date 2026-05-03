@@ -22,11 +22,25 @@ export async function getStaticProps({ params }) {
   return { props: { game } };
 }
 
+function formatPlaytime(s) {
+  if (!s || s < 60) return `${s || 0}s`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m} min`;
+  return `${Math.floor(m / 60)}h ${m % 60} min`;
+}
+
 export default function Game({ game }) {
   const router = useRouter();
   const iframeRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const { pushRecent, isFavorite, toggleFavorite, hydrated } = useGameContext();
+  const {
+    pushRecent,
+    isFavorite,
+    toggleFavorite,
+    hydrated,
+    addPlaytime,
+    getPlaytime,
+  } = useGameContext();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && game?.slug) {
@@ -40,6 +54,50 @@ export default function Game({ game }) {
       pushRecent(game.slug);
     }
   }, [hydrated, game?.slug, pushRecent]);
+
+  // Playtime tracker — counts seconds while the tab is visible. Buffers
+  // increments in a ref so we don't re-render every second; flushes to
+  // context every 5s and on cleanup.
+  const playtimeBuffer = useRef(0);
+  const addPlaytimeRef = useRef(addPlaytime);
+  addPlaytimeRef.current = addPlaytime;
+  useEffect(() => {
+    if (!hydrated || !game?.slug) return;
+    const slug = game.slug;
+    let last = Date.now();
+    const flush = () => {
+      if (playtimeBuffer.current > 0) {
+        addPlaytimeRef.current(slug, playtimeBuffer.current);
+        playtimeBuffer.current = 0;
+      }
+    };
+    const tick = () => {
+      if (document.hidden) {
+        last = Date.now();
+        return;
+      }
+      const now = Date.now();
+      const delta = Math.floor((now - last) / 1000);
+      if (delta >= 1) {
+        playtimeBuffer.current += delta;
+        last = now;
+        if (playtimeBuffer.current >= 5) flush();
+      }
+    };
+    const id = setInterval(tick, 1000);
+    const onVis = () => {
+      if (document.hidden) flush();
+      else last = Date.now();
+    };
+    document.addEventListener('visibilitychange', onVis);
+    window.addEventListener('pagehide', flush);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVis);
+      window.removeEventListener('pagehide', flush);
+      flush();
+    };
+  }, [hydrated, game?.slug]);
 
   useEffect(() => {
     const handleChange = () => {
@@ -177,6 +235,9 @@ export default function Game({ game }) {
             </button>
             <span className={styles.gameMeta}>
               <strong>NOW PLAYING</strong> // {game.tags?.[0] || 'arcade'}
+              {hydrated && getPlaytime(game.slug) > 0 && (
+                <> // <strong>{formatPlaytime(getPlaytime(game.slug))}</strong></>
+              )}
             </span>
           </div>
         </div>

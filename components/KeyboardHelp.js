@@ -7,6 +7,7 @@ import styles from '../styles/KeyboardHelp.module.css';
 
 const SHORTCUTS = [
   { keys: ['/'], desc: 'Focus the search bar' },
+  { keys: ['↑', '↓', '←', '→'], desc: 'Navigate the game grid (Enter to launch)' },
   { keys: ['R'], desc: 'Jump to a random game' },
   { keys: ['F'], desc: 'Toggle fullscreen (on a game page)' },
   { keys: ['`'], desc: 'Panic — redirect to your selected cloak' },
