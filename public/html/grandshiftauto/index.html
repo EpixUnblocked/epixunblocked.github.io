@@ -1,0 +1,48 @@
+ <!DOCTYPE html>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+<html lang="en-us">
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/gts/">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | Toasterball</title>
+     <script>
+      window.fileMergerConfig = {
+        files: [
+          { name: 'isl.data.unityweb', parts: 4 },
+        ],
+        basePath: 'Build/',
+        debug: true
+      };  
+      </script>
+    <script src="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/merge.js"></script>
+  <script src="Build/UnityLoader6.js"></script>
+  <script>
+    var gameInstance = UnityLoader.instantiate("gameContainer", "Build/isl.json");
+  </script>
+  <style>
+    body {
+      background-color: #5525a5;
+      width: 960px;
+      height: 540px;
+      overflow: hidden;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="gameContainer" style="width: 100vw; height: 105vh; margin: auto"></div>
+</body>
+
+</html>

@@ -2,141 +2,387 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPIX // CHAT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Archivo+Black&family=Archivo:wght@500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-color: #2c2f33;
-    color: #ddd;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  :root {
+    --ink: #0a0a09;
+    --ink-2: #13130f;
+    --ink-3: #1c1c17;
+    --acid: #ffe600;
+    --acid-dim: #c8b300;
+    --hot: #ff2d55;
+    --paper: #f5f1e5;
+    --paper-dim: #c8c4ba;
+    --muted: #6b675e;
+    --line: #2a2823;
+    --font-display: 'Bungee Inline', 'Archivo Black', sans-serif;
+    --font-headline: 'Archivo Black', 'Archivo', sans-serif;
+    --font-body: 'Archivo', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'Courier New', monospace;
+    --halftone: radial-gradient(circle at 1px 1px, rgba(245, 241, 229, 0.05) 1px, transparent 0);
   }
 
-  h2 {
-    text-align: center;
-    color: #fff;
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  html {
+    background-color: var(--ink);
+    background-image:
+      var(--halftone),
+      radial-gradient(1200px 600px at 80% -10%, rgba(255, 230, 0, 0.06), transparent 60%),
+      radial-gradient(900px 500px at 0% 110%, rgba(255, 45, 85, 0.05), transparent 60%);
+    background-size: 4px 4px, auto, auto;
+    background-attachment: fixed;
+    background-repeat: repeat, no-repeat, no-repeat;
+  }
+
+  body {
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    overflow-x: hidden;
+    padding: 32px 20px 60px;
+  }
+
+  /* CRT scanlines */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+      rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.18) 3px, rgba(0,0,0,0.18) 3px);
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: multiply;
+    opacity: 0.35;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    animation: grainShift 1.2s steps(4) infinite;
+  }
+  @keyframes grainShift {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-3%, 2%); }
+    50%  { transform: translate(2%, -2%); }
+    75%  { transform: translate(-2%, -3%); }
+    100% { transform: translate(0, 0); }
+  }
+
+  ::selection { background: var(--acid); color: var(--ink); }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--acid); border: 3px solid var(--ink); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--hot); }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 3px solid var(--paper);
+    background: var(--ink-2);
+    padding: 8px 14px;
+    margin-bottom: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--paper-dim);
+  }
+  .topbar .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--hot);
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 1.4s ease-in-out infinite;
+    vertical-align: middle;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 0.95;
+    margin: 0 0 6px;
+    color: var(--acid);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-shadow: 4px 4px 0 var(--ink), 4px 4px 0 1px var(--hot);
+  }
+  .subtitle {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--paper-dim);
+    margin-bottom: 28px;
+    border-left: 4px solid var(--acid);
+    padding-left: 10px;
+  }
+
+  .panel {
+    border: 3px solid var(--paper);
+    background: var(--ink-2);
+    box-shadow: 6px 6px 0 var(--acid);
+    margin-bottom: 26px;
+  }
+  .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 6px 12px;
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 13px;
+  }
+  .panel-head .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    background: var(--ink);
+    color: var(--acid);
+    padding: 2px 6px;
+    letter-spacing: 0.15em;
   }
 
   iframe {
     width: 100%;
-    height: 300px;
+    height: 480px;
     border: none;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    display: block;
+    background: var(--paper);
   }
 
   #feed {
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 10px;
-    max-height: 500px;
+    max-height: 560px;
     overflow-y: auto;
-    background-color: #23272a;
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+  }
+  #feed:empty::before,
+  #feed.loading::before {
+    content: 'LOADING TRANSMISSION…';
+    font-family: var(--font-mono);
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    padding: 20px;
   }
 
   .message {
     display: flex;
     align-items: flex-start;
-    padding: 8px 12px;
-    border-radius: 10px;
+    padding: 10px 12px;
+    border: 2px solid var(--line);
+    background: var(--ink-3);
     word-break: break-word;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.25s ease;
+    transition: border-color 0.15s ease, transform 0.15s ease;
   }
-
-  .message:nth-child(odd) {
-    background-color: #2c2f33;
-  }
-  .message:nth-child(even) {
-    background-color: #3a3f45;
+  .message:hover {
+    border-color: var(--acid);
+    transform: translate(-1px, -1px);
   }
 
   .pfp {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
     object-fit: cover;
-    margin-right: 10px;
-    border: 2px solid #555;
+    margin-right: 12px;
+    border: 2px solid var(--paper);
+    background: var(--ink);
+    flex-shrink: 0;
+    filter: contrast(1.05) saturate(0.9);
   }
 
-  .content {
+  .content { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+
+  .meta {
     display: flex;
-    flex-direction: column;
-  }
-
-  .username {
-    font-weight: bold;
-    color: #7289da;
-  }
-
-  .timestamp {
-    font-size: 0.75em;
-    color: #999;
+    align-items: baseline;
+    gap: 10px;
     margin-bottom: 4px;
+    flex-wrap: wrap;
   }
-
+  .username {
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--acid);
+    font-size: 14px;
+  }
+  .timestamp {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
   .text {
-    font-size: 1em;
-    color: #eee;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--paper);
+    line-height: 1.4;
+  }
+  .text img {
+    max-width: 240px;
+    max-height: 240px;
+    display: block;
+    margin-top: 8px;
+    border: 2px solid var(--paper);
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  #loadMore {
-    margin-top: 10px;
-    background-color: #7289da;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   #typing {
-    font-style: italic;
-    color: #aaa;
-    margin-top: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--paper-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    min-height: 14px;
+  }
+  #typing.error { color: var(--hot); }
+
+  .btn {
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 13px;
+    background: var(--acid);
+    color: var(--ink);
+    border: 3px solid var(--paper);
+    padding: 10px 18px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  }
+  .btn:hover {
+    background: var(--hot);
+    color: var(--paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+    body::before, body::after { display: none; }
   }
 </style>
 </head>
 <body>
 
-<h2>Epix Chat</h2>
+<div class="wrap">
 
-<!-- Google Form Embed -->
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true"></iframe>
+  <!-- <div class="topbar">
+    <span><span class="dot"></span>LIVE // PIRATE BROADCAST</span>
+    <span>CH.07 // EPIX-CHAT</span>
+  </div> -->
 
-<h3>Hosted By MsgNowNet</h3>
-<div id="feed">Loading messages…</div>
-<div id="typing"></div>
-<button id="loadMore">Load More Messages</button>
+  <h1>EPIX CHAT</h1>
+  <div class="subtitle">UNFILTERED &nbsp;//&nbsp; HOSTED BY MSGNOWNET</div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <span>&gt; SEND TRANSMISSION</span>
+      <span class="tag">FORM</span>
+    </div>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true"></iframe>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <span>&gt; INCOMING FEED</span>
+      <span class="tag" id="feedTag">…</span>
+    </div>
+    <div id="feed" class="loading"></div>
+  </div>
+
+  <div class="controls">
+    <div id="typing"></div>
+    <button id="loadMore" class="btn">Load More ↓</button>
+  </div>
+
+</div>
 
 <script>
 const feedDiv = document.getElementById('feed');
 const typingDiv = document.getElementById('typing');
 const loadMoreBtn = document.getElementById('loadMore');
+const feedTag = document.getElementById('feedTag');
 const csvUrl = "https://script.google.com/macros/s/AKfycbxQiP4z80woDPKMfhP_gW-jNygnbB-shDk1WJlgHYabMCFtCO_lLKhOP-H6ZsEjlSA1/exec";
 
 let allMessages = [];
-let messagesToShow = 10; // initial number of messages
+let messagesToShow = 10;
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 function renderMessages() {
+  feedDiv.classList.remove('loading');
   feedDiv.innerHTML = '';
-  // Show last N messages, newest first
   const messages = allMessages.slice(-messagesToShow).reverse();
 
   messages.forEach(msgObj => {
-    // Skip messages where username is "del"
     if ((msgObj.username || "").toLowerCase() === "del") return;
 
     const messageEl = document.createElement('div');
@@ -145,9 +391,14 @@ function renderMessages() {
     const pfpImg = document.createElement('img');
     pfpImg.className = 'pfp';
     pfpImg.src = msgObj.pfp || 'https://i.imgur.com/5QfJ5mL.png';
+    pfpImg.alt = '';
+    pfpImg.onerror = () => { pfpImg.src = 'https://i.imgur.com/5QfJ5mL.png'; };
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'content';
+
+    const metaDiv = document.createElement('div');
+    metaDiv.className = 'meta';
 
     const usernameSpan = document.createElement('span');
     usernameSpan.className = 'username';
@@ -156,20 +407,20 @@ function renderMessages() {
     const timestampSpan = document.createElement('span');
     timestampSpan.className = 'timestamp';
     const dt = new Date(msgObj.timestamp);
-    timestampSpan.textContent = dt.toLocaleString();
+    timestampSpan.textContent = isNaN(dt) ? '' : dt.toLocaleString();
+
+    metaDiv.appendChild(usernameSpan);
+    metaDiv.appendChild(timestampSpan);
 
     const textSpan = document.createElement('span');
     textSpan.className = 'text';
-    let text = msgObj.message || "";
-    // Emoji replacement
+    let text = escapeHtml(msgObj.message || "");
     text = text.replace(/:smile:/g, "😄").replace(/:laugh:/g, "😆");
-    // GIF / Image embedding
-    const gifRegex = /(https?:\/\/\S+\.(?:gif|webp|png|jpg))/gi;
-    text = text.replace(gifRegex, url => `<img src="${url}" style="max-width:200px; max-height:200px; display:block; margin-top:5px;">`);
+    const gifRegex = /(https?:\/\/\S+\.(?:gif|webp|png|jpg|jpeg))/gi;
+    text = text.replace(gifRegex, url => `<img src="${url}" alt="">`);
     textSpan.innerHTML = text;
 
-    contentDiv.appendChild(usernameSpan);
-    contentDiv.appendChild(timestampSpan);
+    contentDiv.appendChild(metaDiv);
     contentDiv.appendChild(textSpan);
 
     messageEl.appendChild(pfpImg);
@@ -177,31 +428,29 @@ function renderMessages() {
     feedDiv.appendChild(messageEl);
   });
 
-  // Scroll to top for newest messages
   feedDiv.scrollTop = 0;
+  feedTag.textContent = String(allMessages.length).padStart(3, '0') + ' MSG';
 }
 
 async function fetchMessages() {
   try {
-    typingDiv.textContent = "Fetching messages…";
     const res = await fetch(csvUrl);
     const data = await res.json();
     allMessages = data;
     renderMessages();
-    typingDiv.textContent = "";
+    typingDiv.classList.remove('error');
+    typingDiv.textContent = "// SYNCED";
+    setTimeout(() => { if (!typingDiv.classList.contains('error')) typingDiv.textContent = ""; }, 800);
   } catch (err) {
     console.error(err);
-    typingDiv.textContent = "Error loading messages.";
+    typingDiv.classList.add('error');
+    typingDiv.textContent = "// SIGNAL LOST";
   }
 }
 
-// Initial fetch
 fetchMessages();
-
-// Refresh every 4 seconds
 setInterval(fetchMessages, 4000);
 
-// Load more messages
 loadMoreBtn.addEventListener('click', () => {
   messagesToShow += 10;
   renderMessages();

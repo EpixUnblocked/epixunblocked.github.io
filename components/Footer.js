@@ -1,21 +1,59 @@
-// components/Footer.js
+// components/Footer.js — END OF BROADCAST
 
 import styles from '../styles/Footer.module.css';
 import Link from 'next/link';
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <div className={styles.links}>
-          <Link href="/terms"><span>Terms of Service</span></Link>
-          <Link href="/privacy"><span>Privacy Policy</span></Link>
-          <a href="https://github.com/EpixUnblocked/epixunblocked.github.io" target="_blank" rel="noopener noreferrer">
-            <span>GitHub</span>
-          </a>
+        <div className={styles.brand}>
+          <span className={styles.brandMark}>EPIX</span>
+          <span className={styles.brandTag}>
+            Unblocked games <em>//</em> Ad free
+          </span>
         </div>
-        <p className={styles.copyright}>© {new Date().getFullYear()} Epix. All rights reserved.</p>
+
+        <nav className={styles.links}>
+          <Link href="/terms"><span>Terms</span></Link>
+          <Link href="/privacy"><span>Privacy</span></Link>
+          <button
+            type="button"
+            className={styles.linkButton}
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent('epix:manage-cookies'))
+            }
+          >
+            <span>Cookies</span>
+          </button>
+          <button
+            type="button"
+            className={styles.linkButton}
+            onClick={() =>
+              window.dispatchEvent(new CustomEvent('epix:open-request'))
+            }
+          >
+            <span>Request</span>
+          </button>
+          <a
+            href="https://github.com/EpixUnblocked/epixunblocked.github.io"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Source</span>
+          </a>
+        </nav>
+
+        <p className={styles.copyright}>
+          <em>© {year} EPIX</em> &nbsp; All rights reserved
+        </p>
       </div>
+
+      <p className={styles.signoff}>
+        // <strong>END OF BROADCAST</strong> //
+      </p>
     </footer>
   );
 }

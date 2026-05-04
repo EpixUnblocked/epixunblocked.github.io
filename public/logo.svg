@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Epix">
+  <title>Epix</title>
+
+  <defs>
+    <pattern id="dots" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.6" fill="#f5f1e5" opacity="0.05"/>
+    </pattern>
+    <!-- Single closed path so the ink outline traces the E silhouette only. -->
+    <path id="e-glyph" d="M0,0 H160 V32 H32 V64 H128 V96 H32 V128 H160 V160 H0 Z"/>
+  </defs>
+
+  <!-- ink tile -->
+  <rect width="256" height="256" fill="#0a0a09"/>
+  <rect width="256" height="256" fill="url(#dots)"/>
+
+  <!-- paper border frame -->
+  <rect x="6" y="6" width="244" height="244" fill="none" stroke="#f5f1e5" stroke-width="3"/>
+
+  <!-- E: hot-pink offset shadow then acid main with ink outline -->
+  <g transform="translate(48 48)">
+    <use href="#e-glyph" fill="#ff2d55" transform="translate(8 8)"/>
+    <use href="#e-glyph"
+         fill="#ffe600"
+         stroke="#0a0a09"
+         stroke-width="6"
+         stroke-linejoin="miter"
+         paint-order="stroke fill"/>
+  </g>
+
+  <!-- thin scanlines -->
+  <g opacity="0.18">
+    <line x1="0" y1="64"  x2="256" y2="64"  stroke="#000" stroke-width="1"/>
+    <line x1="0" y1="128" x2="256" y2="128" stroke="#000" stroke-width="1"/>
+    <line x1="0" y1="192" x2="256" y2="192" stroke="#000" stroke-width="1"/>
+  </g>
+</svg>

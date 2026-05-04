@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" role="img" aria-label="Epix">
+  <title>Epix</title>
+
+  <defs>
+    <!-- Each letter is a single closed path (with a hole for P) so the ink
+         outline traces only the outer silhouette, not internal seams. -->
+    <path id="L-E" d="M0,0 H150 V32 H32 V64 H120 V96 H32 V128 H150 V160 H0 Z"/>
+    <path id="L-P" d="M0,0 H150 V96 H32 V160 H0 Z M32,32 H118 V64 H32 Z" fill-rule="evenodd"/>
+    <path id="L-I" d="M0,0 H80 V32 H56 V128 H80 V160 H0 V128 H24 V32 H0 Z"/>
+    <path id="L-X" d="M0,0 H38 L75,42 L112,0 H150 V32 L108,80 L150,128 V160 H112 L75,118 L38,160 H0 V128 L42,80 L0,32 Z"/>
+
+    <!-- E (150) + 34 gap + P (150) + 34 gap + I (80) + 40 gap + X (150) = 638 -->
+    <g id="wordmark">
+      <use href="#L-E" x="0"/>
+      <use href="#L-P" x="184"/>
+      <use href="#L-I" x="368"/>
+      <use href="#L-X" x="488"/>
+    </g>
+  </defs>
+
+  <!-- "UNBLOCKED" stamp as a banner ABOVE the wordmark, tilted -->
+  <g transform="rotate(-5 380 28)">
+    <rect x="295" y="10" width="170" height="36" fill="#ffe600" stroke="#0a0a09" stroke-width="3"/>
+    <text x="380" y="35" text-anchor="middle"
+          font-family="'DM Mono','Courier New',monospace"
+          font-size="16" font-weight="700"
+          fill="#0a0a09" letter-spacing="3">UNBLOCKED</text>
+  </g>
+
+  <!-- wordmark: hot-pink offset shadow, then acid fill with ink outline -->
+  <g transform="translate(61 90)">
+    <use href="#wordmark" fill="#ff2d55" transform="translate(10 10)"/>
+    <use href="#wordmark"
+         fill="#ffe600"
+         stroke="#0a0a09"
+         stroke-width="6"
+         stroke-linejoin="miter"
+         paint-order="stroke fill"/>
+  </g>
+</svg>

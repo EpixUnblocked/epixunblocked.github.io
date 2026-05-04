@@ -1,0 +1,89 @@
+/* ResumeBanner — thin "last played" strip above the home banner */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 32px 0;
+  padding: 10px 14px;
+  background: var(--ink-2);
+  border: 2px solid var(--paper);
+  color: var(--paper);
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--hot);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  opacity: 0;
+  animation: resumeIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.05) 80ms forwards;
+}
+
+@keyframes resumeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bar:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--hot);
+  background: var(--ink);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hot);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.thumb {
+  width: 38px;
+  height: 38px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ink);
+  border: 2px solid var(--paper);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--paper);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.cta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acid);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ctaArrow {
+  transition: transform 0.18s ease;
+}
+
+.bar:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 560px) {
+  .bar { margin: 16px 18px 0; padding: 9px 12px; gap: 10px; }
+  .thumb { width: 32px; height: 32px; }
+  .title { font-size: 0.85rem; }
+  .cta { font-size: 0.66rem; }
+}
