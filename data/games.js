@@ -344,6 +344,20 @@ const rawGames = [
     description: "A game about buckshot roulette.",
     tags: ['featured', 'popular', 'shooter'],
   },
+  {
+    title: 'Knife Hit!',
+    slug: 'knifehit',
+    description: 'Fun knife throwing game!',
+    thumbnail: `${basePath}/html/knifehit/knifehit.webp`,
+    tags: ['simulator'],
+  },
+  {
+    title: 'Poly Strike 3D',
+    slug: 'polystrike',
+    description: 'Epic soccer game made by william K!',
+    thumbnail: `${basePath}/html/polystrike/polystrike.png`,
+    tags: ['simulator'],
+  },
 ];
 
 // Build the final games list:
