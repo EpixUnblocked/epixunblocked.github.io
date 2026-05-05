@@ -1,21 +1,65 @@
-<!-- games/flappy.html -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Police Chase Drifter</title>
-  <style>
-    body {
-      background-color: #111;
-      color: white;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Police Chase Drifter</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
-   <iframe sandbox="allow-scripts allow-same-origin" scrolling="no"  frameborder="0" src="https://www.onlinegames.io/games/2021/3/police-chase-drifter/index.html" style="border-radius: 1%; height: 720px; width: 1080px;"></iframe>
+
+<div id="c2canvasdiv">
+    <canvas id="c2canvas" width="854" height="480"></canvas>
+</div>
+
+<!-- REQUIRED FILES -->
+<script src="jquery-3.4.1.min.js"></script>
+<script src="pathfind.js"></script>
+<script src="c2runtime.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+        cr_createRuntime("c2canvas");
+    });
+</script>
+
+<script>
+  /* Keep the game from blocking on ads */
+  window.adRunning = 0;
+  window.adRunningRewarded = 0;
+  window.adReward = 1;   // treat rewards as granted
+  window.rewardError = 0;
+  window.canReward = 1;
+
+  /* No-op the common entry points */
+  window.ExternEval = function(){};
+  window.ExternEvalResumeGame = function(){};
+  window.ShowRewarded = function(){};
+  window.PreloadRewarded = function(){};
+  window.RewardedReady = function(){ window.canReward = 1; };
+  window.RewardedSuccess = function(){ window.adReward = 1; };
+  window.RewardedFail = function(){};
+
+  /* Fake a loader object so calls don’t throw */
+  window.preroll = { config: { loaderObjectName: "fakeAdLoader" } };
+  window.fakeAdLoader = {
+    refetchAd: (cb)=>{ if (cb) cb(); },
+    showRewardAd: ()=>{},
+    registerRewardCallbacks: ()=>{}
+  };
+</script>
+
 </body>
 </html>
