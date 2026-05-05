@@ -51,6 +51,7 @@ const thumbnails = {
   'slitherio': '/html/slitherio/thumb.png',
   'slope3': '/html/slope3/thumb.png',
   'soccerrandom': '/html/soccerrandom/thumb.png',
+  'stationsaturn': '/html/stationsaturn/images-2.jpeg',
   'stealbrainrot': '/html/stealbrainrot/thumb.png',
   'stickmanhook': '/html/stickmanhook/thumb.png',
   'subwaysurf': '/html/subwaysurf/thumb.png',
