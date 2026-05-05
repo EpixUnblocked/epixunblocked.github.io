@@ -20,6 +20,7 @@ export const GENRES = [
   'shooter',
   'simulator',
   'sport',
+  'unity',
 ];
 
 export const ALL_SUGGESTED_TAGS = [...BADGES, ...GENRES];

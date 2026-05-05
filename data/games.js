@@ -368,7 +368,7 @@ const rawGames = [
     title: "Journey Up",
     slug: "journeyup",
     description: "Journey Up Zone 1",
-    tags: ['sport'],
+    tags: ['featured', 'sport', 'unity'],
   },
 ];
 
