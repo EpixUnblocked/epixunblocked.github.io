@@ -2,6 +2,7 @@
 // Run `npm run gen:thumbnails` to refresh.
 
 const thumbnails = {
+  'adanceoffireandice': '/html/adanceoffireandice/thumb.jpeg',
   'airlineidle': '/html/airlineidle/thumb.png',
   'backrooms': '/html/backrooms/Backrooms_1.png',
   'baldibasic': '/html/baldibasic/thumb.png',
@@ -31,6 +32,7 @@ const thumbnails = {
   'idlemining': '/html/idlemining/thumb.png',
   'indiantrucksimulator': '/html/indiantrucksimulator/thumb.jpg',
   'jetpack': '/html/jetpack/thumb.png',
+  'knifehit': '/html/knifehit/knifehit.webp',
   'leveldevil': '/html/leveldevil/thumb.png',
   'mariokart': '/html/mariokart/thumb.png',
   'minecraft': '/html/minecraft/thumb.webp',
@@ -41,6 +43,7 @@ const thumbnails = {
   'ovo2': '/html/ovo2/thumb.jpg',
   'pokemonemerald': '/html/pokemonemerald/thumb.png',
   'policechasedrift': '/html/policechasedrift/thumb.png',
+  'polystrike': '/html/polystrike/polystrike.png',
   'polytrack': '/html/polytrack/thumb.png',
   'rooftopsnipers': '/html/rooftopsnipers/thumb.png',
   'run3': '/html/run3/thumb.png',

@@ -358,6 +358,12 @@ const rawGames = [
     thumbnail: `${basePath}/html/polystrike/polystrike.png`,
     tags: ['simulator'],
   },
+  {
+    title: "A Dance of Fire and Ice",
+    slug: "adanceoffireandice",
+    description: "A rhythm game about clicking in the right timing",
+    tags: ['rhythm'],
+  },
 ];
 
 // Build the final games list:
