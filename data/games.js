@@ -364,6 +364,12 @@ const rawGames = [
     description: "A rhythm game about clicking in the right timing",
     tags: ['rhythm'],
   },
+  {
+    title: "Journey Up",
+    slug: "journeyup",
+    description: "Journey Up Zone 1",
+    tags: ['sport'],
+  },
 ];
 
 // Build the final games list:

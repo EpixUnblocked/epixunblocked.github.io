@@ -32,6 +32,7 @@ const thumbnails = {
   'idlemining': '/html/idlemining/thumb.png',
   'indiantrucksimulator': '/html/indiantrucksimulator/thumb.jpg',
   'jetpack': '/html/jetpack/thumb.png',
+  'journeyup': '/html/journeyup/header.png',
   'knifehit': '/html/knifehit/knifehit.webp',
   'leveldevil': '/html/leveldevil/thumb.png',
   'mariokart': '/html/mariokart/thumb.png',
