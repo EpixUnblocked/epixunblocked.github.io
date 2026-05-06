@@ -147,6 +147,63 @@
     padding: 2px 6px;
     letter-spacing: 0.15em;
   }
+  .panel-head-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .head-toggle {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    border: 2px solid var(--ink);
+    color: var(--acid);
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: background 0.1s ease, color 0.1s ease;
+  }
+  .head-toggle:hover { background: var(--acid); color: var(--ink); }
+  .head-toggle[aria-expanded="true"] { background: var(--acid); color: var(--ink); }
+
+  /* === HELP PANEL === */
+  .help-panel {
+    border-bottom: 2px solid var(--line);
+    background: var(--ink-3);
+    padding: 14px 16px 16px;
+    animation: helpExpand 0.2s ease;
+  }
+  @keyframes helpExpand {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .help-grid {
+    display: grid;
+    grid-template-columns: minmax(120px, max-content) 1fr;
+    column-gap: 18px;
+    row-gap: 8px;
+    margin: 0;
+  }
+  .help-grid dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--acid);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .help-grid dd {
+    margin: 0;
+    align-self: center;
+  }
+  .help-grid dd .text { font-size: 13px; line-height: 1.4; }
+  .help-grid .help-desc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--paper-dim);
+    letter-spacing: 0.05em;
+  }
 
   /* === IDENTITY STATUS === */
   .identity-bar {
@@ -404,12 +461,16 @@
   <div class="panel">
     <div class="panel-head">
       <span>&gt; SEND TRANSMISSION</span>
-      <span class="tag">FORM</span>
+      <div class="panel-head-right">
+        <button id="helpToggle" type="button" class="head-toggle" aria-expanded="false">// FORMATTING ⌄</button>
+        <span class="tag">FORM</span>
+      </div>
     </div>
     <div id="identityBar" class="identity-bar unset">
       <span class="id-key">// YOU ARE:</span>
       <span class="id-value" id="identityValue">not set — post once to identify</span>
     </div>
+    <div id="helpPanel" class="help-panel" hidden></div>
     <iframe id="formFrame" src="https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true"></iframe>
   </div>
 
@@ -445,6 +506,8 @@ const searchIn     = document.getElementById('searchInput');
 const formFrame    = document.getElementById('formFrame');
 const identityBar  = document.getElementById('identityBar');
 const identityVal  = document.getElementById('identityValue');
+const helpToggle   = document.getElementById('helpToggle');
+const helpPanel    = document.getElementById('helpPanel');
 
 const csvUrl = "https://script.google.com/macros/s/AKfycbxQiP4z80woDPKMfhP_gW-jNygnbB-shDk1WJlgHYabMCFtCO_lLKhOP-H6ZsEjlSA1/exec";
 
@@ -903,6 +966,52 @@ formFrame.addEventListener('load', () => {
       refreshFormPrefill();
     }
   }
+});
+
+// === FORMATTING HELP PANEL ===
+// Live-rendered cheatsheet — each example runs through the same
+// processMessage pipeline as real messages, so additions/changes to the
+// renderer show up here automatically.
+const HELP_KEY = 'epix-chat:help';
+function getHelpRows() {
+  const me = getMyName();
+  return [
+    { label: '**bold**',    example: '**bold**' },
+    { label: '*italic*',    example: '*italic*' },
+    { label: '`code`',      example: '`code`' },
+    { label: '~~strike~~',  example: '~~strike~~' },
+    { label: '/me <text>',  example: '/me waves at the chat' },
+    { label: '/shrug',      example: 'idk /shrug' },
+    { label: '/flip',       example: 'best of three? /flip' },
+    { label: '@user',       example: '@' + (me || 'friend') + ' check this' },
+    { label: ':emoji:',     example: ':smile: :fire: :eyes: :laugh:' },
+    { label: '<image URL>', description: '.png · .jpg · .gif · .webp auto-embed' },
+  ];
+}
+function buildHelp() {
+  const fake = { timestamp: 'help', username: '__help__' };
+  const rows = getHelpRows().map((row) => {
+    const dt = '<dt>' + escapeHtml(row.label) + '</dt>';
+    if (row.description) {
+      return dt + '<dd class="help-desc">' + escapeHtml(row.description) + '</dd>';
+    }
+    const p = processMessage(row.example, fake);
+    const cls = 'text' + (p.isAction ? ' action' : '');
+    return dt + '<dd><span class="' + cls + '">' + p.html + '</span></dd>';
+  });
+  helpPanel.innerHTML = '<dl class="help-grid">' + rows.join('') + '</dl>';
+}
+function applyHelpState(open) {
+  helpPanel.hidden = !open;
+  helpToggle.textContent = '// FORMATTING ' + (open ? '⌃' : '⌄');
+  helpToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open) buildHelp();
+}
+applyHelpState(getSetting(HELP_KEY, '0') === '1');
+helpToggle.addEventListener('click', () => {
+  const next = helpPanel.hidden;
+  setSetting(HELP_KEY, next ? '1' : '0');
+  applyHelpState(next);
 });
 
 // Boot: if we already know the user, reload the iframe with prefill.
