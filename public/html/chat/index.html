@@ -163,6 +163,8 @@
     padding: 3px 8px;
     cursor: pointer;
     transition: background 0.1s ease, color 0.1s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .head-toggle:hover { background: var(--acid); color: var(--ink); }
   .head-toggle[aria-expanded="true"] { background: var(--acid); color: var(--ink); }
@@ -1003,7 +1005,7 @@ function buildHelp() {
 }
 function applyHelpState(open) {
   helpPanel.hidden = !open;
-  helpToggle.textContent = '// FORMATTING';
+  helpToggle.textContent = '// FORMATTING ' + (open ? '⌃' : '⌄');
   helpToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   if (open) buildHelp();
 }
