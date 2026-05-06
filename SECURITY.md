@@ -16,7 +16,7 @@ If you find a security issue with Epix — such as XSS vulnerabilities, unsafe i
 **Do not open a public GitHub issue for security vulnerabilities.**
 
 Instead, report it privately via GitHub's built-in security advisory tool:
-[github.com/zimogus/epixunblocked/security/advisories/new](https://github.com/epixunblocked/epixunblocked.github.io/security/advisories/new)
+[github.com/epixunblocked/epixunblocked.github.io/security/advisories/new](https://github.com/epixunblocked/epixunblocked.github.io/security/advisories/new)
 
 ### What to include
 
