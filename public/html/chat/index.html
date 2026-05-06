@@ -480,7 +480,11 @@ const ACTIVE_POLL_MS = 2000;
 const IDLE_POLL_MS   = 30000;
 const REL_REFRESH_MS = 30000;
 const CACHE_LIMIT    = 50;
-const FALLBACK_PFP   = '/logo.png'; // used when a message has no pfp or the URL fails
+// Relative path so the same file works whether it's loaded as
+//   /html/chat/index.html (production / Next dev / Live Server in /public)
+//   /public/html/chat/index.html (Live Server from the project root)
+// In every case `../../logo.png` resolves to wherever the logo actually lives.
+const FALLBACK_PFP   = '../../logo.png';
 
 // === SETTINGS ===
 const KEYS = {
