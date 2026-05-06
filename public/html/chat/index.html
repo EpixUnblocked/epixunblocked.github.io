@@ -19,6 +19,9 @@
     --paper-dim: #c8c4ba;
     --muted: #6b675e;
     --line: #2a2823;
+    --cyan: #7df0ff;
+    --lime: #9eff5b;
+    --lavender: #c69dff;
     --font-display: 'Bungee Inline', 'Archivo Black', sans-serif;
     --font-headline: 'Archivo Black', 'Archivo', sans-serif;
     --font-body: 'Archivo', system-ui, sans-serif;
@@ -28,11 +31,7 @@
 
   * { box-sizing: border-box; }
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-  }
+  html, body { margin: 0; padding: 0; min-height: 100%; }
 
   html {
     background-color: var(--ink);
@@ -56,7 +55,6 @@
     padding: 32px 20px 60px;
   }
 
-  /* CRT scanlines */
   body::before {
     content: '';
     position: fixed;
@@ -99,34 +97,6 @@
     margin: 0 auto;
     position: relative;
     z-index: 1;
-  }
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 3px solid var(--paper);
-    background: var(--ink-2);
-    padding: 8px 14px;
-    margin-bottom: 18px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--paper-dim);
-  }
-  .topbar .dot {
-    display: inline-block;
-    width: 10px; height: 10px;
-    background: var(--hot);
-    border-radius: 50%;
-    margin-right: 8px;
-    animation: pulse 1.4s ease-in-out infinite;
-    vertical-align: middle;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
   }
 
   h1 {
@@ -178,6 +148,23 @@
     letter-spacing: 0.15em;
   }
 
+  /* === IDENTITY STATUS === */
+  .identity-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--line);
+    background: var(--ink-3);
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .identity-bar .id-key { color: var(--acid); margin-right: 8px; }
+  .identity-bar .id-value { color: var(--paper); }
+  .identity-bar.unset .id-value { color: var(--muted); font-style: italic; }
+
   iframe {
     width: 100%;
     height: 480px;
@@ -186,6 +173,27 @@
     background: var(--paper);
   }
 
+  /* === FEED CONTROLS === */
+  .feed-controls {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 2px solid var(--line);
+    background: var(--ink-3);
+  }
+  #searchInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    caret-color: var(--acid);
+  }
+  #searchInput::placeholder { color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* === FEED === */
   #feed {
     max-height: 560px;
     overflow-y: auto;
@@ -203,6 +211,36 @@
     font-size: 12px;
     padding: 20px;
   }
+  #feed.empty::before {
+    content: '// NO TRANSMISSIONS // FREQUENCY QUIET';
+    font-family: var(--font-mono);
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    padding: 28px;
+    text-align: center;
+  }
+  #feed.no-results::after {
+    content: '// NO MATCH ON FREQUENCY';
+    font-family: var(--font-mono);
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .divider {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 10px 4px 4px;
+    border-top: 2px dashed var(--line);
+    margin-top: 4px;
+  }
+  .divider:first-child { border-top: none; margin-top: 0; padding-top: 4px; }
 
   .message {
     display: flex;
@@ -266,6 +304,39 @@
     margin-top: 8px;
     border: 2px solid var(--paper);
   }
+  .text code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--ink);
+    border: 1px solid var(--acid);
+    color: var(--acid);
+    padding: 1px 6px;
+  }
+  .text strong { font-weight: 900; color: var(--paper); }
+  .text em { font-style: italic; }
+  .text s { color: var(--muted); }
+  .text.action {
+    font-style: italic;
+    color: var(--paper-dim);
+  }
+  .text.action::before {
+    content: '* ';
+    color: var(--hot);
+    font-weight: 700;
+  }
+
+  .mention {
+    background: var(--ink);
+    color: var(--acid);
+    padding: 0 4px;
+    border: 1px solid var(--acid);
+    font-weight: 700;
+  }
+  .mention.self {
+    background: var(--acid);
+    color: var(--ink);
+    border-color: var(--ink);
+  }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(4px); }
@@ -327,11 +398,6 @@
 
 <div class="wrap">
 
-  <!-- <div class="topbar">
-    <span><span class="dot"></span>LIVE // PIRATE BROADCAST</span>
-    <span>CH.07 // EPIX-CHAT</span>
-  </div> -->
-
   <h1>EPIX CHAT</h1>
   <div class="subtitle">UNFILTERED &nbsp;//&nbsp; HOSTED BY MSGNOWNET</div>
 
@@ -340,13 +406,20 @@
       <span>&gt; SEND TRANSMISSION</span>
       <span class="tag">FORM</span>
     </div>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true"></iframe>
+    <div id="identityBar" class="identity-bar unset">
+      <span class="id-key">// YOU ARE:</span>
+      <span class="id-value" id="identityValue">not set — post once to identify</span>
+    </div>
+    <iframe id="formFrame" src="https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true"></iframe>
   </div>
 
   <div class="panel">
     <div class="panel-head">
       <span>&gt; INCOMING FEED</span>
       <span class="tag" id="feedTag">…</span>
+    </div>
+    <div class="feed-controls">
+      <input id="searchInput" type="search" autocomplete="off" placeholder="> filter // type to narrow…">
     </div>
     <div id="feed" class="loading"></div>
   </div>
@@ -359,40 +432,286 @@
 </div>
 
 <script>
-const feedDiv = document.getElementById('feed');
-const typingDiv = document.getElementById('typing');
-const loadMoreBtn = document.getElementById('loadMore');
-const feedTag = document.getElementById('feedTag');
+// ============================================================
+// EPIX CHAT — client-side feature layer
+// ============================================================
+
+// === ELEMENTS ===
+const feedDiv      = document.getElementById('feed');
+const typingDiv    = document.getElementById('typing');
+const loadMoreBtn  = document.getElementById('loadMore');
+const feedTag      = document.getElementById('feedTag');
+const searchIn     = document.getElementById('searchInput');
+const formFrame    = document.getElementById('formFrame');
+const identityBar  = document.getElementById('identityBar');
+const identityVal  = document.getElementById('identityValue');
+
 const csvUrl = "https://script.google.com/macros/s/AKfycbxQiP4z80woDPKMfhP_gW-jNygnbB-shDk1WJlgHYabMCFtCO_lLKhOP-H6ZsEjlSA1/exec";
 
-let allMessages = [];
-let messagesToShow = 10;
+// === STATE ===
+let allMessages       = [];
+let messagesToShow    = 10;
+let seenIds           = new Set();
+let isFirstFetch      = true;
+let pollTimer         = null;
+let titleFlashTimer   = null;
+let pendingMentions   = 0;
+let iframeLoadCount   = 0;
+let pendingSubmitTime = 0; // ms; when set, next new message claimed as ours
+let suppressNextLoad  = false; // true when we set iframe.src ourselves
+const SUBMIT_GRACE_MS = 30000; // give up auto-detection after 30s
 
+// Google Form prefill IDs (from "Get pre-filled link" in the form editor).
+const FORM_BASE    = 'https://docs.google.com/forms/d/e/1FAIpQLSfvxNfttwqVLFNqmEorNQXhnvifmEFryaRnZPyTk06hl6OltA/viewform?embedded=true';
+const FORM_USER_ID = 'entry.1008751845';
+const FORM_PFP_ID  = 'entry.751637350';
+function buildFormUrl(name, pfp) {
+  let url = FORM_BASE;
+  if (name) url += '&' + FORM_USER_ID + '=' + encodeURIComponent(name);
+  if (pfp)  url += '&' + FORM_PFP_ID  + '=' + encodeURIComponent(pfp);
+  return url;
+}
+function refreshFormPrefill() {
+  suppressNextLoad = true;
+  formFrame.src = buildFormUrl(getMyName(), getMyPfp());
+}
+
+const ACTIVE_POLL_MS = 2000;
+const IDLE_POLL_MS   = 30000;
+const REL_REFRESH_MS = 30000;
+const CACHE_LIMIT    = 50;
+const FALLBACK_PFP   = '/public/logo.png'; // used when a message has no pfp or the URL fails
+
+// === SETTINGS ===
+const KEYS = {
+  username: 'epix-chat:username',
+  pfp:      'epix-chat:pfp',
+  cache:    'epix-chat:cache',
+};
+function getSetting(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch { return d; } }
+function setSetting(k, v) { try { localStorage.setItem(k, v); } catch {} }
+function getCache() { try { return JSON.parse(localStorage.getItem(KEYS.cache) || '[]'); } catch { return []; } }
+function setCache(arr) {
+  try { localStorage.setItem(KEYS.cache, JSON.stringify(arr.slice(-CACHE_LIMIT))); } catch {}
+}
+function getMyName() { return (getSetting(KEYS.username, '') || '').trim(); }
+function getMyPfp()  { return (getSetting(KEYS.pfp, '') || '').trim(); }
+
+// Single entry-point for both fields so prefill reloads happen at most once
+// per submit. Updates only fields that actually changed; empty pfp doesn't
+// overwrite a saved one (so users without a pfp this time keep their old).
+function setIdentity({ name, pfp }) {
+  const previous = { name: getMyName(), pfp: getMyPfp() };
+  let changed = false;
+
+  const cleanName = (name || '').trim();
+  if (cleanName && cleanName !== previous.name) {
+    setSetting(KEYS.username, cleanName);
+    identityVal.textContent = cleanName;
+    identityBar.classList.remove('unset');
+    changed = true;
+  }
+  const cleanPfp = (pfp || '').trim();
+  if (cleanPfp && cleanPfp !== previous.pfp) {
+    setSetting(KEYS.pfp, cleanPfp);
+    changed = true;
+  }
+  if (changed) refreshFormPrefill();
+}
+
+// Back-compat shim — older call sites still pass just a name string.
+function setMyName(name) { setIdentity({ name }); }
+
+// === HELPERS ===
 function escapeHtml(s) {
   return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// FNV-1a 32-bit, deterministic
+function hashStr(s) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+  }
+  return h >>> 0;
+}
+
+const COLOR_PALETTE = [
+  '#ffe600', '#ff2d55', '#c8c4ba',
+  '#7df0ff', '#9eff5b', '#c69dff',
+];
+function colorForUsername(name) {
+  if (!name) return '#ffe600';
+  return COLOR_PALETTE[hashStr(name.toLowerCase()) % COLOR_PALETTE.length];
+}
+
+function messageId(m) {
+  return 'm-' + hashStr((m.timestamp || '') + '::' + (m.username || '')).toString(36);
+}
+
+function formatRelativeTime(ts) {
+  const dt = new Date(ts);
+  if (isNaN(dt)) return '';
+  const sec = Math.max(0, Math.floor((Date.now() - dt.getTime()) / 1000));
+  if (sec < 60)        return 'JUST NOW';
+  if (sec < 3600)      return Math.floor(sec / 60) + 'm AGO';
+  if (sec < 86400)     return Math.floor(sec / 3600) + 'h AGO';
+  if (sec < 86400 * 7) return Math.floor(sec / 86400) + 'd AGO';
+  return dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+}
+
+function dateKey(ts) {
+  const dt = new Date(ts);
+  if (isNaN(dt)) return null;
+  return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
+}
+function formatDateDivider(ts) {
+  const dt = new Date(ts);
+  if (isNaN(dt)) return '// UNKNOWN';
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const yest  = new Date(today); yest.setDate(yest.getDate() - 1);
+  const target = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+  if (target.getTime() === today.getTime()) return '// TODAY';
+  if (target.getTime() === yest.getTime())  return '// YESTERDAY';
+  return '// ' + dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+}
+
+// === RENDER PIPELINE ===
+function applySlashCommands(text, msg) {
+  text = text.replace(/\/shrug\b/g, '¯\\_(ツ)_/¯');
+  text = text.replace(/\/flip\b/g, () => {
+    const seed = hashStr((msg.timestamp || '') + (msg.username || '') + 'flip');
+    return (seed & 1) ? '🪙 HEADS' : '🪙 TAILS';
+  });
+  return text;
+}
+
+function applyEmoji(text) {
+  return text
+    .replace(/:smile:/g, '😄').replace(/:laugh:/g, '😆')
+    .replace(/:fire:/g,  '🔥').replace(/:eyes:/g,  '👀');
+}
+
+function applyMarkdown(text) {
+  // code → strike → bold → italic
+  text = text.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  text = text.replace(/~~([^~\n]+)~~/g, '<s>$1</s>');
+  text = text.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+  return text;
+}
+
+function applyMentions(text) {
+  const me = getMyName().toLowerCase();
+  return text.replace(/(^|\s)@([a-zA-Z0-9_-]{1,32})\b/g, (full, lead, name) => {
+    const isSelf = me && name.toLowerCase() === me;
+    return lead + '<span class="mention' + (isSelf ? ' self' : '') + '">@' + name + '</span>';
+  });
+}
+
+const IMG_RE = /(https?:\/\/\S+\.(?:gif|webp|png|jpg|jpeg))/gi;
+function embedImages(text) { return text.replace(IMG_RE, (url) => `<img src="${url}" alt="">`); }
+
+function processMessage(raw, msg) {
+  let text = escapeHtml(raw || '');
+  let isAction = false;
+  const meMatch = text.match(/^\s*\/me\s+(.*)$/s);
+  if (meMatch) { text = meMatch[1]; isAction = true; }
+  text = applySlashCommands(text, msg);
+  text = applyEmoji(text);
+  text = applyMarkdown(text);
+  text = applyMentions(text);
+  text = embedImages(text);
+  return { html: text, isAction };
+}
+
+// === RENDER ===
+function shouldShowMessage(msg, query) {
+  if ((msg.username || '').toLowerCase() === 'del') return false;
+  if (query) {
+    const hay = ((msg.username || '') + ' ' + (msg.message || '')).toLowerCase();
+    if (!hay.includes(query)) return false;
+  }
+  return true;
+}
+
+// Capture the topmost visible message + its offset relative to the feed
+// container so we can preserve the user's place across re-renders.
+function captureScrollAnchor() {
+  // <8px from the top counts as "at the top"; we want sync to keep showing
+  // the newest message in that case.
+  if (feedDiv.scrollTop < 8) return { atTop: true };
+  const feedTop = feedDiv.getBoundingClientRect().top;
+  for (const el of feedDiv.querySelectorAll('.message')) {
+    const r = el.getBoundingClientRect();
+    if (r.bottom >= feedTop) {
+      return { id: el.id, offset: r.top - feedTop };
+    }
+  }
+  return { atTop: true };
+}
+function restoreScrollAnchor(anchor) {
+  if (!anchor) return;
+  if (anchor.atTop) { feedDiv.scrollTop = 0; return; }
+  const el = anchor.id && document.getElementById(anchor.id);
+  if (!el) { feedDiv.scrollTop = 0; return; }
+  const newOffset =
+    el.getBoundingClientRect().top - feedDiv.getBoundingClientRect().top;
+  feedDiv.scrollTop += (newOffset - anchor.offset);
 }
 
 function renderMessages() {
-  feedDiv.classList.remove('loading');
-  feedDiv.innerHTML = '';
-  const messages = allMessages.slice(-messagesToShow).reverse();
+  const anchor = captureScrollAnchor();
 
-  messages.forEach(msgObj => {
-    if ((msgObj.username || "").toLowerCase() === "del") return;
+  feedDiv.classList.remove('loading');
+  feedDiv.classList.remove('empty');
+  feedDiv.classList.remove('no-results');
+  feedDiv.innerHTML = '';
+
+  if (allMessages.length === 0) {
+    feedDiv.classList.add('empty');
+    feedTag.textContent = '000 MSG';
+    return;
+  }
+
+  const query = (searchIn.value || '').trim().toLowerCase();
+  // Filter against the FULL history first; the messagesToShow cap only
+  // applies to the "no-query" view. With a query, every match across all
+  // time is visible so search isn't artificially scoped to the loaded slice.
+  let pool = allMessages.filter((m) => shouldShowMessage(m, query));
+  if (!query) pool = pool.slice(-messagesToShow);
+  const slice = pool.slice().reverse();
+  let lastDate = null;
+  let renderedAny = false;
+
+  slice.forEach((msg) => {
+
+    const dk = dateKey(msg.timestamp);
+    if (dk && dk !== lastDate) {
+      const div = document.createElement('div');
+      div.className = 'divider';
+      div.textContent = formatDateDivider(msg.timestamp);
+      feedDiv.appendChild(div);
+      lastDate = dk;
+    }
 
     const messageEl = document.createElement('div');
     messageEl.className = 'message';
+    messageEl.id = messageId(msg);
 
     const pfpImg = document.createElement('img');
     pfpImg.className = 'pfp';
-    pfpImg.src = msgObj.pfp || 'https://i.imgur.com/5QfJ5mL.png';
+    pfpImg.src = msg.pfp || FALLBACK_PFP;
     pfpImg.alt = '';
-    pfpImg.onerror = () => { pfpImg.src = 'https://i.imgur.com/5QfJ5mL.png'; };
+    pfpImg.onerror = function () {
+      // Null the handler first so a broken fallback doesn't loop.
+      this.onerror = null;
+      this.src = FALLBACK_PFP;
+    };
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'content';
@@ -402,59 +721,210 @@ function renderMessages() {
 
     const usernameSpan = document.createElement('span');
     usernameSpan.className = 'username';
-    usernameSpan.textContent = msgObj.username || "Anonymous";
+    usernameSpan.textContent = msg.username || 'Anonymous';
+    usernameSpan.style.color = colorForUsername(msg.username || '');
 
     const timestampSpan = document.createElement('span');
     timestampSpan.className = 'timestamp';
-    const dt = new Date(msgObj.timestamp);
-    timestampSpan.textContent = isNaN(dt) ? '' : dt.toLocaleString();
+    timestampSpan.dataset.ts = msg.timestamp || '';
+    const dt = new Date(msg.timestamp);
+    if (!isNaN(dt)) {
+      timestampSpan.textContent = formatRelativeTime(msg.timestamp);
+      timestampSpan.title = dt.toLocaleString();
+    }
 
     metaDiv.appendChild(usernameSpan);
     metaDiv.appendChild(timestampSpan);
 
     const textSpan = document.createElement('span');
     textSpan.className = 'text';
-    let text = escapeHtml(msgObj.message || "");
-    text = text.replace(/:smile:/g, "😄").replace(/:laugh:/g, "😆");
-    const gifRegex = /(https?:\/\/\S+\.(?:gif|webp|png|jpg|jpeg))/gi;
-    text = text.replace(gifRegex, url => `<img src="${url}" alt="">`);
-    textSpan.innerHTML = text;
+    const processed = processMessage(msg.message || '', msg);
+    if (processed.isAction) textSpan.classList.add('action');
+    textSpan.innerHTML = processed.html;
 
     contentDiv.appendChild(metaDiv);
     contentDiv.appendChild(textSpan);
-
     messageEl.appendChild(pfpImg);
     messageEl.appendChild(contentDiv);
     feedDiv.appendChild(messageEl);
+    renderedAny = true;
   });
 
-  feedDiv.scrollTop = 0;
+  if (!renderedAny && query) feedDiv.classList.add('no-results');
+
+  restoreScrollAnchor(anchor);
   feedTag.textContent = String(allMessages.length).padStart(3, '0') + ' MSG';
 }
 
+// Refresh relative timestamps in place
+setInterval(() => {
+  feedDiv.querySelectorAll('.timestamp').forEach((el) => {
+    const ts = el.dataset.ts;
+    if (ts) el.textContent = formatRelativeTime(ts);
+  });
+}, REL_REFRESH_MS);
+
+// === FETCHING ===
 async function fetchMessages() {
   try {
-    const res = await fetch(csvUrl);
+    const res = await fetch(csvUrl, { cache: 'no-store' });
     const data = await res.json();
-    allMessages = data;
+    allMessages = Array.isArray(data) ? data : [];
+
+    const newOnes = isFirstFetch
+      ? []
+      : allMessages.filter((m) => !seenIds.has(messageId(m)));
+
+    // Auto-detect identity on every submit. If we recently saw the form
+    // iframe reload (post-submit), claim the newest just-arrived message
+    // as ours — both username and pfp follow what was actually submitted.
+    if (pendingSubmitTime && newOnes.length) {
+      const cutoff = pendingSubmitTime - 60000; // 60s slack for clock skew
+      const candidates = newOnes
+        .filter((m) => {
+          const t = new Date(m.timestamp).getTime();
+          return !isNaN(t) && t > cutoff;
+        })
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      if (candidates.length) {
+        const claim = candidates[0];
+        setIdentity({ name: claim.username, pfp: claim.pfp });
+        pendingSubmitTime = 0;
+      }
+    }
+    if (pendingSubmitTime && Date.now() - pendingSubmitTime > SUBMIT_GRACE_MS) {
+      pendingSubmitTime = 0; // gave up
+    }
+
+    // @mention detection — only when identity is known
+    const me = getMyName().toLowerCase();
+    if (me && newOnes.length) {
+      newOnes
+        .filter((m) => (m.username || '').toLowerCase() !== me)
+        .filter((m) => mentionsMe(m.message || '', me))
+        .forEach(() => {
+          pendingMentions += 1;
+          flashTitle();
+        });
+    }
+
+    seenIds = new Set(allMessages.map(messageId));
+    isFirstFetch = false;
+
+    setCache(allMessages);
     renderMessages();
     typingDiv.classList.remove('error');
-    typingDiv.textContent = "// SYNCED";
-    setTimeout(() => { if (!typingDiv.classList.contains('error')) typingDiv.textContent = ""; }, 800);
+    typingDiv.textContent = '// SYNCED';
+    setTimeout(() => {
+      if (!typingDiv.classList.contains('error')) typingDiv.textContent = '';
+    }, 800);
   } catch (err) {
     console.error(err);
     typingDiv.classList.add('error');
-    typingDiv.textContent = "// SIGNAL LOST";
+    typingDiv.textContent = '// SIGNAL LOST';
   }
 }
 
-fetchMessages();
-setInterval(fetchMessages, 4000);
+function mentionsMe(message, meLower) {
+  const safe = meLower.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+  return new RegExp('(?:^|\\s)@' + safe + '\\b', 'i').test(message);
+}
 
+// === ADAPTIVE POLLING ===
+function startPolling() {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(fetchMessages, document.hidden ? IDLE_POLL_MS : ACTIVE_POLL_MS);
+}
+document.addEventListener('visibilitychange', () => {
+  startPolling();
+  if (!document.hidden) {
+    fetchMessages();
+    clearTitleFlash();
+  }
+});
+
+// === @MENTION TITLE FLASH ===
+function flashTitle() {
+  const original = 'EPIX // CHAT';
+  const flash = '(' + pendingMentions + ') NEW @MENTION';
+  if (titleFlashTimer) {
+    document.title = flash;
+    return;
+  }
+  let on = true;
+  document.title = flash;
+  titleFlashTimer = setInterval(() => {
+    document.title = on ? original : flash;
+    on = !on;
+  }, 900);
+  ['keydown', 'click', 'scroll', 'visibilitychange'].forEach((ev) => {
+    window.addEventListener(ev, clearTitleFlash, { once: true, passive: true });
+  });
+}
+function clearTitleFlash() {
+  if (titleFlashTimer) clearInterval(titleFlashTimer);
+  titleFlashTimer = null;
+  pendingMentions = 0;
+  document.title = 'EPIX // CHAT';
+}
+
+// === IDENTITY (auto-detected from form submit) ===
+// Initial paint of stored identity, if any.
+const storedName = getMyName();
+if (storedName) {
+  identityVal.textContent = storedName;
+  identityBar.classList.remove('unset');
+}
+
+// The iframe fires `load` once initially, then again each time it navigates
+// (Google Forms shows a "thank-you" page after submit). We treat the 2nd+
+// load as a submission signal.
+formFrame.addEventListener('load', () => {
+  // Skip programmatic reloads (boot prefill, identity change) so they don't
+  // get mistaken for user submissions.
+  if (suppressNextLoad) {
+    suppressNextLoad = false;
+    return;
+  }
+  iframeLoadCount += 1;
+  // 2nd+ load = post-submit navigation. Always treat it as a submit so the
+  // stored identity follows the user across name changes.
+  if (iframeLoadCount > 1) {
+    pendingSubmitTime = Date.now();
+    fetchMessages(); // catch the new message faster than the normal cadence
+  }
+});
+
+// Boot: if we already know the user, reload the iframe with prefill.
+// First-time visitors stay on the bare form rendered from HTML — saves a
+// load and avoids about:blank / CSP weirdness.
+if (getMyName() || getMyPfp()) {
+  suppressNextLoad = true;
+  formFrame.src = buildFormUrl(getMyName(), getMyPfp());
+}
+
+// === SEARCH ===
+let searchDebounce = null;
+searchIn.addEventListener('input', () => {
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(renderMessages, 80);
+});
+
+// === LOAD MORE ===
 loadMoreBtn.addEventListener('click', () => {
   messagesToShow += 10;
   renderMessages();
 });
+
+// === BOOT: render cache instantly, then fetch ===
+const cached = getCache();
+if (cached.length) {
+  allMessages = cached;
+  seenIds = new Set(cached.map(messageId));
+  // Don't mark as first-fetch baseline yet — the network fetch will set it.
+  renderMessages();
+}
+fetchMessages().then(startPolling);
 </script>
 
 </body>
