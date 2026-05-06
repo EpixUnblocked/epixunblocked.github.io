@@ -891,11 +891,17 @@ formFrame.addEventListener('load', () => {
     return;
   }
   iframeLoadCount += 1;
-  // 2nd+ load = post-submit navigation. Always treat it as a submit so the
-  // stored identity follows the user across name changes.
+  // 2nd+ load = post-submit navigation OR a "Submit another response" click
+  // (Google Forms navigates the iframe to the bare form URL — no prefill).
+  // Treat as submit signal AND re-prefill so the next view starts with our
+  // identity instead of an empty form. Suppress flag prevents the resulting
+  // prefill load from looping back through this branch.
   if (iframeLoadCount > 1) {
     pendingSubmitTime = Date.now();
     fetchMessages(); // catch the new message faster than the normal cadence
+    if (getMyName() || getMyPfp()) {
+      refreshFormPrefill();
+    }
   }
 });
 
