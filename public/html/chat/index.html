@@ -1003,7 +1003,7 @@ function buildHelp() {
 }
 function applyHelpState(open) {
   helpPanel.hidden = !open;
-  helpToggle.textContent = '// FORMATTING ' + (open ? '⌃' : '⌄');
+  helpToggle.textContent = '// FORMATTING';
   helpToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   if (open) buildHelp();
 }
