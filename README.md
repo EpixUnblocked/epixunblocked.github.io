@@ -1,6 +1,6 @@
-# Epix Unblocked
-
 ![Epix Unblocked wordmark](./public/wordmark.svg)
+
+# Epix Unblocked
 
 A curated collection of browser games built with Next.js and designed to be easy to browse, launch, and extend.
 
