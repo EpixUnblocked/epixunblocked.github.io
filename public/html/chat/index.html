@@ -511,7 +511,7 @@ const identityVal  = document.getElementById('identityValue');
 const helpToggle   = document.getElementById('helpToggle');
 const helpPanel    = document.getElementById('helpPanel');
 
-const csvUrl = "https://script.google.com/macros/s/AKfycbxFa9fd3cO8bZ6RIymYaJEdAwyFQSnFLgvvuuV8s2Btfr5zh_AR_ISSHsunARQ-r9OI/exec";
+const csvUrl = "https://script.google.com/macros/s/AKfycbxIc-j-R2Z8eZzwZZ4NcpMGyhk1d72eXVjYeXDj9MN5_blh1Q9PqPRCWak-OF6CdCg5/exec";
 
 // === STATE ===
 let allMessages       = [];
@@ -860,7 +860,11 @@ setInterval(() => {
 // === FETCHING ===
 async function fetchMessages() {
   try {
-    const res = await fetch(csvUrl, { cache: 'no-store' });
+    const res = await fetch(csvUrl, { 
+      cache: 'no-store',
+      mode: 'cors',
+      credentials: 'omit'
+    });
     const data = await res.json();
     allMessages = Array.isArray(data) ? data : [];
 
