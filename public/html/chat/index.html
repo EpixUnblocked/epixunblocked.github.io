@@ -511,7 +511,7 @@ const identityVal  = document.getElementById('identityValue');
 const helpToggle   = document.getElementById('helpToggle');
 const helpPanel    = document.getElementById('helpPanel');
 
-const csvUrl = "https://script.google.com/macros/s/AKfycbxQiP4z80woDPKMfhP_gW-jNygnbB-shDk1WJlgHYabMCFtCO_lLKhOP-H6ZsEjlSA1/exec";
+const csvUrl = "https://script.google.com/macros/s/AKfycbxFa9fd3cO8bZ6RIymYaJEdAwyFQSnFLgvvuuV8s2Btfr5zh_AR_ISSHsunARQ-r9OI/exec";
 
 // === STATE ===
 let allMessages       = [];
@@ -592,6 +592,29 @@ function setIdentity({ name, pfp }) {
 function setMyName(name) { setIdentity({ name }); }
 
 // === HELPERS ===
+// === BANNED WORDS ===========================================
+// Whole-word, case-insensitive. Matches are replaced with asterisks
+// inline so the message is preserved minus the offending word.
+// MIRROR THIS LIST in the Apps Script doGet for true server-side blocking
+// — anyone fetching the JSON endpoint directly bypasses this filter.
+const BANNED_WORDS = [
+  'nigger',
+  'nigga',
+  'goon',
+  'zimo',
+  'pimple',
+  'acne',
+  'cum',
+];
+function _escRe(s) { return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'); }
+const BANNED_RE = BANNED_WORDS.length
+  ? new RegExp('\\b(' + BANNED_WORDS.map(_escRe).join('|') + ')\\b', 'gi')
+  : null;
+function censorText(s) {
+  if (!BANNED_RE || !s) return s;
+  return String(s).replace(BANNED_RE, (m) => '*'.repeat(m.length));
+}
+
 function escapeHtml(s) {
   return String(s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -690,6 +713,7 @@ function processMessage(raw, msg) {
   let isAction = false;
   const meMatch = text.match(/^\s*\/me\s+(.*)$/s);
   if (meMatch) { text = meMatch[1]; isAction = true; }
+  text = censorText(text); // before any styled transforms so asterisks aren't formatted
   text = applySlashCommands(text, msg);
   text = applyEmoji(text);
   text = applyMarkdown(text);
@@ -790,7 +814,7 @@ function renderMessages() {
 
     const usernameSpan = document.createElement('span');
     usernameSpan.className = 'username';
-    usernameSpan.textContent = msg.username || 'Anonymous';
+    usernameSpan.textContent = censorText(msg.username || 'Anonymous');
     usernameSpan.style.color = colorForUsername(msg.username || '');
 
     const timestampSpan = document.createElement('span');
