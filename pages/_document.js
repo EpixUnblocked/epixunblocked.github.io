@@ -35,6 +35,14 @@ export default function Document() {
         {/* Google Analytics 4 — consent-gated via Consent Mode v2 */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: consentScript }} />
+        {/* Advertising Scripts */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "(function(s){s.dataset.zone='12056145';s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))"
+          }}
+        />
+        
+        
       </Head>
       <body>
         <Main />
