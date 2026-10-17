@@ -41,7 +41,6 @@ export default function Document() {
             __html: "(function(s){s.dataset.zone='12056145';s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))"
           }}
         />
-        
       </Head>
       <body>
         <Main />
